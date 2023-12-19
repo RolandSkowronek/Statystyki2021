@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<komorki>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>1</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> Rozpr.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>2</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Posiedz.</text>  
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>3</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> Rozpr.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>4</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Posiedz.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>5</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> Rozpr.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>6</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Posiedz.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>7</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> Rozpr.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>8</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Posiedz.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>9</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> Rozpr.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>10</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Posiedz.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>11</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> Rozpr.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>12</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Posiedz.</text>
+  </komorka>
+ 
+
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>18</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> Rozpr.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>19</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Posiedz.</text>
+
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>20</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> Rozpr.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>21</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Posiedz.</text>
+
+  </komorka>
+  
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>22</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> Rozpr.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>23</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Posiedz.</text>
+  </komorka>
+  
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>37</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>urlop</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>38</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>zwolnienie lekarskie</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>39</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>opieka nad dzieckiem</text>
+  </komorka>
+
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>40</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>szkolenia</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>41</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>delegacja do SO</text>
+  </komorka>
+
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>42</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>delegacja do MS</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>43</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>inne</text>
+  </komorka>
+
+
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>47</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>1-14 dni</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>48</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>w tym usprawied-liwione</text>
+  </komorka>
+
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>49</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>15-30 dni</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>50</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>w tym usprawied-liwione</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>51</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>pow. 1 do 3 mies.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>52</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>w tym usprawied-liwione</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>53</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>ponad 3 mies.</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>54</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>w tym usprawied-liwione</text>
+  </komorka>
+ 
+
+
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>1</kolumna>
+    <colSpan>2</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>P</text>
+  </komorka>
+
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>3</kolumna>
+    <colSpan>2</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Po</text>
+  </komorka>
+
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>5</kolumna>
+    <colSpan>2</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+
+    <text>Np.</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>7</kolumna>
+    <colSpan>2</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+
+    <text>Pz</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>9</kolumna>
+    <colSpan>0</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+
+    <text>Razem</text>
+  </komorka>
+ 
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>11</kolumna>
+    <colSpan>2</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Z tego</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>13</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>Liczba odbytych sesji</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>14</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>Liczba wyznaczonych sesji</text>
+  </komorka>
+
+  
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>20</kolumna>
+    <colSpan>2</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>P</text>
+  </komorka>
+
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>22</kolumna>
+    <colSpan>2</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+
+    <text>Po</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>24</kolumna>
+    <colSpan>2</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+
+    <text>Np.</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>26</kolumna>
+    <colSpan>0</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+
+    <text>RAZEM</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>28</kolumna>
+    <colSpan>2</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>z tego:</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>29</kolumna>
+    <colSpan>0</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>Odroczenia</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>30</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>Razem</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>31</kolumna>
+    <colSpan>7</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>z tego:</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>33</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>Obsada średniookresowa</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>34</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>Obsada sędziów deleg. do SO</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>35</kolumna>
+    <colSpan>0</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>Obsada sędziów deleg. do MS</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>42</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>RAZEM</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>43</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>W terminie ustawowym</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>44</kolumna>
+    <colSpan>8</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>W terminie przedłużonym</text>
+  </komorka>
+ 
+
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>1</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>3</rowSpan>
+    <hv>h</hv>
+    <text>L.p. </text>
+  </komorka>
+  
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>2</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>3</rowSpan>
+    <hv>h</hv>
+    <text>Nazwisko i imię sędziego </text>
+  </komorka>
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>3</kolumna>
+    <colSpan>11</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>ZAŁATWIENIA</text>
+  </komorka>
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>17</kolumna>
+    <colSpan>12</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>WYZNACZENIA</text>
+  </komorka>
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>34</kolumna>
+    <colSpan>8</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>NIEOBECNOŚCI (liczba dni)</text>
+  </komorka>
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>42</kolumna>
+    <colSpan>3</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Obsada</text>
+  </komorka>
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>35</kolumna>
+    <colSpan>10</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>UZASADNIENIA</text>
+  </komorka>
+</komorki>

@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<komorki>
+  <komorka>
+    <wiersz>4</wiersz>
+    <kolumna>1</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> publiczne</text>
+  </komorka>
+  <komorka>
+    <wiersz>4</wiersz>
+    <kolumna>2</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> prywatne</text>
+  </komorka>
+  <komorka>
+    <wiersz>4</wiersz>
+    <kolumna>3</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> wyrokiem</text>
+  </komorka>
+  <komorka>
+    <wiersz>4</wiersz>
+    <kolumna>4</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> nakazem</text>
+  </komorka>
+  <komorka>
+    <wiersz>4</wiersz>
+    <kolumna>5</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> inne</text>
+  </komorka>
+  <komorka>
+    <wiersz>4</wiersz>
+    <kolumna>6</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> Ko</text>
+  </komorka>
+  <komorka>
+    <wiersz>4</wiersz>
+    <kolumna>7</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>1 Ko</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>1</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>K</text>
+  </komorka>
+  
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>2</kolumna>
+    <colSpan>2</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> z tego</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>3</kolumna>
+    <colSpan>3</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Załatwione</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>4</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text> Ko</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>5</kolumna>
+    <colSpan>2</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text> z tego</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>6</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>Kp</text>
+  </komorka>
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>7</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>W</text>
+  </komorka>
+
+  <komorka>
+    <wiersz>3</wiersz>
+    <kolumna>8</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>2</rowSpan>
+    <hv>h</hv>
+    <text>Sprawy karne i wykroczeniowe</text>
+  </komorka>
+
+
+
+
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>1</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>3</rowSpan>
+    <hv>h</hv>
+    <text>Dni rozpraw</text>
+  </komorka>
+
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>3</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>3</rowSpan>
+    <hv>h</hv>
+    <text>Dni posiedzeń</text>
+  </komorka>
+
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>5</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>3</rowSpan>
+    <hv>h</hv>
+    <text>Łącznie</text>
+  </komorka>
+
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>5</kolumna>
+    <colSpan>10</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+
+    <text>Sprawy Karne</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>15</kolumna>
+    <colSpan>2</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+
+    <text>Sprawy wykroczeniowe</text>
+  </komorka>
+
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>11</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>3</rowSpan>
+    <hv>h</hv>
+    <text>Kop</text>
+  </komorka>
+  <komorka>
+    <wiersz>2</wiersz>
+    <kolumna>13</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>3</rowSpan>
+    <hv>h</hv>
+    <text>Sprawy karne i wykroczeniowe</text>
+  </komorka>
+  
+  
+
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>1</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>4</rowSpan>
+    <hv>h</hv>
+    <text>L.p. </text>
+  </komorka>
+
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>2</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>4</rowSpan>
+    <hv>h</hv>
+    <text>Nazwisko i imię sędziego </text>
+  </komorka>
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>3</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>4</rowSpan>
+    <hv>h</hv>
+    <text>Choroby i urlopy w dniach roboczych</text>
+  </komorka>
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>3</kolumna>
+    <colSpan>3</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Liczba wokand</text>
+  </komorka>
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>34</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>4</rowSpan>
+    <hv>h</hv>
+    <text>Ilość spraw skierowanych na wokandy</text>
+  </komorka>
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>42</kolumna>
+    <colSpan>14</colSpan>
+    <rowSpan>1</rowSpan>
+    <hv>h</hv>
+    <text>Załatwienia</text>
+  </komorka>
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>35</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>4</rowSpan>
+    <hv>h</hv>
+    <text>Med</text>
+  </komorka>
+  <komorka>
+    <wiersz>1</wiersz>
+    <kolumna>36</kolumna>
+    <colSpan>1</colSpan>
+    <rowSpan>4</rowSpan>
+    <hv>h</hv>
+    <text>Sprawy zawieszone</text>
+  </komorka>
+</komorki>

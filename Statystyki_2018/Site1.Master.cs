@@ -186,6 +186,7 @@ namespace Statystyki_2018
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             Session["elementMenu"] = "";
+            Session["stat_Count"] = 0;
             Session["czesc"] = "";
             Button1.Text = "";
             ControlName.Text = "";

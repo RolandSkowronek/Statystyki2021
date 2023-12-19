@@ -14,7 +14,7 @@
     <colSpan>1</colSpan>
     <rowSpan>1</rowSpan>
     <hv>h</hv>
-    <text>Posiedz.</text>  
+    <text>Posiedz.</text>
   </komorka>
   <komorka>
     <wiersz>3</wiersz>
@@ -149,7 +149,7 @@
     <text>Posiedz.</text>
 
   </komorka>
-  
+
   <komorka>
     <wiersz>3</wiersz>
     <kolumna>22</kolumna>
@@ -387,7 +387,7 @@
     <hv>h</hv>
     <text>w tym usprawied-liwione</text>
   </komorka>
- 
+
 
 
   <komorka>
@@ -468,7 +468,7 @@
     <text>z tego:</text>
   </komorka>
 
-  
+
   <komorka>
     <wiersz>2</wiersz>
     <kolumna>16</kolumna>
@@ -620,7 +620,7 @@
     <hv>h</hv>
     <text>Razem</text>
   </komorka>
-   <komorka>
+  <komorka>
     <wiersz>2</wiersz>
     <kolumna>46</kolumna>
     <colSpan>1</colSpan>
@@ -645,7 +645,7 @@
     <hv>h</hv>
     <text>L.p. </text>
   </komorka>
-  
+
   <komorka>
     <wiersz>1</wiersz>
     <kolumna>2</kolumna>

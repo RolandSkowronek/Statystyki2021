@@ -210,7 +210,7 @@ namespace Statystyki_2018
             DataTable tabelka01 = new DataTable();
             try
             {
-                tabelka01 = dr.generuj_dane_do_tabeli_wierszy2018(Date1.Date, Date2.Date, (string)Session["id_dzialu"], 2, 8, 18, tenPlik);
+                tabelka01 = dr.generuj_dane_do_tabeli_wierszy2018(Date1.Date, Date2.Date, (string)Session["id_dzialu"], 2, 15, 18, tenPlik);
                 Session["tabelka002"] = tabelka01;
                 //row 1
             }

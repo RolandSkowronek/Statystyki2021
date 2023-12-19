@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Statystyki_2018 {
-    
-    
-    public partial class aopc {
-        
+namespace Statystyki_2018
+{
+
+
+    public partial class aopc
+    {
+
         /// <summary>
         /// Label4 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label4;
-        
+
         /// <summary>
         /// Date1 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxDateEdit Date1;
-        
+
         /// <summary>
         /// Date2 control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxDateEdit Date2;
-        
+
         /// <summary>
         /// LinkButton54 control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton54;
-        
+
         /// <summary>
         /// LinkButton57 control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton57;
-        
+
         /// <summary>
         /// LabelNazwaSadu control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelNazwaSadu;
-        
+
         /// <summary>
         /// Label1 control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-        
+
         /// <summary>
         /// infoLabel1 control.
         /// </summary>
@@ -83,16 +85,25 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label infoLabel1;
-        
+
         /// <summary>
-        /// gwTabela1 control.
+        /// ASPxGridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gwTabela1;
-        
+        protected global::DevExpress.Web.ASPxGridView ASPxGridView1;
+
+        /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+
         /// <summary>
         /// Label27 control.
         /// </summary>
@@ -101,7 +112,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label27;
-        
+
         /// <summary>
         /// Label29 control.
         /// </summary>
@@ -110,7 +121,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label29;
-        
+
         /// <summary>
         /// Label28 control.
         /// </summary>
@@ -119,7 +130,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label28;
-        
+
         /// <summary>
         /// Label30 control.
         /// </summary>
@@ -128,7 +139,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label30;
-        
+
         /// <summary>
         /// Label11 control.
         /// </summary>

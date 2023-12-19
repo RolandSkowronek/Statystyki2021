@@ -1,17 +1,16 @@
 ﻿/*
 Last Update:
-    - version 1.210416
-Creation date: 2019-01-27
+    - version 1.211201
+Creation date: 2019-12-11
 
 */
 
+using DevExpress.Web;
 using OfficeOpenXml;
 using System;
 using System.Data;
 using System.Globalization;
 using System.IO;
-using System.Text;
-using System.Web.UI.WebControls;
 
 namespace Statystyki_2018
 {
@@ -21,15 +20,14 @@ namespace Statystyki_2018
         public common cm = new common();
         public tabele tb = new tabele();
         public dataReaders dr = new dataReaders();
-        public XMLHeaders xMLHeaders = new XMLHeaders();
-
+        public devExpressXXL DevExpressXXL = new devExpressXXL();
         private const string tenPlik = "oopc.aspx";
         private const string tenPlikNazwa = "oopc";
         private string path = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string idWydzial =  Request.QueryString["w"];
+             string idWydzial = Request.QueryString["w"]; Session["czesc"] = cm.nazwaFormularza(tenPlik, idWydzial) ;
             try
             {
                 if (idWydzial == null)
@@ -49,7 +47,6 @@ namespace Statystyki_2018
                 {
                     Server.Transfer("default.aspx?info='Użytkownik " + (string)Session["identyfikatorUzytkownika"] + " nie praw do działu nr " + idWydzial + "'");
                 }
-
                 path = Server.MapPath("~\\Template\\" + tenPlikNazwa + ".xlsx");
                 CultureInfo newCulture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
                 newCulture.DateTimeFormat = CultureInfo.GetCultureInfo("PL").DateTimeFormat;
@@ -90,7 +87,17 @@ namespace Statystyki_2018
             catch
             { }
 
-          
+            try
+            {
+                string idDzialu = (string)Session["id_dzialu"];
+                infoLabel1.Visible = cl.debug(int.Parse(idDzialu));
+              
+            }
+            catch
+            {
+                infoLabel1.Visible = false;
+              
+            }
         }
 
         protected void Odswiez(object sender, EventArgs e)
@@ -107,6 +114,8 @@ namespace Statystyki_2018
 
             //odswiezenie danych
             tabela_1();
+          
+
             LabelNazwaSadu.Text = cl.nazwaSadu((string)Session["id_dzialu"]);
         }
 
@@ -121,13 +130,24 @@ namespace Statystyki_2018
             }
             string download = Server.MapPath("Template") + @"\" + tenPlikNazwa + "";
             FileInfo fNewFile = new FileInfo(download + "_.xlsx");
+            DataTable tabela = (DataTable)Session["tabelka001"];
+            if (tabela == null)
+            {
+                return;
+            }
+            foreach (DataRow dr in tabela.Select($"id=0"))
+                dr.Delete();
+            // pierwsza tabelka
 
             using (ExcelPackage MyExcel = new ExcelPackage(existingFile))
             {
                 ExcelWorksheet MyWorksheet1 = MyExcel.Workbook.Worksheets[1];
 
-                MyWorksheet1 = tb.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], (DataTable)Session["tabelka001"], 98, 0, 8, true, true, false, false, false);
+                // pierwsza
 
+                MyWorksheet1 = tb.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], tabela, 98, 0, 8, true, true, false, false, false);
+           
+               
                 try
                 {
                     MyExcel.SaveAs(fNewFile);
@@ -146,29 +166,111 @@ namespace Statystyki_2018
 
         protected void tabela_1()
         {
-            tablePlaceHolder01.Controls.Clear();
             string idDzialu = (string)Session["id_dzialu"];
             if (cl.debug(int.Parse(idDzialu)))
             {
-                cm.log.Info(tenPlik + ": rozpoczęcie tworzenia tabeli 5");
+                cm.log.Info(tenPlik + ": rozpoczęcie tworzenia tabeli 1");
             }
-         //   DataTable tabelka01 = dr.generuj_dane_do_tabeli_sedziowskiej_2019(int.Parse(idDzialu), 1, Date1.Date, Date2.Date, 400, tenPlik);
+            DataTable tabelka01 = DevExpressXXL.zLicznikiemKolumn(dr.konwertujNaPrzecinek(dr.generuj_dane_do_tabeli_sedziowskiej_2019(int.Parse(idDzialu), 5, Date1.Date, Date2.Date, 220, tenPlik)));
 
+            Session["tabelka001"] = tabelka01;
+
+            ASPxGridView1.DataSource = null;
+            ASPxGridView1.DataSourceID = null;
+            ASPxGridView1.AutoGenerateColumns = true;
+            ASPxGridView1.DataSource = tabelka01;
+            ASPxGridView1.DataBind();
+            ASPxGridView1.KeyFieldName = "id_sedziego";
+            ASPxGridView1.Columns.Clear();
+            int szerokoscKolumny = 80;
+            ASPxGridView1.Width = Panel1.Width;
+            idDzialu = "5";
+            ASPxGridView1.Columns.Add(DevExpressXXL.kolumnaDoTabeli("L.p.", "id", idDzialu, "", true, 36));
+            ASPxGridView1.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Imie i nazwisko", "Imienazwisko", idDzialu, "", true, 250));
+
+            GridViewBandColumn kolumna_SprawyZakresuUbezpieczenSpolecznych = DevExpressXXL.GetBoundColumn("Wpływ");
+
+            string[] teksty01 = new string[] { "Ogółem", "C", "Ns", "Wykaz N", "Nc", "Co", "Cps", "WSC", "WSNc", "Cz" };
+            string[] teksty01N = new string[] { "Ogółem", "C", "Ns", "Nc", "Co", "Cps", "WSC", "WSNc", "Cz" };
+            ASPxGridView1.Columns.Add(DevExpressXXL.podKolumna(teksty01, 1, idDzialu, false, szerokoscKolumny, "WPŁYW"));
+
+            ASPxGridView1.Columns.Add(DevExpressXXL.SekcjaDwiePodKolumny(teksty01N, "Załatwiono", 11, idDzialu, szerokoscKolumny));
+            ASPxGridView1.Columns.Add(DevExpressXXL.podKolumna(teksty01, 29, idDzialu, false, szerokoscKolumny, "Załatwienia"));
+
+            #region sesje odbyte przez sędziego
+
+            GridViewBandColumn sesjeSedziego = DevExpressXXL.GetBoundColumn("sesje odbyte przez sędziego ");
+
+            GridViewBandColumn wszystkieSesjeSedziego = DevExpressXXL.GetBoundColumn("(na potrzeby MS-S)");
+            wszystkieSesjeSedziego.Columns.Add(DevExpressXXL.kolumnaDoTabeli("ogółem", "d_39", idDzialu, "", false, szerokoscKolumny));
+            wszystkieSesjeSedziego.Columns.Add(DevExpressXXL.podKolumna(new string[] { "rozprawy", "posiedzenia jawne", "posiedzenia niejawne" }, 40, idDzialu, false, szerokoscKolumny, "z tego "));
+            sesjeSedziego.Columns.Add(wszystkieSesjeSedziego);
+
+            ASPxGridView1.Columns.Add(sesjeSedziego);
+
+            #endregion sesje odbyte przez sędziego
+
+            ASPxGridView1.Columns.Add(DevExpressXXL.podKolumna(teksty01, 43, idDzialu, false, szerokoscKolumny, "POZOSTAŁOŚĆ na następny m-c"));
+            ASPxGridView1.Columns.Add(DevExpressXXL.podKolumna(new string[] { "Ogółem", "do 3 mie- sięcy", "pow. 3 do 6 m-cy", "pow. 6 do 12 m-cy", "pow.12 m-cy do 2 lat", "pow. 2 do 3 lat", "pow. 3 do 5 lat", "pow. 5 do 8 lat", "pow. 8 lat" }, 53, idDzialu, false, szerokoscKolumny, "pozostało spraw starych (wszystkie kategorie spraw)"));
+            ASPxGridView1.Columns.Add(DevExpressXXL.podKolumna(new string[] { "Ogółem", "zakreś- lonych", "nie zakreś- lonych" }, 62, idDzialu, false, szerokoscKolumny, "stan spraw zawieszonych (wszystkie kategorie spraw)"));
+
+            GridViewBandColumn liczbaSporzadzonychUzasadnien = DevExpressXXL.podKolumna(new string[4] { "Łącznie", "w terminie ustawowym 14 dni", "razem po terminie ustawowym", "nie- usprawied- liwione" }, 65, idDzialu, false, szerokoscKolumny, "terminowość sporządzania uzasadnień na wniosek przez sędziów i referendarzy sądowych (zgodnie z MS - S1r, dz. 1.4.1.a + 1.4.1.c) * ");
+            GridViewBandColumn PoUplywie = (DevExpressXXL.podKolumna(new string[8] { "1-14 dni", "w tym nieuspra -wiedliwione", "15-30 dni", "w tym nieuspra -wiedliwione", "powyżej 1 do 3 mies", "w tym nieuspra -wiedliwione", "ponad 3 mies", "w tym nieuspra -wiedliwione" }, 69, idDzialu, false, szerokoscKolumny, "po upływie terminiu ustawowego"));
+            liczbaSporzadzonychUzasadnien.Columns.Add(PoUplywie);
+            liczbaSporzadzonychUzasadnien.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Uzasadnienia wygłoszone **/***", "d_77", idDzialu, "", false, szerokoscKolumny));
+            liczbaSporzadzonychUzasadnien.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Liczba spraw, do których wpłynął wniosek o transkrypcje uzasadnień wygłoszonych", "d_78", idDzialu, "", false, szerokoscKolumny));
+            ASPxGridView1.Columns.Add(liczbaSporzadzonychUzasadnien);
+
+
+
+            GridViewBandColumn liczbaSporzadzonychUzasadnien2 = DevExpressXXL.podKolumna(new string[4] { "Łącznie", "w terminie ustawowym 14 dni", "razem po terminie ustawowym", "nie- usprawied- liwione" }, 79, idDzialu, false, szerokoscKolumny, "terminowość sporządzania uzasadnień z urzędu  przez sędziów i referendarzy sądowych  (zgodnie z MS-S1r, dz. 1.4.1.b + 1.4.1.d) *");
+            GridViewBandColumn PoUplywie2 = (DevExpressXXL.podKolumna(new string[8] { "1-14 dni", "w tym nieuspra -wiedliwione", "15-30 dni", "w tym nieuspra -wiedliwione", "powyżej 1 do 3 mies", "w tym nieuspra -wiedliwione", "ponad 3 mies", "w tym nieuspra -wiedliwione" }, 83, idDzialu, false, szerokoscKolumny, "po upływie terminiu ustawowego"));
+
+            liczbaSporzadzonychUzasadnien2.Columns.Add(PoUplywie2);
+            liczbaSporzadzonychUzasadnien2.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Uzasadnienia wygłoszone **/***", "d_91", idDzialu, "", false, szerokoscKolumny));
+            liczbaSporzadzonychUzasadnien2.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Liczba spraw, do których wpłynął wniosek o transkrypcje uzasadnień wygłoszonych", "d_92", idDzialu, "", false, szerokoscKolumny));
+            ASPxGridView1.Columns.Add(liczbaSporzadzonychUzasadnien2);
+
+
+
+            GridViewBandColumn zalatwiono01skargiNaPrzewleklosc = DevExpressXXL.GetBoundColumn("skargi na przewlekłość");
+            zalatwiono01skargiNaPrzewleklosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("wpływ", "d_93", idDzialu, "", false, szerokoscKolumny));
+
+            zalatwiono01skargiNaPrzewleklosc.Columns.Add(DevExpressXXL.podKolumna(new string[2] { "ogółem", "uwzględniono" }, 94, idDzialu, false, szerokoscKolumny, "załatwiono"));
+            zalatwiono01skargiNaPrzewleklosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("pozostałość", "d_96", idDzialu, "", false, szerokoscKolumny));
+            ASPxGridView1.Columns.Add(zalatwiono01skargiNaPrzewleklosc);
+
+            ASPxGridView1.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Uwagi", "d_97", idDzialu, "", false, szerokoscKolumny));
+
+            ASPxGridView1.TotalSummary.Clear();
+            ASPxGridView1.TotalSummary.Add(DevExpressXXL.komorkaSumujaca("Ogółem"));
+            for (int i = 1; i < 102; i++)
+            {
+                ASPxGridView1.TotalSummary.Add(DevExpressXXL.komorkaSumujaca(i));
+            }
+        }
+
+    
+
+        protected void Suma(object sender, DevExpress.Data.CustomSummaryEventArgs e)
+        {
+            ASPxSummaryItem sumItem = (ASPxSummaryItem)e.Item;
+        }
+
+        protected void ASPxGridView1_SummaryDisplayText(object sender, ASPxGridViewSummaryDisplayTextEventArgs e)
+        {
             try
             {
-                Session["tabelka001"] = dr.generuj_dane_do_tabeli_sedziowskiej_2019(int.Parse(idDzialu), 5, Date1.Date, Date2.Date, 350, tenPlik);
-
-                string path = Server.MapPath("XMLHeaders") + "\\" + tenPlikNazwa + ".xml";
-                StringBuilder Tabele = new StringBuilder();
-                Tabele.Append(xMLHeaders.TabelaSedziowskaXML(path, int.Parse(idDzialu), "5", (DataTable)Session["tabelka001"], true, false, false, true, "", tenPlik));
-
-                tablePlaceHolder01.Controls.Add(new Label { Text = Tabele.ToString(), ID = "id1" });
+                if (e.Item.FieldName.Contains("d_"))
+                {
+                    double value = double.Parse(e.Value.ToString());
+                    string field = e.Item.FieldName.Replace("d_", "");
+                    value = value - double.Parse(field);
+                    e.Text = value.ToString();
+                }
             }
-            catch (Exception ex)
-            {
-                string exx = ex.Message;
-                cm.log.Error(tenPlik + " :Generowanie tabeli danych:  " + ex.Message + " " + tenPlik);
-            }
+            catch
+            { }
         }
     }
 }

@@ -43,7 +43,7 @@
          <br />
          <asp:Panel ID="menuKategorii" runat="server">
            
-                    <dx:ASPxCardView ID="cardView" runat="server" AutoGenerateColumns="False" KeyFieldName="nazwa" EnableTheming="True"  Cursor="pointer" Width="100%" OnPageSizeChanged="select">
+                    <dx:ASPxCardView ID="cardView" runat="server" AutoGenerateColumns="False" KeyFieldName="nazwa" EnableTheming="True"  Cursor="pointer" Width="100%" OnPageSizeChanged="select" ClientIDMode="AutoID" EnableCallbackAnimation="True" ValidateRequestMode="Enabled" ViewStateMode="Enabled">
                         <SettingsPager Visible="False">
                             <SettingsTableLayout ColumnCount="3" RowsPerPage="200" />
                         </SettingsPager>
@@ -73,6 +73,7 @@
                                 </dx:CardViewLayoutGroup>
                             </Items>
                         </CardLayoutProperties>
+                        <SettingsSearchPanel Visible="true" ShowClearButton="true" />
                         <Styles Header-HorizontalAlign="Center" Card-HorizontalAlign="Center">
                             <Card CssClass="myButton" Border-BorderColor="Black" Border-BorderStyle="Solid" Border-BorderWidth="2px" Height="80px" />
                             <Header HorizontalAlign="Center">

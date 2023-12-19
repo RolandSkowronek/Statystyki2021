@@ -119,6 +119,10 @@ namespace Statystyki_2018
                     cm.log.Error(ex.Message);
                 }
             }
+
+            if (!IsPostBack)
+                cardView.SearchPanelFilter = "";
+           
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -191,10 +195,18 @@ namespace Statystyki_2018
 
         private void ElementyMenuStatystyczne()
         {
-         
+            int stat_Count = 0;
+            try
+            {
+                stat_Count = (int)Session["stat_Count"];
+            }
+            catch 
+            {}
+            stat_Count += 1;
+
             DataTable parametry = cm.makeParameterTable();
             parametry.Rows.Add("@identyfikatorUzytkownika", (string)Session["identyfikatorUzytkownika"]);
-
+            
             Session["elementMenu"] = "Statystyczne";
             Session["czesc"] = "";
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "SetText", "JavaScript:SetText('Statystyczne');", true);
@@ -219,10 +231,35 @@ namespace Statystyki_2018
             PanelMenuGlowne.Visible = false;
             zaladujDaneDoMenu(kwerenda, (string)Session["identyfikatorUzytkownika"]);
             menuKategorii.Visible = true;
+            cardView.DataBind();
+            cardView.DoCardValidation();
+            String lastKwerenda = kwerenda;
+            kwerenda = "";
+            zaladujDaneDoMenu(kwerenda, (string)Session["identyfikatorUzytkownika"]);
+            menuKategorii.Visible = true;
+            cardView.DataBind();
+            zaladujDaneDoMenu(lastKwerenda, (string)Session["identyfikatorUzytkownika"]);
+            menuKategorii.Visible = true;
+            cardView.DataBind();
+            if (stat_Count == 1)
+            {
+                Session["stat_Count"] = stat_Count;
+                string nazwa = (string)Session["elementMenu"];
+                Server.Transfer("redirector.aspx?id=" + nazwa);
+            }
+            
         }
 
         private void ElementyMenuMSS()
         {
+            int stat_Count = 0;
+            try
+            {
+                stat_Count = (int)Session["stat_Count"];
+            }
+            catch
+            { }
+            stat_Count += 1;
             String IdentyfikatorUzytkownika = string.Empty;
             IdentyfikatorUzytkownika = (string)Session["identyfikatorUzytkownika"];
             DataTable parametry = cm.makeParameterTable();
@@ -247,10 +284,24 @@ namespace Statystyki_2018
             zaladujDaneDoMenu(kwerenda, IdentyfikatorUzytkownika);
             PanelMenuGlowne.Visible = false;
             menuKategorii.Visible = true;
+            if (stat_Count == 1)
+            {
+                Session["stat_Count"] = stat_Count;
+                string nazwa = (string)Session["elementMenu"];
+                Server.Transfer("redirector.aspx?id=" + nazwa);
+            }
         }
 
         private void ElementyMenuKontrolki()
         {
+            int stat_Count = 0;
+            try
+            {
+                stat_Count = (int)Session["stat_Count"];
+            }
+            catch
+            { }
+            stat_Count += 1;
             DataTable parametry = cm.makeParameterTable();
             parametry.Rows.Add("@identyfikatorUzytkownika", (string)Session["identyfikatorUzytkownika"]);
 
@@ -285,12 +336,25 @@ namespace Statystyki_2018
             zaladujDaneDoMenu(kwerenda, (string)Session["identyfikatorUzytkownika"]);
             menuKategorii.Visible = true;
 
+            if (stat_Count == 1)
+            {
+                Session["stat_Count"] = stat_Count;
+                string nazwa = (string)Session["elementMenu"];
+                Server.Transfer("redirector.aspx?id=" + nazwa);
+            }
 
-    
         }
 
         private void ElementyMenuInne()
         {
+            int stat_Count = 0;
+            try
+            {
+                stat_Count = (int)Session["stat_Count"];
+            }
+            catch
+            { }
+            stat_Count += 1;
             String IdentyfikatorUzytkownika = string.Empty;
             IdentyfikatorUzytkownika = (string)Session["identyfikatorUzytkownika"];
             DataTable parametry = cm.makeParameterTable();
@@ -331,7 +395,8 @@ namespace Statystyki_2018
                     dr[2] = "kof.aspx";
                     pozycje.Rows.Add(dr);
                 }
-                int iloscUprawnienInne = int.Parse(cm.getQuerryValue("SELECT COUNT(*) FROM  uprawnienia WHERE (rodzaj = 5) and id_uzytkownika=@identyfikatorUzytkownika", cm.con_str, parametry, "Header - sprawdzanie oceny pracownika"));
+                int iloscUprawnienInne = int.Parse(cm.getQuerryValue("SELECT        COUNT(konfig.ident) AS Expr1 FROM            konfig INNER JOIN uprawnienia ON konfig.ident = uprawnienia.id_wydzialu WHERE(uprawnienia.rodzaj = 5) AND(uprawnienia.id_uzytkownika = @identyfikatorUzytkownika)", cm.con_str, parametry, "Header - sprawdzanie oceny pracownika"));
+                
                 if (iloscUprawnienInne > 0)
                 {
                     //                kwerenda = "SELECT DISTINCT konfig.ident, konfig.opis, konfig.wartosc, konfig.klucz FROM uprawnienia INNER JOIN konfig ON uprawnienia.id_wydzialu  = konfig.ident WHERE        (uprawnienia.id_uzytkownika = @identyfikatorUzytkownika) AND (uprawnienia.rodzaj =3 )  AND (rtrim(konfig.klucz) = 'kontrolka') order by konfig.opis";
@@ -357,10 +422,24 @@ namespace Statystyki_2018
             {
                 cm.log.Error(ex.Message);
             }
+            if (stat_Count == 1)
+            {
+                Session["stat_Count"] = stat_Count;
+                string nazwa = (string)Session["elementMenu"];
+                Server.Transfer("redirector.aspx?id=" + nazwa);
+            }
         }
 
         protected void Administracja_Click(object sender, EventArgs e)
         {
+            int stat_Count = 0;
+            try
+            {
+                stat_Count = (int)Session["stat_Count"];
+            }
+            catch
+            { }
+            stat_Count += 1;
             String IdentyfikatorUzytkownika = string.Empty;
             IdentyfikatorUzytkownika = (string)Session["identyfikatorUzytkownika"];
             DataTable parametry = cm.makeParameterTable();
@@ -373,7 +452,15 @@ namespace Statystyki_2018
                 cardView.Visible = false;
                 Server.Transfer("adm.aspx");
             }
-           
+            if (stat_Count == 1)
+            {
+                Session["stat_Count"] = stat_Count;
+                string nazwa = (string)Session["elementMenu"];
+                Server.Transfer("redirector.aspx?id=" + nazwa);
+            }
+
         }
     }
+
+    
 }

@@ -85,7 +85,7 @@ namespace Statystyki_2018
         protected void odswiez()
         {
             string idDzialu = (string)Session["id_dzialu"];
-            string txt = string.Empty; //
+            string txt = string.Empty; 
             try
             {
                 bool debug = cl.debug(int.Parse(idDzialu));
@@ -103,7 +103,6 @@ namespace Statystyki_2018
                 cm.log.Error(tenPlik + " " + ex.Message);
             }
 
-            // dopasowanie opisów
             makeLabels();
 
             try
@@ -132,30 +131,27 @@ namespace Statystyki_2018
             dT_01.Columns.Add("Column3", typeof(string));
             dT_01.Columns.Add("Column4", typeof(string));
             dT_01.Columns.Add("Column5", typeof(string));
-            dT_01.Columns.Add("Column6", typeof(string));
 
-            dT_01.Clear();
+            dT_01.Rows.Add(new Object[] { "1", "rozprawy", "1", "1" });
+            dT_01.Rows.Add(new Object[] { "1", "posiedzenia", "1", "1" });
             for (int i = 0; i < 2; i++)
             {
                 dT_01.Rows.Add(new Object[] { "1", "P", "1", "1" });
                 dT_01.Rows.Add(new Object[] { "1", "Np.", "1", "1" });
                 dT_01.Rows.Add(new Object[] { "1", "Po", "1", "1" });
-                dT_01.Rows.Add(new Object[] { "1", "U", "1", "1" });
-                dT_01.Rows.Add(new Object[] { "1", "Uo", "1", "1" });
                 dT_01.Rows.Add(new Object[] { "1", "Pz", "1", "1" });
-                dT_01.Rows.Add(new Object[] { "1", "Uz", "1", "1" });
+             
                 dT_01.Rows.Add(new Object[] { "1", "Razem", "1", "1" });
             }
 
             dT_01.Rows.Add(new Object[] { "2", "L.p.", "1", "2" });
 
             dT_01.Rows.Add(new Object[] { "2", " Imię i nazwisko sędziego", "1", "2" });
-            dT_01.Rows.Add(new Object[] { "2", "Ilość sesji", "1", "2" });
-
+            dT_01.Rows.Add(new Object[] { "2", "podstawowy wskaźnik przedziału", "1", "2" });
+            dT_01.Rows.Add(new Object[] { "2", "Ilość sesji", "2", "1" });
             dT_01.Rows.Add(new Object[] { "2", "Liczba Przesł.osób", "1", "2" });
-
-            dT_01.Rows.Add(new Object[] { "2", "Wpływ", "8", "1" });
-            dT_01.Rows.Add(new Object[] { "2", "Załatwienia", "8", "1" });
+            dT_01.Rows.Add(new Object[] { "2", "Wpływ", "5", "1" });
+            dT_01.Rows.Add(new Object[] { "2", "Załatwienia", "5", "1" });
             dT_01.Rows.Add(new Object[] { "2", "Absencja w diach roboczych", "1", "2" });
 
             return dT_01;
@@ -177,8 +173,6 @@ namespace Statystyki_2018
                 catch
                 { }
                 Label3.Text = cl.nazwaSadu((string)Session["id_dzialu"]);
-
-                //	id_dzialu.Text = (string)Session["txt_dzialu"];
                 Label28.Text = cl.podajUzytkownika(User_id, domain);
                 Label29.Text = DateTime.Now.ToLongDateString();
                 try
@@ -205,93 +199,6 @@ namespace Statystyki_2018
             }
         }
 
-        protected void Button3_Click(object sender, EventArgs e)
-        {
-            string path = Server.MapPath("Template") + "\\oktp.xlsx";
-            FileInfo existingFile = new FileInfo(path);
-
-            string download = Server.MapPath("Template") + @"\oktp";
-
-            FileInfo fNewFile = new FileInfo(download + "_.xlsx");
-
-            using (ExcelPackage MyExcel = new ExcelPackage(existingFile))
-            {
-                // pierwsza
-
-                int rowik = 0;
-
-                ExcelWorksheet MyWorksheet1 = MyExcel.Workbook.Worksheets[1];
-
-                DataTable table = (DataTable)Session["tabelka001"];
-
-                MyWorksheet1 = tb.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], table, 19, 0, 5, true, true, false, false, false);
-
-                int iloscWierszy = GridView1.Rows.Count;
-                if (iloscWierszy > 0)
-                {
-                    for (int i = 0; i < iloscWierszy; i++)
-                    {
-                        TextBox txt = ((TextBox)GridView1.Rows[i].Cells[19].FindControl("TextBox1"));
-                        if (txt != null)
-                        {
-                            string tekst = txt.Text;
-                            tb.komorkaExcela(MyWorksheet1, i + 5, 21, tekst, false, 0, 0);
-                            //wpisz text
-                        }
-                    }
-                }
-                rowik = table.Rows.Count + 3;
-
-                // pod tabela z tebeli nr 2
-
-                rowik = rowik + 3;
-                tb.komorkaExcela(MyWorksheet1, rowik, 1, "Pozostało z poprzedniego okresu", true, 0, 3);
-                tb.komorkaExcela(MyWorksheet1, rowik + 1, 1, "Wpłynęło", true, 0, 3);
-                tb.komorkaExcela(MyWorksheet1, rowik + 2, 1, "Załatwiono", true, 0, 3);
-                tb.komorkaExcela(MyWorksheet1, rowik + 3, 1, "Pozostało na następny okres", true, 0, 3);
-
-                tb.komorkaExcela(MyWorksheet1, rowik + 4, 1, "Zaległości", true, 4, 1);
-
-                tb.komorkaExcela(MyWorksheet1, rowik + 4, 3, "3 - 6 miesięcy", true, 0, 1);
-                tb.komorkaExcela(MyWorksheet1, rowik + 5, 3, "6 - 12 miesięcy", true, 0, 1);
-                tb.komorkaExcela(MyWorksheet1, rowik + 6, 3, "od 1 do 2 lat", true, 0, 1);
-                tb.komorkaExcela(MyWorksheet1, rowik + 7, 3, "od 2 do 3 lat", true, 0, 1);
-                tb.komorkaExcela(MyWorksheet1, rowik + 8, 3, "powyżej 3 lat", true, 0, 1);
-
-                DataTable tabelka001 = (DataTable)Session["tabelka002"];
-                for (int i = 0; i < 9; i++)
-                {
-                    for (int j = 0; j < 9; j++)
-                    {
-                        try
-                        {
-                            MyWorksheet1.Cells[rowik + i, j + 4].Value = tabelka001.Rows[i][j+2].ToString();
-                            MyWorksheet1.Cells[rowik + i, j + 4].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin, System.Drawing.Color.Black);
-                        }
-                        catch
-                        { }
-                    }
-                }
-
-                try
-                {
-                    MyExcel.SaveAs(fNewFile);
-
-                    this.Response.Clear();
-                    this.Response.ContentType = "application/vnd.ms-excel";
-                    this.Response.AddHeader("Content-Disposition", "attachment;filename=" + fNewFile.Name);
-                    this.Response.WriteFile(fNewFile.FullName);
-                    this.Response.End();
-                }
-                catch (Exception ex)
-                {
-                    cm.log.Error(tenPlik + " " + ex.Message);
-                }
-            }//end of using
-
-            odswiez();
-        }
-
         protected void LinkButton54_Click(object sender, EventArgs e)
         {
             odswiez();
@@ -315,10 +222,6 @@ namespace Statystyki_2018
 
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.Footer)
-            {
-         //       tb.makeSumRow((DataTable)Session["tabelka001"], e);
-            }
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 storid = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "id").ToString());
@@ -329,13 +232,13 @@ namespace Statystyki_2018
 
         private GridViewRow wierszTabeli3(DataTable tabelka01, int idWiersza, string idtabeli, string tekst)
         {
-            // nowy wiersz
+            
 
             GridViewRow NewTotalRow = new GridViewRow(0, 0, DataControlRowType.DataRow, DataControlRowState.Insert);
 
             NewTotalRow.Cells.Add(tb.cela(tekst, 1, 2, "borderTopLeft  "));
 
-            for (int i = 1; i < 9; i++)
+            for (int i = 1; i < 6; i++)
             {
                 string idKolumny = "d_" + i.ToString("D2");
                 NewTotalRow.Cells.Add(tb.cela("<a  href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!2!" + i.ToString().Trim() + "!3')\">" + tabelka01.Rows[idWiersza - 1][idKolumny].ToString().Trim() + "</a>", 1, 1, "borderTopLeft"));
@@ -346,12 +249,12 @@ namespace Statystyki_2018
 
         private GridViewRow wierszTabela2(DataTable tabelka01, int idWiersza, string idtabeli, string tekst)
         {
-            // nowy wiersz
+            
             GridViewRow NewTotalRow = new GridViewRow(0, 0, DataControlRowType.DataRow, DataControlRowState.Insert);
-            NewTotalRow.Cells.Add(tb.cela("Zaległości", 5, 2, "borderTopLeft col_240"));
+            NewTotalRow.Cells.Add(tb.cela("Zaległości", 5, 4, "borderTopLeft col_240"));
             NewTotalRow.Cells.Add(tb.cela(tekst, 1, 2, "borderTopLeft  "));
 
-            for (int i = 1; i < 9; i++)
+            for (int i = 1; i < 6; i++)
             {
                 string idKolumny = "d_" + i.ToString("D2");
                 NewTotalRow.Cells.Add(tb.cela("<a  href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!2!" + i.ToString().Trim() + "!3')\">" + tabelka01.Rows[idWiersza - 1][idKolumny].ToString().Trim() + "</a>", 1, 1, "borderTopLeft"));
@@ -369,49 +272,117 @@ namespace Statystyki_2018
             GridViewRow NewTotalRow = new GridViewRow(0, 0, DataControlRowType.DataRow, DataControlRowState.Insert);
             try
             {
-                GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.PodsumowanieTabeli(tabelka02, 19, "borderAll center"));
+                GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.PodsumowanieTabeli(tabelka02, 15, "borderAll center gray"));
             }
             catch
             {
             }
 
             string idtabeli = "2";
-
-            // nowy wiersz
+            
             int idWiersza = 1;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 9, idWiersza, idtabeli, "Pozostało z poprzedniego okresu", 4, 1, "", "borderAll center"));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 6, idWiersza, idtabeli, "Pozostało z poprzedniego okresu", 6, 1, "", "borderAll center"));
 
             idWiersza = 2;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 9, idWiersza, idtabeli, "Wpłynęło", 4, 1, "", "borderAll center"));
-
-            // nowy wiersz
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 6, idWiersza, idtabeli, "Wpłynęło", 6, 1, "", "borderAll center"));
+            
             idWiersza = 3;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 9, idWiersza, idtabeli, "Załatwiono", 4, 1, "", "borderAll center"));
-
-            // nowy wiersz
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 6, idWiersza, idtabeli, "Załatwiono", 6, 1, "", "borderAll center"));
+            
             idWiersza = 4;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 9, idWiersza, idtabeli, "Pozostało na następny okres", 4, 1, "", "borderAll center"));
-
-            // nowy wiersz
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 6, idWiersza, idtabeli, "Pozostało na następny okres", 6, 1, "", "borderAll center"));
+            
             idWiersza = 5;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, wierszTabela2(tabelka01, idWiersza, idtabeli, "3-6 m-cy"));
-            // nowy wiersz
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, wierszTabela2(tabelka01, idWiersza, idtabeli, "powyżej 3-6 m-cy"));
+            
             idWiersza = 6;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, wierszTabeli3(tabelka01, idWiersza, idtabeli, "6 - 12 miesięcy"));
-
-            // nowy wiersz
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, wierszTabeli3(tabelka01, idWiersza, idtabeli, "powyżej 6 - 12 miesięcy"));
+            
             idWiersza = 7;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, wierszTabeli3(tabelka01, idWiersza, idtabeli, "od 1 do 2 lat"));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, wierszTabeli3(tabelka01, idWiersza, idtabeli, "powyżej 12 miesięcy do 2 lat"));
 
             idWiersza = 8;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, wierszTabeli3(tabelka01, idWiersza, idtabeli, "od 2 do 3 lat"));
-            //wierszTabelia3
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, wierszTabeli3(tabelka01, idWiersza, idtabeli, "powyżej 2 do 3 lat"));
+           
             idWiersza = 9;
             GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, wierszTabeli3(tabelka01, idWiersza, idtabeli, "powyżej 3 lat"));
         }
 
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        protected void TworzExcell(object sender, EventArgs e)
         {
+            string path = Server.MapPath("Template") + "\\oktp.xlsx";
+            FileInfo existingFile = new FileInfo(path);
+            string download = Server.MapPath("Template") + @"\oktp";
+            FileInfo fNewFile = new FileInfo(download + "_.xlsx");
+
+            using (ExcelPackage MyExcel = new ExcelPackage(existingFile))
+            {
+                int rowik = 0;
+                ExcelWorksheet MyWorksheet1 = MyExcel.Workbook.Worksheets[1];
+                DataTable table = (DataTable)Session["tabelka001"];
+                MyWorksheet1 = tb.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], table, 15, 0, 5, true, true, false, false, false);
+
+                int iloscWierszy = GridView1.Rows.Count;
+                if (iloscWierszy > 0)
+                {
+                    for (int i = 0; i < iloscWierszy; i++)
+                    {
+                        TextBox txt = ((TextBox)GridView1.Rows[i].Cells[15].FindControl("TextBox1"));
+                        if (txt != null)
+                        {
+                            string tekst = txt.Text;
+                            tb.komorkaExcela(MyWorksheet1, i + 5, 17, tekst, false, 0, 0);
+                        }
+                    }
+                }
+                rowik = table.Rows.Count + 3;
+
+                rowik = rowik + 3;
+                tb.komorkaExcela(MyWorksheet1, rowik, 1, "Pozostało z poprzedniego okresu", true, 0, 5);
+                tb.komorkaExcela(MyWorksheet1, rowik + 1, 1, "Wpłynęło", true, 0, 5);
+                tb.komorkaExcela(MyWorksheet1, rowik + 2, 1, "Załatwiono", true, 0, 5);
+                tb.komorkaExcela(MyWorksheet1, rowik + 3, 1, "Pozostało na następny okres", true, 0, 5);
+
+                tb.komorkaExcela(MyWorksheet1, rowik + 4, 1, "Zaległości", true, 4, 3);
+
+                tb.komorkaExcela(MyWorksheet1, rowik + 4, 5, "3 - 6 miesięcy", true, 0, 1);
+                tb.komorkaExcela(MyWorksheet1, rowik + 5, 5, "6 - 12 miesięcy", true, 0, 1);
+                tb.komorkaExcela(MyWorksheet1, rowik + 6, 5, "od 1 do 2 lat", true, 0, 1);
+                tb.komorkaExcela(MyWorksheet1, rowik + 7, 5, "od 2 do 3 lat", true, 0, 1);
+                tb.komorkaExcela(MyWorksheet1, rowik + 8, 5, "powyżej 3 lat", true, 0, 1);
+
+                DataTable tabelka001 = (DataTable)Session["tabelka002"];
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 5; j++)
+                    {
+                        try
+                        {
+                            MyWorksheet1.Cells[rowik + i, j + 7].Value = tabelka001.Rows[i][j + 2].ToString();
+                            MyWorksheet1.Cells[rowik + i, j + 7].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin, System.Drawing.Color.Black);
+                        }
+                        catch
+                        { }
+                    }
+                }
+
+                try
+                {
+                    MyExcel.SaveAs(fNewFile);
+
+                    this.Response.Clear();
+                    this.Response.ContentType = "application/vnd.ms-excel";
+                    this.Response.AddHeader("Content-Disposition", "attachment;filename=" + fNewFile.Name);
+                    this.Response.WriteFile(fNewFile.FullName);
+                    this.Response.End();
+                }
+                catch (Exception ex)
+                {
+                    cm.log.Error(tenPlik + " " + ex.Message);
+                }
+            }//end of using
+
+            odswiez();
         }
     }
 }

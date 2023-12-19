@@ -1,16 +1,16 @@
 ﻿/*
 Last Update:
-    - version 1.210203
-Creation date: 2019-04-21
+    - version 1.211201
+Creation date: 2019-12-11
 
 */
 
+using DevExpress.Web;
 using OfficeOpenXml;
 using System;
 using System.Data;
 using System.Globalization;
 using System.IO;
-using System.Web.UI.WebControls;
 
 namespace Statystyki_2018
 {
@@ -20,7 +20,7 @@ namespace Statystyki_2018
         public common cm = new common();
         public tabele tb = new tabele();
         public dataReaders dr = new dataReaders();
-
+        public devExpressXXL DevExpressXXL = new devExpressXXL();
         private const string tenPlik = "aopc.aspx";
         private const string tenPlikNazwa = "aopc";
         private string path = "";
@@ -28,13 +28,14 @@ namespace Statystyki_2018
         protected void Page_Load(object sender, EventArgs e)
         {
              string idWydzial = Request.QueryString["w"]; Session["czesc"] = cm.nazwaFormularza(tenPlik, idWydzial) ;
-            if (idWydzial == null)
-            {
-                Server.Transfer("default.aspx");
-                return;
-            }
             try
             {
+                if (idWydzial == null)
+                {
+                    Server.Transfer("default.aspx");
+                    return;
+                }
+
                 Session["id_dzialu"] = idWydzial;
                 String IdentyfikatorUzytkownika = string.Empty;
                 IdentyfikatorUzytkownika = (string)Session["identyfikatorUzytkownika"];
@@ -78,6 +79,7 @@ namespace Statystyki_2018
                 }
                 catch
                 { }
+                //Label3.Text = cl.nazwaSadu((string)Session["id_dzialu"]);
                 Label28.Text = cl.podajUzytkownika(User_id, domain);
                 Label29.Text = DateTime.Now.ToLongDateString();
                 Label30.Text = System.IO.File.ReadAllText(Server.MapPath(@"~//version.txt")).ToString().Trim();
@@ -89,10 +91,12 @@ namespace Statystyki_2018
             {
                 string idDzialu = (string)Session["id_dzialu"];
                 infoLabel1.Visible = cl.debug(int.Parse(idDzialu));
+              
             }
             catch
             {
                 infoLabel1.Visible = false;
+              
             }
         }
 
@@ -110,6 +114,8 @@ namespace Statystyki_2018
 
             //odswiezenie danych
             tabela_1();
+          
+
             LabelNazwaSadu.Text = cl.nazwaSadu((string)Session["id_dzialu"]);
         }
 
@@ -126,15 +132,10 @@ namespace Statystyki_2018
 
             FileInfo fNewFile = new FileInfo(download + "_.xlsx");
 
-            // pierwsza tabelka
-
             using (ExcelPackage MyExcel = new ExcelPackage(existingFile))
             {
-                ExcelWorksheet MyWorksheet1 = MyExcel.Workbook.Worksheets[1];
-
-                // pierwsza
-
-                MyWorksheet1 = tb.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], (DataTable)Session["tabelka001"], 112, 0, 10, true, false, false, false, false);
+                
+                ExcelWorksheet MyWorksheet1 = tb.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], (DataTable)Session["tabelka001"], 112, 0, 10, true, false, false, false, false);
 
                 try
                 {
@@ -157,326 +158,205 @@ namespace Statystyki_2018
             string idDzialu = (string)Session["id_dzialu"];
             if (cl.debug(int.Parse(idDzialu)))
             {
-                //cm.log.Info(tenPlik + ": rozpoczęcie tworzenia tabeli 1");
+                cm.log.Info(tenPlik + ": rozpoczęcie tworzenia tabeli 1");
             }
-            DataTable tabelka01 = dr.generuj_dane_do_tabeli_sedziowskiej_2019(int.Parse(idDzialu), 5, Date1.Date, Date2.Date, 230, tenPlik);
+            DataTable tabelka01 = DevExpressXXL.zLicznikiemKolumn(dr.konwertujNaPrzecinek(dr.generuj_dane_do_tabeli_sedziowskiej_2019(int.Parse(idDzialu), 5, Date1.Date, Date2.Date, 220, tenPlik)));
+
             Session["tabelka001"] = tabelka01;
-            gwTabela1.DataSource = null;
-            gwTabela1.DataSourceID = null;
-            gwTabela1.DataSource = tabelka01;
-            gwTabela1.DataBind();
-        }
 
-        protected void naglowekTabeli_gwTabela1(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
-                DataTable dT = (DataTable)Session["header_01"];
-                tb.makeHeader(header_01(), gwTabela1);
-            }
-        }
+            ASPxGridView1.DataSource = null;
+            ASPxGridView1.DataSourceID = null;
+            ASPxGridView1.AutoGenerateColumns = true;
+            ASPxGridView1.DataSource = tabelka01;
+            ASPxGridView1.DataBind();
+            ASPxGridView1.KeyFieldName = "id_sedziego";
+            ASPxGridView1.Columns.Clear();
+            int szerokoscKolumny = 80;
+            ASPxGridView1.Width = Panel1.Width;
+            idDzialu = "5";
+            ASPxGridView1.Columns.Add(DevExpressXXL.kolumnaDoTabeli("L.p.", "id", idDzialu, "", true, 36));
+            ASPxGridView1.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Imie i nazwisko", "Imienazwisko", idDzialu, "", true, 250));
 
-        protected void stopkaTabeli_gwTabela1(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.Footer)
-            {
-                DataTable table = (DataTable)Session["tabelka001"];
-                tb.makeSumRow(table, e, 1);
-            }
-        }
+            #region wpływ
 
-        private DataTable header_01()
-        {
-            DataTable tabelaNaglowkowa = tb.SchematTabelinaglowkowej();
+            GridViewBandColumn kolumnaWplyw = DevExpressXXL.GetBoundColumn("Wpływ");
+            kolumnaWplyw.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Ogółem", "d_01", idDzialu, "", false, szerokoscKolumny));
+            GridViewBandColumn kolumnaWplywC = DevExpressXXL.GetBoundColumn("C");
+            kolumnaWplywC.Columns.Add(DevExpressXXL.kolumnaDoTabeli("ogółem", "d_02", idDzialu, "", false, szerokoscKolumny));
+            kolumnaWplywC.Columns.Add(DevExpressXXL.podKolumna(new string[] { "o rozwód", "o separację" }, 3, idDzialu, false, szerokoscKolumny, "w tym"));
+            kolumnaWplyw.Columns.Add(kolumnaWplywC);
+            kolumnaWplyw.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Ns ogółem", "d_05", idDzialu, "", false, szerokoscKolumny));
+            kolumnaWplyw.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Ns-rej", "d_06", idDzialu, "", false, szerokoscKolumny));
+            kolumnaWplyw.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Nc", "d_07", idDzialu, "", false, szerokoscKolumny));
+            kolumnaWplyw.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Co ogółem", "d_08", idDzialu, "", false, szerokoscKolumny));
+            kolumnaWplyw.Columns.Add(DevExpressXXL.kolumnaDoTabeli("w tym Co (wnioski o zwoln. od kosztów sąd. i ustanow. pełnom. przed złożeniem pozwu)", "d_09", idDzialu, "", false, szerokoscKolumny));
+            kolumnaWplyw.Columns.Add(DevExpressXXL.kolumnaDoTabeli("WSC", "d_10", idDzialu, "", false, szerokoscKolumny));
+            kolumnaWplyw.Columns.Add(DevExpressXXL.kolumnaDoTabeli("WSNc", "d_11", idDzialu, "", false, szerokoscKolumny));
+            kolumnaWplyw.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Cz", "d_12", idDzialu, "", false, szerokoscKolumny));
+            ASPxGridView1.Columns.Add(kolumnaWplyw);
 
+            #endregion wpływ
+
+            #region załatwiono
+
+            GridViewBandColumn kolumnaZalatwiono = DevExpressXXL.GetBoundColumn("ZAŁATWIONO");
+            kolumnaZalatwiono.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 13, idDzialu, false, szerokoscKolumny, "Ogółem"));
+            kolumnaZalatwiono.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 15, idDzialu, false, szerokoscKolumny, "C"));
+            GridViewBandColumn kolumnaZalatwionoWtym = DevExpressXXL.GetBoundColumn("w tym");
+            kolumnaZalatwionoWtym.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 17, idDzialu, false, szerokoscKolumny, "o rozwód"));
+            kolumnaZalatwionoWtym.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 19, idDzialu, false, szerokoscKolumny, "o separację"));
+            kolumnaZalatwiono.Columns.Add(kolumnaZalatwionoWtym);
+            kolumnaZalatwiono.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 21, idDzialu, false, szerokoscKolumny, "RC"));
+            GridViewBandColumn kolumnaZalatwionoWtymRC = DevExpressXXL.GetBoundColumn("z tego");
+            kolumnaZalatwionoWtymRC.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 23, idDzialu, false, szerokoscKolumny, "o rozwód"));
+            kolumnaZalatwionoWtymRC.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 25, idDzialu, false, szerokoscKolumny, "o separację"));
+            kolumnaZalatwiono.Columns.Add(kolumnaZalatwionoWtymRC);
+            GridViewBandColumn kolumnaZalatwionoWCod = DevExpressXXL.GetBoundColumn("C od 1.02.2018 r.");
+            kolumnaZalatwionoWCod.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 27, idDzialu, false, szerokoscKolumny, "o rozwód"));
+            kolumnaZalatwionoWCod.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 29, idDzialu, false, szerokoscKolumny, "o separację"));
+            kolumnaZalatwiono.Columns.Add(kolumnaZalatwionoWCod);
+            kolumnaZalatwiono.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 31, idDzialu, false, szerokoscKolumny, "Ns"));
+            kolumnaZalatwiono.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 33, idDzialu, false, szerokoscKolumny, "Ns-Rej"));
+            kolumnaZalatwiono.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 35, idDzialu, false, szerokoscKolumny, "Nc"));
+            kolumnaZalatwiono.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 37, idDzialu, false, szerokoscKolumny, "Co"));
+            kolumnaZalatwiono.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 39, idDzialu, false, szerokoscKolumny, "WSC"));
+            kolumnaZalatwiono.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 41, idDzialu, false, szerokoscKolumny, "WSCNc"));
+            kolumnaZalatwiono.Columns.Add(DevExpressXXL.podKolumna(new string[] { "na rozprawe", "na posiedzenie" }, 43, idDzialu, false, szerokoscKolumny, "Cz"));
+
+           
+            ASPxGridView1.Columns.Add(kolumnaZalatwiono);
+
+            #endregion załatwiono
+
+            #region załatwienia
+
+            GridViewBandColumn kolumnaZalatwienia = DevExpressXXL.GetBoundColumn("ZAŁATWIENIA");
+            kolumnaZalatwienia.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Ogółem", "d_45", idDzialu, "", false, szerokoscKolumny));
+            GridViewBandColumn kolumnaZalatwieniaC = DevExpressXXL.GetBoundColumn("C");
+            kolumnaZalatwieniaC.Columns.Add(DevExpressXXL.kolumnaDoTabeli("ogółem", "d_46", idDzialu, "", false, szerokoscKolumny));
+            kolumnaZalatwieniaC.Columns.Add(DevExpressXXL.kolumnaDoTabeli("o rozwód", "d_47", idDzialu, "", false, szerokoscKolumny));
+            kolumnaZalatwieniaC.Columns.Add(DevExpressXXL.kolumnaDoTabeli("o separację", "d_48", idDzialu, "", false, szerokoscKolumny));
+
+            kolumnaZalatwieniaC.Columns.Add(DevExpressXXL.podKolumna(new string[] { "ogółem","o rozwód", "o separację" }, 49, idDzialu, false, szerokoscKolumny, "RC (do 31.01.2018)"));
+            kolumnaZalatwieniaC.Columns.Add(DevExpressXXL.podKolumna(new string[] { "o rozwód", "o separację" }, 52, idDzialu, false, szerokoscKolumny, "od 1.02.2018"));
+
+            kolumnaZalatwienia.Columns.Add(kolumnaZalatwieniaC);
+            kolumnaZalatwienia.Columns.Add(kolumnaZalatwieniaC);
+            kolumnaZalatwienia.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Ns", "d_54", idDzialu, "", false, szerokoscKolumny));
+            kolumnaZalatwienia.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Ns-rej", "d_55", idDzialu, "", false, szerokoscKolumny));
+            kolumnaZalatwienia.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Nc", "d_56", idDzialu, "", false, szerokoscKolumny));
+            kolumnaZalatwienia.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Co", "d_57", idDzialu, "", false, szerokoscKolumny));
+            kolumnaZalatwienia.Columns.Add(DevExpressXXL.kolumnaDoTabeli("WSC", "d_58", idDzialu, "", false, szerokoscKolumny));
+            kolumnaZalatwienia.Columns.Add(DevExpressXXL.kolumnaDoTabeli("WSNc", "d_59", idDzialu, "", false, szerokoscKolumny));
+            kolumnaZalatwienia.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Cz", "d_60", idDzialu, "", false, szerokoscKolumny));
+            ASPxGridView1.Columns.Add(kolumnaZalatwienia);
+
+            #endregion załatwienia
+
+
+            #region sesje odbyte przez sędziego
+
+            GridViewBandColumn sesjeSedziego = DevExpressXXL.GetBoundColumn("sesje odbyte przez sędziego ");
+
+            GridViewBandColumn wszystkieSesjeSedziego = DevExpressXXL.GetBoundColumn("(na potrzeby MS-S)");
+            wszystkieSesjeSedziego.Columns.Add(DevExpressXXL.kolumnaDoTabeli("ogółem", "d_61", idDzialu, "", false, szerokoscKolumny));
+            wszystkieSesjeSedziego.Columns.Add(DevExpressXXL.podKolumna(new string[] { "rozprawy", "posiedzenia jawne", "posiedzenia niejawne" }, 62, idDzialu, false, szerokoscKolumny, "z tego "));
+            sesjeSedziego.Columns.Add(wszystkieSesjeSedziego);
+
+            ASPxGridView1.Columns.Add(sesjeSedziego);
+
+            #endregion sesje odbyte przez sędziego
+
+            
+
+                        #region pozostalosc
+
+                        GridViewBandColumn kolumnaPozostalosc = DevExpressXXL.GetBoundColumn("Pozostałość na następny miesiąc");
+                        kolumnaPozostalosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Ogółem", "d_65", idDzialu, "", false, szerokoscKolumny));
+                        GridViewBandColumn kolumnaPozostaloscC = DevExpressXXL.GetBoundColumn("C");
+                        kolumnaPozostaloscC.Columns.Add(DevExpressXXL.kolumnaDoTabeli("ogółem", "d_66", idDzialu, "", false, szerokoscKolumny));
+                        kolumnaPozostaloscC.Columns.Add(DevExpressXXL.kolumnaDoTabeli("ogółem", "d_67", idDzialu, "", false, szerokoscKolumny));
+                        kolumnaPozostaloscC.Columns.Add(DevExpressXXL.kolumnaDoTabeli("ogółem", "d_68", idDzialu, "", false, szerokoscKolumny));
+
+                        kolumnaPozostaloscC.Columns.Add(DevExpressXXL.podKolumna(new string[] { "ogółem", "o rozwód", "o separację" }, 69, idDzialu, false, szerokoscKolumny, "RC (do 31.01.2018)"));
+                        kolumnaPozostaloscC.Columns.Add(DevExpressXXL.podKolumna(new string[] { "o rozwód", "o separację" }, 72, idDzialu, false, szerokoscKolumny, "od 1.02.2018"));
+
+                        kolumnaPozostalosc.Columns.Add(kolumnaPozostaloscC);
+                        kolumnaPozostalosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Ns", "d_74", idDzialu, "", false, szerokoscKolumny));
+                        kolumnaPozostalosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Ns-rej", "d_75", idDzialu, "", false, szerokoscKolumny));
+                        kolumnaPozostalosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Nc", "d_76", idDzialu, "", false, szerokoscKolumny));
+                        kolumnaPozostalosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Co", "d_77", idDzialu, "", false, szerokoscKolumny));
+                        kolumnaPozostalosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("WSC", "d_78", idDzialu, "", false, szerokoscKolumny));
+                        kolumnaPozostalosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("WSNc", "d_79", idDzialu, "", false, szerokoscKolumny));
+                        kolumnaPozostalosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Cz", "d_80", idDzialu, "", false, szerokoscKolumny));
+                        ASPxGridView1.Columns.Add(kolumnaPozostalosc);
+
+            #endregion pozostalosc
+
+            
+                                    ASPxGridView1.Columns.Add(DevExpressXXL.podKolumna(new string[] { "Ogółem", "do 3 mie- sięcy", "pow. 3 do 6 m-cy", "pow. 6 do 12 m-cy", "pow.12 m-cy do 2 lat", "pow. 2 do 3 lat", "pow. 3 do 5 lat", "pow. 5 do 8 lat", "pow. 8 lat" }, 81, idDzialu, false, szerokoscKolumny, "pozostało spraw starych (wszystkie kategorie spraw) pozostało spraw starych - wszystkie kategorie spraw(bez czasu trwania mediacji, zgodnie z dz. 2.1.1.1 MS - S1o)"));
+
+                                    ASPxGridView1.Columns.Add(DevExpressXXL.podKolumna(new string[] { "Ogółem", "zakreś- lonych", "nie zakreś- lonych" }, 90, idDzialu, false, szerokoscKolumny, "stan spraw zawieszonych(wszystkie kategorie spraw, zgodnie z MS - S5r)"));
+
+                                    GridViewBandColumn liczbaSporzadzonychUzasadnien = DevExpressXXL.podKolumna(new string[4] { "Łącznie", "w terminie ustawowym 14 dni", "razem po terminie ustawowym", "nie- usprawied- liwione" }, 93, idDzialu, false, szerokoscKolumny, "terminowość sporządzania uzasadnień	skargi na przewlekłość	UWAGI od dnia doręczenia sędziemu wniosku do sporządzenia uzasadnienia(zgodnie z MS-S1o, dz. 1.4.2)*");
+                                    GridViewBandColumn PoUplywie = (DevExpressXXL.podKolumna(new string[8] { "1-14 dni", "w tym nieuspra -wiedliwione", "15-30 dni", "w tym nieuspra -wiedliwione", "powyżej 1 do 3 mies", "w tym nieuspra -wiedliwione", "ponad 3 mies", "w tym nieuspra -wiedliwione" }, 97, idDzialu, false, szerokoscKolumny, "po upływie terminiu ustawowego"));
+                                    liczbaSporzadzonychUzasadnien.Columns.Add(PoUplywie);
+                        
+                   liczbaSporzadzonychUzasadnien.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Uzasadnienia wygłoszone **/***", "d_105", idDzialu, "", false, szerokoscKolumny));
+                   liczbaSporzadzonychUzasadnien.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Liczba spraw, do których wpłynął wniosek o transkrypcje uzasadnień wygłoszonych", "d_106", idDzialu, "", false, szerokoscKolumny));
+                  ASPxGridView1.Columns.Add(liczbaSporzadzonychUzasadnien);
+
+
+
+
+            GridViewBandColumn liczbaSporzadzonychUzasadnien2 = DevExpressXXL.podKolumna(new string[4] { "Łącznie", "w terminie ustawowym 14 dni", "razem po terminie ustawowym", "nie- usprawied- liwione" }, 107, idDzialu, false, szerokoscKolumny, "terminowość sporządzania uzasadnień z urzędu  przez sędziów i referendarzy sądowych (zgodnie z MS - S5r, dz. 1.3.1.b + 1.3.1.d) * ");
+            GridViewBandColumn PoUplywie2 = (DevExpressXXL.podKolumna(new string[8] { "1-14 dni", "w tym nieuspra -wiedliwione", "15-30 dni", "w tym nieuspra -wiedliwione", "powyżej 1 do 3 mies", "w tym nieuspra -wiedliwione", "ponad 3 mies", "w tym nieuspra -wiedliwione" }, 111, idDzialu, false, szerokoscKolumny, "po upływie terminiu ustawowego"));
+
+            liczbaSporzadzonychUzasadnien2.Columns.Add(PoUplywie2);
+            liczbaSporzadzonychUzasadnien2.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Uzasadnienia wygłoszone **/***", "d_119", idDzialu, "", false, szerokoscKolumny));
+            liczbaSporzadzonychUzasadnien2.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Liczba spraw, do których wpłynął wniosek o transkrypcje uzasadnień wygłoszonych", "d_120", idDzialu, "", false, szerokoscKolumny));
+            ASPxGridView1.Columns.Add(liczbaSporzadzonychUzasadnien2);
+
+
+
+            GridViewBandColumn zalatwiono01skargiNaPrzewleklosc = DevExpressXXL.GetBoundColumn("skargi na przewlekłość");
+            zalatwiono01skargiNaPrzewleklosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("wpływ", "d_121", idDzialu, "", false, szerokoscKolumny));
+
+            zalatwiono01skargiNaPrzewleklosc.Columns.Add(DevExpressXXL.podKolumna(new string[2] { "ogółem", "uwzględniono" }, 122, idDzialu, false, szerokoscKolumny, "załatwiono"));
+            zalatwiono01skargiNaPrzewleklosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("pozostałość", "d_124", idDzialu, "", false, szerokoscKolumny));
+            ASPxGridView1.Columns.Add(zalatwiono01skargiNaPrzewleklosc);
+
+            ASPxGridView1.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Uwagi", "d_125", idDzialu, "", false, szerokoscKolumny));
+
+            ASPxGridView1.TotalSummary.Clear();
+            ASPxGridView1.TotalSummary.Add(DevExpressXXL.komorkaSumujaca("Ogółem"));
             for (int i = 1; i < 112; i++)
             {
-                tabelaNaglowkowa.Rows.Add(new Object[] { "1", i.ToString(), "1", "1" });
+                ASPxGridView1.TotalSummary.Add(DevExpressXXL.komorkaSumujaca(i));
             }
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "o rozwód", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "o separację", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "ogółem", "1", "1" });
+        }
 
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "o rozwód", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "o separację", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "o rozwód", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "o separację", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "ogółem", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "o rozwód", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "o separację", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "o rozwód", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "o separację", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "1-14 dni", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "w tym nieusprawiedliwione", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "15-30 dni", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "w tym nieusprawiedliwione", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "powyżej 1 do 3 mies.", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "w tym nieusprawiedliwione", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "ponad 3 mies.", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "w tym nieusprawiedliwione", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "ogółęm", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "w tym, w których wpłynął wniosek o transkrypcję", "1", "1" });
-          
+    
 
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "ogółem", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "w tym", "2", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "Co (wnioski o zwoln. od kosztów sąd. i ustanow. pełnom. przed złożeniem pozwu)", "1", "2" });
-     
-            for (int i = 0; i < 16; i++)
+        protected void Suma(object sender, DevExpress.Data.CustomSummaryEventArgs e)
+        {
+            ASPxSummaryItem sumItem = (ASPxSummaryItem)e.Item;
+        }
+
+        protected void ASPxGridView1_SummaryDisplayText(object sender, ASPxGridViewSummaryDisplayTextEventArgs e)
+        {
+            try
             {
-                tabelaNaglowkowa.Rows.Add(new Object[] { "3", "na rozprawę", "1", "2" });
-                tabelaNaglowkowa.Rows.Add(new Object[] { "3", "na posiedzenie", "1", "2" });
-            }
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "ogółem", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "o rozwód", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "o separację", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "RC (do 31.01.2018)", "3", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "od 1.02.2018", "2", "1" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "Rozprawy", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "posiedzenia jawne", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "posiedzenia niejawne", "1", "2" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "ogółem", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "o rozwód", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "o separację", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "RC (do 31.01.2018)", "3", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "od 1.02.2018", "2", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "ogółem", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "w których wpłynął wniosek o transkrypcję", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "wpływ", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "rozpoznano", "2", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "pozostałość", "1", "2" });
-         
-                for (int i = 0; i < 2; i++)
-                 {
-                    tabelaNaglowkowa.Rows.Add(new Object[] { "4", "o rozwód", "2", "1" });
-                    tabelaNaglowkowa.Rows.Add(new Object[] { "4", "o separację", "2", "1" });
+                if (e.Item.FieldName.Contains("d_"))
+                {
+                    double value = double.Parse(e.Value.ToString());
+                    string field = e.Item.FieldName.Replace("d_", "");
+                    value = value - double.Parse(field);
+                    e.Text = value.ToString();
                 }
-
-        
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ogółem", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "C", "3", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ns ogółem", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ns-rej", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Nc", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Co ogółem", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "w tym", "1", "2" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "WSC", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "WSNc", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Cz", "1", "4" });
-
-
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ogółem", "2", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "C", "2", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "w tym", "4", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "RC", "2", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "z tego", "4", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "C od 1.02.2018 r.", "4", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ns", "2", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ns-Rej", "2", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Nc", "2", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Co", "2", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "WSC", "2", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "WSNc", "2", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Cz", "2", "2" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ogółem", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "C", "8", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ns", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ns-rej", "1", "4" }); //51
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Nc", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Co", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "WSC", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "WSNc", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Cz", "1", "4" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "ogółem", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "z tego", "3", "2" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "ogółem", "1", "4" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "C", "8", "2" });//98
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ns", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ns-rej", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Nc", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Co", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "WSC", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "WSNc", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Cz", "1", "4" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ogółem", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "do 3 mies.", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "pow. 3 do 6 m - cy", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "pow.  6 do 12 m - cy", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "pow. 12 m-cy do 2 lat", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "pow. 2 do 3 lat", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "pow. 3 do 5 lat", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "pow. 5 do 8 lat", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "pow.  8 lat", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "Ogółem", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "zakreślonych", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "niezakreślonych", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "łącznie", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "w terminie ustawowym 14 dni", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "razem po terminie ustawowym", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "nieusprawiedliwione", "1", "4" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "po upływie terminiu ustawowego", "8", "3" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "5", "uzasadnienia wygłoszone ***", "2", "2" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "6", "od dnia doręczenia sędziemu wniosku do sporządzenia uzasadnienia (zgodnie z MS-S1o, dz. 1.4.2)* ", "12", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "6", "od dnia wpływu wniosku do właściwego sądu (zgodnie z MS-S1o, dz. 1.4.1) **", "2", "1" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "7", "lp", "1", "7" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "7", "imię i nazwisko sędziego", "1", "7" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "7", "WPŁYW", "12", "2" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "7", "Załatwiono", "32", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "7", "ZAŁATWIENIA", "16", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "7", "sesje odbyte przez sędziego", "4", "2" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "7", "POZOSTAŁOŚĆ na następny m-c", "16", "2" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "7", "pozostało spraw starych (wszystkie kategorie spraw)<br/>pozostało spraw starych - wszystkie kategorie spraw (bez czasu trwania mediacji, zgodnie z dz. 2.1.1.1 MS-S1o)", "9", "2" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "7", "stan spraw zawieszonych (wszystkie kategorie spraw, bez czasu trwania mediacji, zgodnie z MS-S1o)", "3", "2" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "7", "terminowość sporządzania uzasadnień", "14", "1" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "7", "skargi na przewlekłość", "4", "4" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "7", "UWAGI", "1", "6" });
-
-            return tabelaNaglowkowa;
-        }
-
-        private DataTable header_02()
-        {
-            DataTable tabelaNaglowkowa = tb.SchematTabelinaglowkowej();
-
-            for (int i = 0; i < 8; i++)
-            {
-                tabelaNaglowkowa.Rows.Add(new Object[] { "1", "I + II Inst.", "1", "1", "h" });
-                tabelaNaglowkowa.Rows.Add(new Object[] { "1", "I Inst.", "1", "1", "h" });
-                tabelaNaglowkowa.Rows.Add(new Object[] { "1", "GC", "1", "1" });
-                tabelaNaglowkowa.Rows.Add(new Object[] { "1", "II Inst.", "1", "1" });
-                tabelaNaglowkowa.Rows.Add(new Object[] { "1", "Ga", "1", "1" });
-                tabelaNaglowkowa.Rows.Add(new Object[] { "1", "Gz", "1", "1" });
             }
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "I + II Instancja", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "I Instancja", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "II Instancja", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "I + II Instancja", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "I Instancja", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "GC", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "II Instancja", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Ga", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Gz", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "I Instancja", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "II Instancja", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "I Instancja", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "II Instancja", "1", "2" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "1-14 dni ", "6", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "w tym nieusprawiedliwione", "6", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "15-30 dni ", "6", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "w tym nieusprawiedliwione", "6", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "powyżej 1 do 3 mies. ", "6", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "w tym nieusprawiedliwione", "6", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "ponad 3 mies. ", "6", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "w tym nieusprawiedliwione", "6", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Ogółem", "1", "2" });
-         //   tabelaNaglowkowa.Rows.Add(new Object[] { "2", "aaaaw których wpłynął wniosek o transkrypcję", "1", "2" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "Ogółem", "3", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "w terminie ustawowym", "6", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "razem po terminie ustawowym", "2", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "nieusprawiedliwione", "2", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "po upływie terminu ustawowego", "48", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Ogółem", "1", "3" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "w tym", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "Razem", "1", "3" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "3", "w tym, w których projekt został zaakceptowany przez sędziego", "1", "3" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "4", "L.p.", "1", "4", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "4", "imię i nazwisko sędziego", "1", "4", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "4", "liczba sporządzonych uzasadnień (wszystkie kategorie spraw)", "61", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "4", "uzasadnienia wygłoszone *", "2", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "4", "Liczba spraw, w których projekt uzasadnienia orzeczenia sporządził asystent", "2", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "4", "Uwagi", "1", "4", "h" });
-
-            return tabelaNaglowkowa;
-        }
-
-        private DataTable header_05()
-        {
-            DataTable tabelaNaglowkowa = tb.SchematTabelinaglowkowej();
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "K", "1", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "Ko", "1", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "Kop", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "Kp", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "W", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "Razem", "1", "1" });
-
-            return tabelaNaglowkowa;
-        }
-
-        private DataTable header_11()
-        {
-            DataTable tabelaNaglowkowa = tb.SchematTabelinaglowkowej();
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "uchylono", "1", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "skierowano do wykonania", "1", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "inny sposób", "1", "1" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Sędzia", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Wpływ", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Załatwienia", "3", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Pozostało", "1", "2" });
-
-            return tabelaNaglowkowa;
-        }
-
-        private DataTable header_10()
-        {
-            DataTable tabelaNaglowkowa = tb.SchematTabelinaglowkowej();
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "K", "1", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "Ko", "1", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "Kop", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "Kp", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "W", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "Razem", "1", "1" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Sędzia", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Efektywny okres orzekania", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Ilość wyznaczonych spraw", "6", "1" });
-
-            return tabelaNaglowkowa;
-        }
-
-        private DataTable header_12()
-        {
-            DataTable tabelaNaglowkowa = tb.SchematTabelinaglowkowej();
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "utrzymano  w mocy", "1", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "uchylono ", "1", "1", "h" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "Kop", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "zmienionoKp", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "częściowo uchylono", "1", "1" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "1", "pozostawiono bez rozpoznania ", "1", "1" });
-
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Sędzia", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Rodzaje orzeczeń ", "1", "2" });
-            tabelaNaglowkowa.Rows.Add(new Object[] { "2", "Razem", "6", "1" });
-
-            return tabelaNaglowkowa;
+            catch
+            { }
         }
     }
 }

@@ -372,7 +372,7 @@ namespace Statystyki_2018
                 }
                 catch (Exception ex)
                 {
-                    cm.log.Error("Wymiana  serwer 1: Bład kwerend z zapytaniami");
+                    cm.log.Error("Wymiana  serwer 1: Bład kwerend z zapytaniami " + ex.Message);
                   
                 }
                 Zapytania.AppendLine("</zapytanie> ");

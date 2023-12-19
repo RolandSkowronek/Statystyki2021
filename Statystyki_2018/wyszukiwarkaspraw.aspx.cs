@@ -45,22 +45,11 @@ namespace Statystyki_2018
                         var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~//version.txt"));
                         this.Title = "Wyszukiwarka spraw " + fileContents.ToString().Trim();
 
-
-
                     }
                     catch
                     {
                     }
-                    string txt = (string)Session["user_id"];
-                    if (string.IsNullOrEmpty((txt)))
-                    {
-                        //Server.Transfer("default.aspx");
-                    }
-                    else
-                    {
-
-
-                    }
+                  
                
                 }
                 catch
@@ -82,23 +71,22 @@ namespace Statystyki_2018
                 {
                     id = 100 + int.Parse(ident);
                 }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
-                    //cl.log.Error("Wyszukiwarka spraw " + ex.Message);
+                    cl.log.Error("Wyszukiwarka wyszukiwarka2 " + ex.Message);
                 }
-                //user
+
                 string user = string.Empty;
                 string domain = string.Empty;
                 try
                 {
                     user = (string)Session["user_id"];
-
                     domain = (string)Session["damain"];
                 }
-                catch 
-                {    }
+                catch (Exception ex)
+                {
+                    cl.log.Error("Wyszukiwarka wyszukiwarka2 " + ex.Message);
+                }
 
                 string pozwolenie = cl.czy_dostepny(user, id.ToString(), domain);
                 if (pozwolenie != "0")
@@ -106,8 +94,6 @@ namespace Statystyki_2018
                     ASPxComboBox1.Items.Add(dR[0].ToString());
                 }
             }
-
-            //-------------
             
             if (ASPxComboBox1.SelectedIndex == -1)
             {
@@ -123,10 +109,11 @@ namespace Statystyki_2018
             try
             {
                 SqlDataSource1.ConnectionString = connectionString;
-
             }
-            catch (Exception)
-            { }
+            catch (Exception ex)
+            {
+                cl.log.Error("Wyszukiwarka makeGrid " + ex.Message);
+            }
 
 
             Session["imie"] = imie.Text.Trim();
@@ -155,13 +142,10 @@ namespace Statystyki_2018
                 listaSpraw.Columns.Clear();
                 listaSpraw.DataBind();
             }
-            catch 
+            catch (Exception ex)
             {
-
-
+                cl.log.Error("Wyszukiwarka makeGrid " + ex.Message);
             }
-
-            //listaSpraw.Theme  = "Mulberry";
         }
 
         protected void Grid_Load(object sender, EventArgs e)
@@ -178,15 +162,17 @@ namespace Statystyki_2018
                         connectionString = (string)Session["connectionString"];
                         makeGrid(connectionString, kwerenda);
                     }
-                    catch
+                    catch (Exception ex)
                     {
-
+                        cl.log.Error("Wyszukiwarka Grid_Load " + ex.Message);
                     }
-                    //makeGrid();
+                  
                 }
             }
-            catch
-            { }
+            catch (Exception ex)
+            {
+                cl.log.Error("Wyszukiwarka Grid_Load " + ex.Message);
+            }
         }
 
 
