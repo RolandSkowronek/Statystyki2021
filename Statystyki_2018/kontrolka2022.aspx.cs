@@ -3,6 +3,7 @@ using DevExpress.XtraPrinting;
 using System;
 using System.Data;
 using System.Drawing;
+using System.Web.UI.WebControls;
 
 namespace Statystyki_2018
 {
@@ -50,7 +51,7 @@ namespace Statystyki_2018
                 {
                     data2.Date = DateTime.Parse(dTime.Year.ToString() + "-" + dTime.Month.ToString("D2") + "-" + DateTime.DaysInMonth(dTime.Year, dTime.Month).ToString("D2"));
                 }
-
+                
                 grid.DataBind();
                 DataBindX();
                 

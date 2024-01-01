@@ -57,6 +57,7 @@
     <div>
          <div data-bind="dxDataGrid: gridOptions"></div>
         <dx:ASPxGridView ID="grid" 
+            
             runat="server" 
             EnableTheming="True" 
             OnDataBinding="dataBinding" 
@@ -80,13 +81,19 @@
            
            <SettingsPager AlwaysShowPager="True" EnableAdaptivity="True">
             </SettingsPager>
-
+           
+        
+        
             <Settings 
+               
+                VerticalScrollBarMode="Visible"
+                VerticalScrollableHeight="640"
                 ShowFilterRow="True" 
                 EnableFilterControlPopupMenuScrolling="True" 
                 ShowFilterBar="Auto" 
                 ShowFilterRowMenu="True" 
                 ShowGroupFooter="VisibleAlways" ShowFooter="True" ShowHeaderFilterButton="True" />
+              <SettingsBehavior AllowFixedGroups="true" AllowFocusedRow="True" />
             <SettingsDataSecurity 
                 AllowDelete="False" 
                 AllowEdit="False" 
@@ -101,6 +108,8 @@
                 </DetailCell>
                 <Cell Wrap="False">
                 </Cell>
+                <FocusedCell BackColor="#FFCC00">
+                </FocusedCell>
             </Styles>
           
             

@@ -116,7 +116,7 @@ namespace Statystyki_2018
             {
                 cm.log.Info(tenPlik + ": rozpoczęcie tworzenia tabeli 1");
             }
-            DataTable tabelka01 = dr.generuj_dane_do_tabeli_sedziowskiej_2019(int.Parse(idDzialu), 1, Date1.Date, Date2.Date, 35, tenPlik);
+            DataTable tabelka01 = dr.generuj_dane_do_tabeli_sedziowskiej_2019(int.Parse(idDzialu), 1, Date1.Date, Date2.Date, 28, tenPlik);
             Session["tabelka001"] = tabelka01;
             gwTabela1.DataSource = null;
             gwTabela1.DataSourceID = null;
@@ -187,7 +187,8 @@ namespace Statystyki_2018
             dT_02.Rows.Add(new Object[] { "1", "zaw", "1", "1", "h", "60" });//
             dT_02.Rows.Add(new Object[] { "1", "Cgg", "1", "1", "h", "60" });//
             dT_02.Rows.Add(new Object[] { "1", "zaw", "1", "1", "h", "60" });//
-
+            dT_02.Rows.Add(new Object[] { "1", "WSC", "1", "1", "h", "60" });//
+            dT_02.Rows.Add(new Object[] { "1", "zaw", "1", "1", "h", "60" });//
             dT_02.Rows.Add(new Object[] { "1", "CZ", "1", "1", "h", "60" });//
             dT_02.Rows.Add(new Object[] { "1", "N", "1", "1", "h", "60" });//
             dT_02.Rows.Add(new Object[] { "1", "Razem", "1", "1", "h", "60" });//
@@ -196,7 +197,7 @@ namespace Statystyki_2018
             dT_02.Rows.Add(new Object[] { "2", "L.p.", "1", "2", "h", "10" });//
             dT_02.Rows.Add(new Object[] { "2", "Nazwisko i imię Sędziego", "1", "2", "h", "130" });//
             dT_02.Rows.Add(new Object[] { "2", "Ilość rozpraw", "1", "2", "h", "60" });//
-            dT_02.Rows.Add(new Object[] { "2", "ZAŁATWIENIA ", "16", "1", "h", "45" });//
+            dT_02.Rows.Add(new Object[] { "2", "ZAŁATWIENIA ", "18", "1", "h", "45" });//
 
             return dT_02;
         }
@@ -205,7 +206,7 @@ namespace Statystyki_2018
         {
             DataTable dT_03 = SchematTabeliNaglowka();
             dT_03.Clear();
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 10; i++)
             {
                 dT_03.Rows.Add(new Object[] { "1", "Na rozprawach", "1", "1", "v" });
                 dT_03.Rows.Add(new Object[] { "1", "Na posiedzeniach", "1", "1", "v" });
@@ -224,6 +225,7 @@ namespace Statystyki_2018
             dT_03.Rows.Add(new Object[] { "2", "Co", "2", "1", "h" });
             dT_03.Rows.Add(new Object[] { "2", "Cps", "2", "1", "h" });
             dT_03.Rows.Add(new Object[] { "2", "Cgg", "2", "1", "h" });
+            dT_03.Rows.Add(new Object[] { "2", "WSC", "2", "1", "h" });
             dT_03.Rows.Add(new Object[] { "2", "Cz", "2", "1", "h" });
             dT_03.Rows.Add(new Object[] { "2", "N", "2", "1", "h" });
 
@@ -238,7 +240,7 @@ namespace Statystyki_2018
             dT_03.Rows.Add(new Object[] { "3", "Ilość wyznaczonych spraw", "2", "1", "h" });
             dT_03.Rows.Add(new Object[] { "3", "Ilość spraw odrocznych z rozpraw (bez publikacji!!!)", "1", "3", "h" });
             dT_03.Rows.Add(new Object[] { "3", "Wskaźnik odroczeń", "1", "3", "h" });
-            dT_03.Rows.Add(new Object[] { "3", "Załatwienia", "16", "1", "h" });
+            dT_03.Rows.Add(new Object[] { "3", "Załatwienia", "18", "1", "h" });
 
             dT_03.Rows.Add(new Object[] { "3", "Razem", "2", "2", "h" });
 
@@ -349,7 +351,7 @@ namespace Statystyki_2018
                 rowik = table.Rows.Count - 2;
                 MyWorksheet1 = tb.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], table, 18, 0, 5, false, false, false, false, false, false);
 
-                MyWorksheet1 = tb.tworzArkuszwExcleBezSedziow(MyExcel.Workbook.Worksheets[1], (DataTable)Session["tabelka002"], 12, 16, 2, rowik + 7, false);
+                MyWorksheet1 = tb.tworzArkuszwExcleBezSedziow(MyExcel.Workbook.Worksheets[1], (DataTable)Session["tabelka002"], 14, 16, 2, rowik + 7, false);
 
                 tb.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 7, 1, "Zaległość z poprzedniego miesiąca", true, 0, 1);
                 tb.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 8, 1, "Wpływ", true, 0, 1);
@@ -452,47 +454,47 @@ namespace Statystyki_2018
             // nowy wiersz
             int idWiersza = 1;
 
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 17, idWiersza, idtabeli, "Zaległość z poprzedniego miesiąca", 3, 1, "normal", "borderTopLeft "));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19 , idWiersza, idtabeli, "Zaległość z poprzedniego miesiąca", 3, 1, "normal", "borderTopLeft "));
 
             idWiersza = 2;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 17, idWiersza, idtabeli, "Wpływ", 3, 1, "normal", "borderTopLeft "));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19 , idWiersza, idtabeli, "Wpływ", 3, 1, "normal", "borderTopLeft "));
 
             // nowy wiersz
             idWiersza = 3;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 17, idWiersza, idtabeli, "Załatwienia", 3, 1, "normal", "borderTopLeft "));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19 , idWiersza, idtabeli, "Załatwienia", 3, 1, "normal", "borderTopLeft "));
 
             // nowy wiersz
             idWiersza = 4;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 17, idWiersza, idtabeli, "Pozostałość na następny miesiąc", 3, 1, "normal", "borderTopLeft "));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19 , idWiersza, idtabeli, "Pozostałość na następny miesiąc", 3, 1, "normal", "borderTopLeft "));
 
             // nowy wiersz
             idWiersza = 5;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 17, idWiersza, idtabeli, "Odroczono", 1, 1, "normal", "borderTopLeft col_60", "Zaległość", 8, 2, "borderTopLeft col_60"));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19 , idWiersza, idtabeli, "Odroczono", 1, 1, "normal", "borderTopLeft col_60", "Zaległość", 8, 2, "borderTopLeft col_60"));
 
             // nowy wiersz
             idWiersza = 6;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 17, idWiersza, idtabeli, "0-3  miesięcy ", 1, 1, "normal", "borderTopLeft "));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19 , idWiersza, idtabeli, "0-3  miesięcy ", 1, 1, "normal", "borderTopLeft "));
 
             // nowy wiersz
             idWiersza = 7;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 17, idWiersza, idtabeli, "3-6  miesięcy ", 1, 1, "normal", "borderTopLeft "));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19 , idWiersza, idtabeli, "3-6  miesięcy ", 1, 1, "normal", "borderTopLeft "));
 
             // nowy wiersz
             idWiersza = 8;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 17, idWiersza, idtabeli, "6-12  miesięcy ", 1, 1, "normal", "borderTopLeft "));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19 , idWiersza, idtabeli, "6-12  miesięcy ", 1, 1, "normal", "borderTopLeft "));
 
             // nowy wiersz
             idWiersza = 9;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 17, idWiersza, idtabeli, "12-24  miesięcy (do 2 lat)", 1, 1, "normal", "borderTopLeft "));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19 , idWiersza, idtabeli, "12-24  miesięcy (do 2 lat)", 1, 1, "normal", "borderTopLeft "));
 
             idWiersza = 10;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 17, idWiersza, idtabeli, "24-36  miesięcy (2-3 lat))", 1, 1, "normal", "borderTopLeft "));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19 , idWiersza, idtabeli, "24-36  miesięcy (2-3 lat))", 1, 1, "normal", "borderTopLeft "));
 
             idWiersza = 11;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 17, idWiersza, idtabeli, "36-60  miesięcy (3-5 lat)", 1, 1, "normal", "borderTopLeft "));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19 , idWiersza, idtabeli, "36-60  miesięcy (3-5 lat)", 1, 1, "normal", "borderTopLeft "));
 
             idWiersza = 12;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 17, idWiersza, idtabeli, "Powyżej 60 miesięcy (powyżej 5 lat)", 1, 1, "normal", "borderTopLeft "));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19 , idWiersza, idtabeli, "Powyżej 60 miesięcy (powyżej 5 lat)", 1, 1, "normal", "borderTopLeft "));
         }
     }
 }
