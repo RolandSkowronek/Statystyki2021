@@ -11,7 +11,7 @@ namespace Statystyki_2018
 {
 
 
-    public partial class aglg
+    public partial class osog
     {
 
         /// <summary>
@@ -87,76 +87,13 @@ namespace Statystyki_2018
         protected global::System.Web.UI.WebControls.Label infoLabel2;
 
         /// <summary>
-        /// gwTabela1 control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gwTabela1;
-
-        /// <summary>
-        /// Label17 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label17;
-
-        /// <summary>
-        /// infoLabel3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label infoLabel3;
-
-        /// <summary>
-        /// gwTabela3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gwTabela3;
-
-        /// <summary>
-        /// Label15 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label15;
-
-        /// <summary>
-        /// infoLabel5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label infoLabel5;
-
-        /// <summary>
-        /// gwTabela4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gwTabela4;
-
-        /// <summary>
-        /// Label27 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label27;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
         /// Label29 control.

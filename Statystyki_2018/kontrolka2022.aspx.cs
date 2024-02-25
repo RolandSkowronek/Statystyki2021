@@ -1,4 +1,5 @@
-﻿using DevExpress.Web;
+﻿using DevExpress.Utils;
+using DevExpress.Web;
 using DevExpress.XtraPrinting;
 using System;
 using System.Data;
@@ -201,6 +202,8 @@ namespace Statystyki_2018
                 {
                     grid.Width = szerokosctabeli;
                 }
+                else
+                {  grid.Width = 0;     }
             }
             catch
             { }
@@ -220,6 +223,7 @@ namespace Statystyki_2018
                 {
                     grid.DataColumns[name].SettingsHeaderFilter.Mode = GridHeaderFilterMode.DateRangePicker;
                     grid.DataColumns[name].Settings.AllowHeaderFilter = DevExpress.Utils.DefaultBoolean.True;
+                   
                 }
                 if (dCol is GridViewDataColumn)
                 {

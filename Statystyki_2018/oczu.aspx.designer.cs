@@ -11,7 +11,7 @@ namespace Statystyki_2018
 {
 
 
-    public partial class aglg
+    public partial class oczu
     {
 
         /// <summary>
@@ -60,31 +60,22 @@ namespace Statystyki_2018
         protected global::System.Web.UI.WebControls.LinkButton LinkButton57;
 
         /// <summary>
-        /// Label3 control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// tabela2Label control.
+        /// infoLabel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label tabela2Label;
-
-        /// <summary>
-        /// infoLabel2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label infoLabel2;
+        protected global::System.Web.UI.WebControls.Label infoLabel1;
 
         /// <summary>
         /// gwTabela1 control.
@@ -94,60 +85,6 @@ namespace Statystyki_2018
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gwTabela1;
-
-        /// <summary>
-        /// Label17 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label17;
-
-        /// <summary>
-        /// infoLabel3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label infoLabel3;
-
-        /// <summary>
-        /// gwTabela3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gwTabela3;
-
-        /// <summary>
-        /// Label15 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label15;
-
-        /// <summary>
-        /// infoLabel5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label infoLabel5;
-
-        /// <summary>
-        /// gwTabela4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gwTabela4;
 
         /// <summary>
         /// Label27 control.

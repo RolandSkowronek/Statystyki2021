@@ -151,14 +151,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="adm.aspx" />
+    <Content Include="akti.aspx" />
     <Content Include="kontrolka2022.aspx" />
     <Content Include="nowaN.aspx" />
+    <Content Include="aglg.aspx" />
     <Content Include="oglk.aspx" />
     <Content Include="oczu.aspx" />
     <Content Include="oczp.aspx" />
     <Content Include="aopc.aspx" />
     <Content Include="aktg2.aspx" />
-    <Content Include="osok.aspx" />
+    <Content Include="osog.aspx" />
     <Content Include="oktc.aspx" />
     <Content Include="oktr.aspx" />
     <Content Include="oktk.aspx" />
@@ -174,7 +176,6 @@
     <Content Include="aktpe.aspx" />
     <Content Include="aktk2.aspx" />
     <Content Include="aktk.aspx" />
-    <Content Include="aglg.aspx" />
     <Content Include="aglc.aspx" />
     <Content Include="agl.aspx" />
     <Content Include="akrg.aspx" />
@@ -574,6 +575,13 @@
     <Compile Include="adm.aspx.designer.cs">
       <DependentUpon>adm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="akti.aspx.cs">
+      <DependentUpon>akti.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="akti.aspx.designer.cs">
+      <DependentUpon>akti.aspx</DependentUpon>
+    </Compile>
     <Compile Include="kontrolka2022.aspx.cs">
       <DependentUpon>kontrolka2022.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -587,6 +595,13 @@
     </Compile>
     <Compile Include="nowaN.aspx.designer.cs">
       <DependentUpon>nowaN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="aglg.aspx.cs">
+      <DependentUpon>aglg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="aglg.aspx.designer.cs">
+      <DependentUpon>aglg.aspx</DependentUpon>
     </Compile>
     <Compile Include="oglk.aspx.cs">
       <DependentUpon>oglk.aspx</DependentUpon>
@@ -623,12 +638,12 @@
     <Compile Include="aktg2.aspx.designer.cs">
       <DependentUpon>aktg2.aspx</DependentUpon>
     </Compile>
-    <Compile Include="osok.aspx.cs">
-      <DependentUpon>osok.aspx</DependentUpon>
+    <Compile Include="osog.aspx.cs">
+      <DependentUpon>osog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="osok.aspx.designer.cs">
-      <DependentUpon>osok.aspx</DependentUpon>
+    <Compile Include="osog.aspx.designer.cs">
+      <DependentUpon>osog.aspx</DependentUpon>
     </Compile>
     <Compile Include="oktc.aspx.cs">
       <DependentUpon>oktc.aspx</DependentUpon>
@@ -727,13 +742,6 @@
     </Compile>
     <Compile Include="aktk.aspx.designer.cs">
       <DependentUpon>aktk.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="aglg.aspx.cs">
-      <DependentUpon>aglg.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="aglg.aspx.designer.cs">
-      <DependentUpon>aglg.aspx</DependentUpon>
     </Compile>
     <Compile Include="aglc.aspx.cs">
       <DependentUpon>aglc.aspx</DependentUpon>

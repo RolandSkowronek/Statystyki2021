@@ -63,7 +63,7 @@
             OnDataBinding="dataBinding" 
             Theme="Moderno"
             EnableCallbackAnimation="True" 
-             ViewStateMode="Enabled" OnCustomColumnDisplayText="grid_CustomColumnDisplayText"
+             ViewStateMode="Enabled" OnCustomColumnDisplayText="grid_CustomColumnDisplayText" Width="100%"
             
             >
            
