@@ -1123,6 +1123,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RenderingResult.cs" />
     <Compile Include="SerwisWymiany.asmx.cs">
       <DependentUpon>SerwisWymiany.asmx</DependentUpon>
       <SubType>Component</SubType>

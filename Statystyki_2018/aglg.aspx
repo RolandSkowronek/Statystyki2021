@@ -610,7 +610,7 @@
 
 
                 </Columns>
-                <FooterStyle Font-Bold="True" HorizontalAlign="Center" />
+                <FooterStyle Font-Bold="True" HorizontalAlign="Center" BackColor="#CCCCCC" />
                 <RowStyle Height="25px" />
             </asp:GridView>
             <br />
@@ -673,7 +673,7 @@
                         <ItemStyle CssClass="col_91" />
                     </asp:TemplateField>
                 </Columns>
-                <FooterStyle Font-Bold="True" HorizontalAlign="Center" />
+                <FooterStyle Font-Bold="True" HorizontalAlign="Center" BackColor="#CCCCCC" />
             </asp:GridView>
             <br />
         </div>

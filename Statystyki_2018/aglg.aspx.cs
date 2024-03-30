@@ -184,25 +184,25 @@ namespace Statystyki_2018
 
 
 
-            dT_02.Rows.Add(new Object[] { "3", "GC", "1", "3", "h", "40" });
-            dT_02.Rows.Add(new Object[] { "3", "Gc zaw", "1", "3", "h", "40" });
+            dT_02.Rows.Add(new Object[] { "3", "GC", "1", "3", "h", "60" });
+            dT_02.Rows.Add(new Object[] { "3", "GC zaw", "1", "3", "h", "60" });
             dT_02.Rows.Add(new Object[] { "3", "GNC", "1", "3", "h", "60" });
             dT_02.Rows.Add(new Object[] { "3", "GCo", "1", "3", "h", "60" });
             dT_02.Rows.Add(new Object[] { "3", "GCo zaw.", "1", "3", "h", "60" });
-            dT_02.Rows.Add(new Object[] { "3", "Ga", "1", "3", "h", "40" });
+            dT_02.Rows.Add(new Object[] { "3", "Ga", "1", "3", "h", "60" });
             dT_02.Rows.Add(new Object[] { "3", "Ga zaw", "1", "3", "h", "60" });
             dT_02.Rows.Add(new Object[] { "3", "Ga KRZ", "1", "3", "h", "60" });
             dT_02.Rows.Add(new Object[] { "3", "GZ KRZ", "1", "3", "h", "60" });
             dT_02.Rows.Add(new Object[] { "3", "GZ", "1", "3", "h", "60" });
-            dT_02.Rows.Add(new Object[] { "3", "Gz poziome", "3", "1", "h", "60" });
+            dT_02.Rows.Add(new Object[] { "3", "Gz poziome", "3", "1", "h", "120" });
             dT_02.Rows.Add(new Object[] { "3", "S", "1", "3", "h", "60" });
-            dT_02.Rows.Add(new Object[] { "3", "WSC  ", "2", "1", "h", "10" });
-            dT_02.Rows.Add(new Object[] { "4", "I instancja", "5", "1", "h", "130" });
-            dT_02.Rows.Add(new Object[] { "4", "II instancja", "13", "1", "h", "130" });
+            dT_02.Rows.Add(new Object[] { "3", "WSC  ", "2", "1", "h", "120" });
+            dT_02.Rows.Add(new Object[] { "4", "I instancja", "5", "1", "h", "150" });
+            dT_02.Rows.Add(new Object[] { "4", "II instancja", "13", "1", "h", "150" });
 
             dT_02.Rows.Add(new Object[] { "5", "Lp ", "1", "5", "h", "45" });//
             dT_02.Rows.Add(new Object[] { "5", "Imię i nazwisko ", "1", "5", "h", "45" });//
-            dT_02.Rows.Add(new Object[] { "5", "ZAŁATWIENIA ", "16", "1", "h", "45" });//
+            dT_02.Rows.Add(new Object[] { "5", "ZAŁATWIENIA ", "16", "1", "h", "1000" });//
             dT_02.Rows.Add(new Object[] { "5", "Razem", "1", "5", "h", "60" });
             dT_02.Rows.Add(new Object[] { "5", "zaw", "1", "5", "h", "60" });
 
@@ -467,31 +467,31 @@ namespace Statystyki_2018
             string idtabeli = "2";
 
             int idWiersza = 1;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliAGLG(tabelka01, 19 , idWiersza, idtabeli, "Pozostałóść z poprzedniego miesiąca", 2, 1, "normal ", "borderTopLeft ",false));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliAGLG(tabelka01, 19 , idWiersza, idtabeli, "Pozostałóść z poprzedniego miesiąca", 2, 1, "normal ", "borderTopLeft ",true));
 
             idWiersza = 2;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliAGLG(tabelka01, 19 , idWiersza, idtabeli, "Wpływ", 2, 1, "normal gary", "borderTopLeft ", true));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliAGLG(tabelka01, 19 , idWiersza, idtabeli, "Wpływ", 2, 1, "normal ", "borderTopLeft ", false,true));
 
             idWiersza = 3;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliAGLG(tabelka01, 19 , idWiersza, idtabeli, "Załatwienia", 2, 1, "normal", "borderTopLeft ", true));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliAGLG(tabelka01, 19 , idWiersza, idtabeli, "Załatwienia", 2, 1, "normal", "borderTopLeft ", false,true));
 
             idWiersza = 4;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliAGLG(tabelka01, 19 , idWiersza, idtabeli, "Pozostałość na następny miesiąc", 2, 1, "normal", "borderTopLeft ", false));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliAGLG(tabelka01, 19 , idWiersza, idtabeli, "Pozostałość na następny miesiąc", 2, 1, "normal", "borderTopLeft ", true));
 
             idWiersza = 5;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19, idWiersza, idtabeli, "powyżej  3 do 6 miesięcy", 2, 1, "normal", "borderTopLeft ", true));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19, idWiersza, idtabeli, "powyżej  3 do 6 miesięcy", 2, 1, "normal", "borderTopLeft ", false,    true));
 
             idWiersza = 6;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19, idWiersza, idtabeli, "powyżej 6 do 12 miesięcy", 2, 1, "normal", "borderTopLeft ", true));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19, idWiersza, idtabeli, "powyżej 6 do 12 miesięcy", 2, 1, "normal", "borderTopLeft ", false , true));
 
             idWiersza = 7;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19, idWiersza, idtabeli, "powyżej 12 do 24 miesięcy", 2, 1, "normal", "borderTopLeft ", true));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19, idWiersza, idtabeli, "powyżej 12 do 24 miesięcy", 2, 1, "normal", "borderTopLeft ", false, true));
 
             idWiersza = 8;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19, idWiersza, idtabeli, "powyżej 24 miesięcy", 2, 1, "normal", "borderTopLeft ", true));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19, idWiersza, idtabeli, "powyżej 24 miesięcy", 2, 1, "normal", "borderTopLeft ", false, true));
 
             idWiersza = 9;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19, idWiersza, idtabeli, "Odroczenia", 2, 1, "normal", "borderTopLeft ", true));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeli(tabelka01, 19, idWiersza, idtabeli, "Odroczenia", 2, 1, "normal", "borderTopLeft ", false,true));
 
         }
     }

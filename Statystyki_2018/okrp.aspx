@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <div style="width: 1150px; margin: 0 auto 0 auto; position: relative; top: 60px;">
+    <div style="width: 1150px; margin: 0 40px 0 40px; position: relative; top: 60px;">
 
         <div id="Div2" style="z-index: 10;">
             <div style="margin-left: auto; margin-right: auto; text-align: center; width: auto;">
@@ -420,6 +420,7 @@
                         <ItemStyle CssClass="col_40" />
                     </asp:TemplateField>
                 </Columns>
+                <FooterStyle BackColor="#CCCCCC" />
             </asp:GridView>
             <asp:SqlDataSource ID="tabela_2" runat="server"
                 ConnectionString="<%$ ConnectionStrings:wap %>"
