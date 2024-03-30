@@ -53,7 +53,8 @@ namespace Statystyki_2018
                     data2.Date = DateTime.Parse(dTime.Year.ToString() + "-" + dTime.Month.ToString("D2") + "-" + DateTime.DaysInMonth(dTime.Year, dTime.Month).ToString("D2"));
                 }
                 
-                grid.DataBind();
+              
+                
                 DataBindX();
                 
             }
@@ -61,9 +62,20 @@ namespace Statystyki_2018
 
         protected void szukaj(object sender, EventArgs e)
         {
-            grid.DataBind();
+           // grid.DataBind();
+        }
+        protected void ASPxGridViewExporter1_RenderBrick(object sender, DevExpress.Web.ASPxGridViewExportRenderingEventArgs e)
+        {
+            StringFormat sFormat = new StringFormat(StringFormatFlags.NoWrap);
+            BrickStringFormat brickSFormat = new BrickStringFormat(sFormat);
+            e.XlsxFormatString = sFormat.ToString();
         }
 
+
+        protected void grid_SummaryDisplayText(object sender, ASPxGridViewSummaryDisplayTextEventArgs e)
+        {
+          
+        }
         protected void Druk(object sender, EventArgs e)
         {
             string ident = (string)Session["valueX"];
@@ -124,13 +136,7 @@ namespace Statystyki_2018
             ASPxGridViewExporter1.WriteXlsxToResponse("kontrolka - " + DateTime.Now.ToShortDateString());
         }
 
-        protected void ASPxGridViewExporter1_RenderBrick(object sender, DevExpress.Web.ASPxGridViewExportRenderingEventArgs e)
-        {
-            StringFormat sFormat = new StringFormat(StringFormatFlags.NoWrap);
-            BrickStringFormat brickSFormat = new BrickStringFormat(sFormat);
-            e.XlsxFormatString = sFormat.ToString();
-        }
-
+    
         private void DataBindX()
         {
             string ident = (string)Session["valueX"];
@@ -149,8 +155,9 @@ namespace Statystyki_2018
                 
                 
             }
-           
+          
             grid.DataSource = daneNew;
+            grid.DataBind();
             try
             {
                 grid.SettingsPager.PageSize = int.Parse(cm.odczytajWartosc("kontrolka_wiersze"));
@@ -161,54 +168,11 @@ namespace Statystyki_2018
             }
             DataTable parameters = cm.makeParameterTable();
             parameters.Rows.Add("@ident", ident);
-            int szerokoscKolumny = 0;
-            int rozmiarCzcionki = 0;
-            int szerokosctabeli = 0;
-
-            try
-            {
-                szerokoscKolumny = int.Parse(cm.getQuerryValue("SELECT szerokoscKolumny FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters));
-            }
-            catch
-            {
-                szerokoscKolumny = 50;
-            }
-            try
-            {
-                rozmiarCzcionki = int.Parse(cm.getQuerryValue("SELECT rozmiarczcionki FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters));
-            }
-            catch
-            {
-                rozmiarCzcionki = 10;
-            }
-            try
-            {
-                szerokosctabeli = int.Parse(cm.getQuerryValue("SELECT szerokosctabeli FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters));
-            }
-            catch
-            {
-                szerokosctabeli = 1150;
-            }
-            cm.log.Info("Kontrolka -rozmiar czcionki: " + rozmiarCzcionki.ToString());
-            cm.log.Info("Kontrolka -szerokosc Kolumny: " + szerokoscKolumny.ToString());
-            cm.log.Info("Kontrolka -szerokosc tabeli: " + szerokosctabeli.ToString());
-            Session["rozmiarCzcionki"] = rozmiarCzcionki;
-            Session["szerokoscKolumny"] = szerokoscKolumny;
-            Session["szerokosctabeli"] = szerokosctabeli;
-
-            try
-            {
-                if (szerokosctabeli > 0)
-                {
-                    grid.Width = szerokosctabeli;
-                }
-                else
-                {  grid.Width = 0;     }
-            }
-            catch
-            { }
-
           
+
+       
+            /*
+           // grid.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
             foreach (GridViewDataColumn dCol in grid.Columns)
             {
                 string name = dCol.Name;
@@ -216,23 +180,25 @@ namespace Statystyki_2018
                 Type typRef = typeof(DateTime);
                 GridViewDataColumn id = new GridViewDataColumn();
                 id.FieldName = name;
-                //  grid.Columns.Add(id);
+               
                 cm.log.Info("kontrolka reftype: " + typRef.FullName);
                 cm.log.Info("kontrolka type: " + typ.FullName);
                 if (typ == typRef)
                 {
-                    grid.DataColumns[name].SettingsHeaderFilter.Mode = GridHeaderFilterMode.DateRangePicker;
-                    grid.DataColumns[name].Settings.AllowHeaderFilter = DevExpress.Utils.DefaultBoolean.True;
+                //    grid.DataColumns[name].SettingsHeaderFilter.Mode = GridHeaderFilterMode.DateRangePicker;
+                //    grid.DataColumns[name].Settings.AllowHeaderFilter = DevExpress.Utils.DefaultBoolean.True;
                    
                 }
                 if (dCol is GridViewDataColumn)
                 {
                     ((GridViewDataColumn)dCol).Settings.AutoFilterCondition = AutoFilterCondition.Contains;
                 }
-                dCol.Width = szerokoscKolumny;
+                dCol.Settings.AllowEllipsisInText = DefaultBoolean.True;
+               
+               
                 dCol.CellStyle.Font.Size = rozmiarCzcionki;
             }
-
+            */
             ASPxGridViewExporter1.DataBind();
         }
 
@@ -244,6 +210,7 @@ namespace Statystyki_2018
             }
            
         }
-       
+
+      
     }
 }

@@ -7,7 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_PublishTargetUrl>C:\repo\priv\publish</_PublishTargetUrl>
-    <History>True|2024-01-31T18:39:59.4739602Z;True|2024-01-12T12:54:34.2704525+01:00;True|2024-01-11T21:01:05.0552343+01:00;True|2023-12-18T20:07:41.5935169+01:00;True|2023-12-13T14:01:48.5033379+01:00;True|2023-12-12T20:43:57.5398166+01:00;True|2023-12-11T19:09:55.3970330+01:00;True|2023-09-18T17:08:28.9592224+02:00;True|2023-08-04T11:39:06.9685516+02:00;True|2023-08-03T17:56:08.4519122+02:00;False|2023-07-16T12:25:58.5644230+02:00;True|2023-07-02T16:12:55.6400954+02:00;True|2023-06-11T15:07:06.6939034+02:00;True|2023-06-11T12:57:27.8201249+02:00;True|2023-05-23T12:37:42.0833952+02:00;True|2023-05-10T21:44:36.9208239+02:00;True|2023-05-07T19:06:55.5609663+02:00;True|2023-05-07T18:43:03.9642545+02:00;True|2023-04-10T18:14:08.3284086+02:00;True|2023-04-08T15:58:29.4021434+02:00;True|2023-04-02T17:00:02.1565115+02:00;True|2023-04-02T11:21:43.3725738+02:00;True|2023-02-05T18:10:08.0504172+01:00;True|2023-01-08T19:53:11.3583070+01:00;True|2022-12-19T11:17:31.2565077+01:00;False|2022-12-19T11:14:58.6001496+01:00;False|2022-12-19T11:12:17.6139636+01:00;False|2022-12-19T11:09:17.2088059+01:00;False|2022-12-19T11:06:16.3256032+01:00;False|2022-12-19T08:34:59.1404114+01:00;False|2022-12-19T08:33:37.2877052+01:00;</History>
+    <History>True|2024-03-28T19:14:20.2769374Z;True|2024-03-28T08:44:54.2513054+01:00;True|2024-03-10T20:41:25.6478066+01:00;True|2024-02-25T19:19:06.4277250+01:00;True|2024-02-25T19:18:00.5108134+01:00;True|2024-02-25T16:38:35.7429826+01:00;True|2024-02-25T16:37:43.5676828+01:00;True|2024-02-25T14:35:17.3549231+01:00;True|2024-02-25T13:16:38.8638348+01:00;True|2024-02-25T13:15:48.4413717+01:00;True|2024-02-25T13:15:20.1797445+01:00;True|2024-01-31T19:39:59.4739602+01:00;True|2024-01-12T12:54:34.2704525+01:00;True|2024-01-11T21:01:05.0552343+01:00;True|2023-12-18T20:07:41.5935169+01:00;True|2023-12-13T14:01:48.5033379+01:00;True|2023-12-12T20:43:57.5398166+01:00;True|2023-12-11T19:09:55.3970330+01:00;True|2023-09-18T17:08:28.9592224+02:00;True|2023-08-04T11:39:06.9685516+02:00;True|2023-08-03T17:56:08.4519122+02:00;False|2023-07-16T12:25:58.5644230+02:00;True|2023-07-02T16:12:55.6400954+02:00;True|2023-06-11T15:07:06.6939034+02:00;True|2023-06-11T12:57:27.8201249+02:00;True|2023-05-23T12:37:42.0833952+02:00;True|2023-05-10T21:44:36.9208239+02:00;True|2023-05-07T19:06:55.5609663+02:00;True|2023-05-07T18:43:03.9642545+02:00;True|2023-04-10T18:14:08.3284086+02:00;True|2023-04-08T15:58:29.4021434+02:00;True|2023-04-02T17:00:02.1565115+02:00;True|2023-04-02T11:21:43.3725738+02:00;True|2023-02-05T18:10:08.0504172+01:00;True|2023-01-08T19:53:11.3583070+01:00;True|2022-12-19T11:17:31.2565077+01:00;False|2022-12-19T11:14:58.6001496+01:00;False|2022-12-19T11:12:17.6139636+01:00;False|2022-12-19T11:09:17.2088059+01:00;False|2022-12-19T11:06:16.3256032+01:00;False|2022-12-19T08:34:59.1404114+01:00;False|2022-12-19T08:33:37.2877052+01:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -39,7 +39,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="aglg.aspx">
-      <publishTime>01/13/2024 19:42:12</publishTime>
+      <publishTime>02/25/2024 15:40:37</publishTime>
     </File>
     <File Include="aglg.aspx.cs">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -175,6 +175,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="aktg2_old.aspx">
       <publishTime>06/11/2023 14:01:50</publishTime>
+    </File>
+    <File Include="akti.aspx">
+      <publishTime>02/25/2024 15:46:14</publishTime>
     </File>
     <File Include="aktk.aspx">
       <publishTime>12/11/2022 13:42:32</publishTime>
@@ -738,7 +741,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/24/2018 15:38:22</publishTime>
     </File>
     <File Include="bin/Microsoft.Data.Edm.dll">
-      <publishTime>02/26/2016 11:33:06</publishTime>
+      <publishTime>10/23/2023 18:51:02</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>02/18/2018 09:44:54</publishTime>
@@ -978,10 +981,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/01/2019 12:40:59</publishTime>
     </File>
     <File Include="bin/stat2018.dll">
-      <publishTime>02/21/2024 20:15:34</publishTime>
+      <publishTime>03/28/2024 20:13:47</publishTime>
     </File>
     <File Include="bin/stat2018.pdb">
-      <publishTime>02/21/2024 20:15:34</publishTime>
+      <publishTime>03/28/2024 20:13:47</publishTime>
     </File>
     <File Include="bin/stat2018.XmlSerializers.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -1197,7 +1200,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/02/2019 15:59:09</publishTime>
     </File>
     <File Include="kontrolka2022.aspx">
-      <publishTime>01/12/2024 12:53:36</publishTime>
+      <publishTime>03/10/2024 20:36:56</publishTime>
+    </File>
+    <File Include="kontrolka2022X.aspx">
+      <publishTime>03/10/2024 20:36:55</publishTime>
     </File>
     <File Include="kontrolkaDruk.aspx">
       <publishTime>12/11/2022 13:42:33</publishTime>
@@ -1776,7 +1782,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/12/2019 06:17:56</publishTime>
     </File>
     <File Include="oopk.aspx">
-      <publishTime>04/02/2023 10:50:30</publishTime>
+      <publishTime>03/10/2024 15:11:39</publishTime>
     </File>
     <File Include="oopk.aspx.cs">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -1905,7 +1911,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>12/13/2023 13:52:42</publishTime>
+      <publishTime>03/28/2024 07:26:00</publishTime>
     </File>
     <File Include="passwordPopup.aspx">
       <publishTime>12/11/2022 13:42:34</publishTime>
@@ -1926,7 +1932,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2018 16:29:38</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>02/21/2024 21:20:30</publishTime>
+      <publishTime>03/28/2024 20:13:49</publishTime>
     </File>
     <File Include="Properties/AssemblyInfo.cs">
       <publishTime>03/03/2020 13:38:12</publishTime>
@@ -2085,10 +2091,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2021 16:44:26</publishTime>
     </File>
     <File Include="Statystyki_2018.csproj">
-      <publishTime>01/13/2024 13:20:09</publishTime>
+      <publishTime>03/28/2024 07:27:51</publishTime>
     </File>
     <File Include="Statystyki_2018.csproj.user">
-      <publishTime>01/31/2024 19:43:34</publishTime>
+      <publishTime>03/28/2024 20:13:43</publishTime>
     </File>
     <File Include="style/card.css">
       <publishTime>12/11/2022 13:42:34</publishTime>
@@ -2451,7 +2457,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="version.txt">
-      <publishTime>02/21/2024 20:10:29</publishTime>
+      <publishTime>03/28/2024 20:13:43</publishTime>
     </File>
     <File Include="wab.aspx">
       <publishTime>12/11/2022 13:42:34</publishTime>
@@ -2472,7 +2478,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/11/2024 20:59:58</publishTime>
+      <publishTime>03/28/2024 08:44:15</publishTime>
     </File>
     <File Include="Web.config-stary">
       <publishTime>03/05/2021 16:44:28</publishTime>

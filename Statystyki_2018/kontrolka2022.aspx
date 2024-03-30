@@ -16,7 +16,7 @@
             }
            
     </style>
-
+   
     <script src="Scripts/rls.js"></script>
 
     <div class="noprint" style="margin-left: auto; margin-right: auto;">
@@ -54,68 +54,38 @@
         </div>
     </div>
 
-    <div>
-         <div data-bind="dxDataGrid: gridOptions"></div>
-        <dx:ASPxGridView ID="grid" 
-            
-            runat="server" 
-            EnableTheming="True" 
-            OnDataBinding="dataBinding" 
-            Theme="Moderno"
-            EnableCallbackAnimation="True" 
-             ViewStateMode="Enabled" OnCustomColumnDisplayText="grid_CustomColumnDisplayText" Width="100%"
-            
-            >
-           
-              <SettingsDetail ExportMode="All" />
-           
-              <SettingsAdaptivity>
-                  <AdaptiveDetailLayoutProperties>
-                      <SettingsItems Width="1px" />
-                      <Styles>
-                          <LayoutItem CssClass="NowaDopasowanie">
-                          </LayoutItem>
-                      </Styles>
-                  </AdaptiveDetailLayoutProperties>
-              </SettingsAdaptivity>
-           
-           <SettingsPager AlwaysShowPager="True" EnableAdaptivity="True">
-            </SettingsPager>
-           
+    
+    <div  id="gridContainer" >
+           <dx:ASPxGridView ID="grid" ClientInstanceName="grid" runat="server" KeyFieldName="ID"
+            Width="100%" AutoGenerateColumns="true" OnCustomColumnDisplayText="grid_CustomColumnDisplayText"
+            OnSummaryDisplayText="grid_SummaryDisplayText" Theme="Moderno">
+            <Columns>
         
-        
+             
+            </Columns>
             <Settings 
-               
-                VerticalScrollBarMode="Visible"
-                VerticalScrollableHeight="640"
-                ShowFilterRow="True" 
-                EnableFilterControlPopupMenuScrolling="True" 
-                ShowFilterBar="Auto" 
-                ShowFilterRowMenu="True" 
-                ShowGroupFooter="VisibleAlways" ShowFooter="True" ShowHeaderFilterButton="True" />
-              <SettingsBehavior AllowFixedGroups="true" AllowFocusedRow="True" />
-            <SettingsDataSecurity 
-                AllowDelete="False" 
-                AllowEdit="False" 
-                AllowInsert="False" />
-              <SettingsSearchPanel ShowClearButton="True" Visible="True" />
-            <Styles>
-                <Header Wrap="True">
-                </Header>
-                <DetailRow Wrap="True">
-                </DetailRow>
-                <DetailCell Wrap="True">
-                </DetailCell>
-                <Cell Wrap="False">
-                </Cell>
-                <FocusedCell BackColor="#FFCC00">
-                </FocusedCell>
-            </Styles>
+              VerticalScrollBarMode="Visible"
+VerticalScrollableHeight="640"
+ShowFilterRow="True" 
+EnableFilterControlPopupMenuScrolling="True" 
+ShowFilterBar="Auto" 
+ShowFilterRowMenu="True" 
+ShowGroupFooter="VisibleAlways" 
+ShowFooter="True" 
+ShowHeaderFilterButton="True"
+                />
+            <SettingsPager>
+                <PageSizeItemSettings Visible="true" Items="10, 20, 50" />
+            </SettingsPager>
+            <SettingsDataSecurity AllowInsert="false" AllowEdit="false" AllowDelete="false" />
+            <ClientSideEvents Init="grid_Init" BeginCallback="grid_BeginCallback" EndCallback="grid_EndCallback" />
           
-            
+            <GroupSummary>
+                <dx:ASPxSummaryItem SummaryType="Count" />
+            </GroupSummary>
         </dx:ASPxGridView>
         <br />
-
+      
         <dx:ASPxGridViewExporter ID="ASPxGridViewExporter1" 
             runat="server" 
             GridViewID="grid" 
@@ -126,8 +96,11 @@
             <Styles>
                 <Header Wrap="True">
                 </Header>
+                 
             </Styles>
         </dx:ASPxGridViewExporter>
+        <br />
+        <br />
         <br />
        
     </div>

@@ -682,7 +682,58 @@ namespace Statystyki_2018
 
             NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!1!3')\">" + jedenWiersz["d_15"].ToString().Trim() + "</a>", 1, 2, cssStyleDlaTabeli));
             return NewTotalRow;
-        }// end of
+        }
+
+        public GridViewRow wierszTabeliAGLG(DataTable dane, int iloscKolumn, int idWiersza, string idtabeli, string tekst, int colSpan, int rowSpan, string CssStyleDlaTekstu, string cssStyleDlaTabeli, bool isGray)
+        {
+            if (isGray)
+            {
+                CssStyleDlaTekstu = CssStyleDlaTekstu + " gray";
+                cssStyleDlaTabeli = cssStyleDlaTabeli + " gray";
+            }
+            if (dane == null)
+            {
+                return null;
+            }
+            GridViewRow NewTotalRow = new GridViewRow(0, 0, DataControlRowType.DataRow, DataControlRowState.Insert);
+            NewTotalRow.Cells.Add(cela(tekst, rowSpan, colSpan, CssStyleDlaTekstu));
+            DataRow jedenWiersz = dane.Rows[idWiersza - 1];
+
+            NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!1!3')\">" + jedenWiersz["d_01"].ToString().Trim() + "</a>", 1, 2, cssStyleDlaTabeli));
+
+            NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!1!3')\">" + jedenWiersz["d_03"].ToString().Trim() + "</a>", 1, 1, cssStyleDlaTabeli));
+            NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!1!3')\">" + jedenWiersz["d_04"].ToString().Trim() + "</a>", 1, 2, cssStyleDlaTabeli));
+            NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!1!3')\">" + jedenWiersz["d_05"].ToString().Trim() + "</a>", 1, 2, cssStyleDlaTabeli));
+
+
+            for (int i = 8; i < iloscKolumn - 2; i++)
+            {
+                try
+                {
+                    string nazwaKolumny = "d_" + i.ToString("D2");
+                    NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!" + i.ToString().Trim() + "!3')\">" + jedenWiersz[nazwaKolumny].ToString().Trim() + "</a>", 1, 1, cssStyleDlaTabeli));
+                }
+                catch
+                {
+                    try
+                    {
+                        NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!" + i.ToString().Trim() + "!3')\">0</a>", 1, 1, cssStyleDlaTabeli));
+                    }
+                    catch (Exception ex)
+                    {
+                        cm.log.Error("Podtabela  : " + ex.Message);
+                    }
+                }
+            }
+
+
+            NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!1!3')\">" + jedenWiersz["d_15"].ToString().Trim() + "</a>", 1, 2, cssStyleDlaTabeli));
+            return NewTotalRow;
+        }
+
+
+
+
         public GridViewRow wierszTabeli(DataTable dane, int iloscKolumn, int idWiersza, string idtabeli, string tekst, int colSpan, int rowSpan, string CssStyleDlaTekstu, string cssStyleDlaTabeli)
         {
             if (dane == null)
@@ -713,8 +764,43 @@ namespace Statystyki_2018
             }
             return NewTotalRow;
         }// end of
+        public GridViewRow wierszTabeli(DataTable dane, int iloscKolumn, int idWiersza, string idtabeli, string tekst, int colSpan, int rowSpan, string CssStyleDlaTekstu, string cssStyleDlaTabeli, bool isGray)
+        {
+            if (dane == null)
+            {
+                return null;
+            }
+            if (isGray)
+            {
+                CssStyleDlaTekstu = CssStyleDlaTekstu + " gray";
+                cssStyleDlaTabeli = cssStyleDlaTabeli + " gray";
+            }
+            GridViewRow NewTotalRow = new GridViewRow(0, 0, DataControlRowType.DataRow, DataControlRowState.Insert);
+            NewTotalRow.Cells.Add(cela(tekst, rowSpan, colSpan, CssStyleDlaTekstu));
+            DataRow jedenWiersz = dane.Rows[idWiersza - 1];
+            for (int i = 1; i < iloscKolumn; i++)
+            {
+                try
+                {
+                    string nazwaKolumny = "d_" + i.ToString("D2");
+                    NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!" + i.ToString().Trim() + "!3')\">" + jedenWiersz[nazwaKolumny].ToString().Trim() + "</a>", 1, 1, cssStyleDlaTabeli));
+                }
+                catch
+                {
+                    try
+                    {
+                        NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!" + i.ToString().Trim() + "!3')\">0</a>", 1, 1, cssStyleDlaTabeli));
+                    }
+                    catch (Exception ex)
+                    {
+                        cm.log.Error("Podtabela  : " + ex.Message);
+                    }
+                }
+            }
+            return NewTotalRow;
+        }// end of
 
-
+        /*
         public GridViewRow wierszTabeli(DataTable dane, int iloscKolumn, int idWiersza, string idtabeli, string tekst, int colSpan, int rowSpan, string CssStyleDlaTekstu, string cssStyleDlaTabeli, bool ostatniaEdytowalna)
         {
             GridViewRow NewTotalRow = new GridViewRow(0, 0, DataControlRowType.DataRow, DataControlRowState.Insert);
@@ -738,6 +824,35 @@ namespace Statystyki_2018
             }
             return NewTotalRow;
         }// end of
+
+        */
+
+        public GridViewRow wierszTabeli(string[] lista, int iloscKolumn, int idWiersza,  string tekst, int colSpan, int rowSpan, string CssStyleDlaTekstu, string cssStyleDlaTabeli, bool ostatniaEdytowalna)
+        {
+            GridViewRow NewTotalRow = new GridViewRow(0, 0, DataControlRowType.DataRow, DataControlRowState.Insert);
+            NewTotalRow.Cells.Add(cela(tekst, rowSpan, colSpan, CssStyleDlaTekstu));
+           
+            for (int i = 1; i < iloscKolumn; i++)
+            {
+                try
+                {
+                    string nazwaKolumny = "d_" + i.ToString("D2");
+                    string textC = lista[i];
+                    NewTotalRow.Cells.Add(cela(
+                        textC, 1, 1, cssStyleDlaTabeli));
+                }
+                catch (Exception ex)
+                {
+                    cm.log.Error("Podtabela  : " + ex.Message);
+                }
+            }
+            if (ostatniaEdytowalna)
+            {
+                NewTotalRow.Cells.Add(cela("<input id = \"Text1\" type = \"text\" />", 1, 1, "borderTopLeft"));
+            }
+            return NewTotalRow;
+        }// end of
+
 
         public TableCell cela(string text, int rowSpan, int colSpan, string cssClass)
         {

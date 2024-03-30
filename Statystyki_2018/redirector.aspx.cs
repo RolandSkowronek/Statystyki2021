@@ -121,8 +121,11 @@ namespace Statystyki_2018
             }
 
             if (!IsPostBack)
+            {
                 cardView.SearchPanelFilter = "";
-           
+                cardView.DataBind();
+            }
+
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -290,6 +293,7 @@ namespace Statystyki_2018
                 string nazwa = (string)Session["elementMenu"];
                 Server.Transfer("redirector.aspx?id=" + nazwa);
             }
+            cardView.DataBind();
         }
 
         private void ElementyMenuKontrolki()
@@ -342,6 +346,7 @@ namespace Statystyki_2018
                 string nazwa = (string)Session["elementMenu"];
                 Server.Transfer("redirector.aspx?id=" + nazwa);
             }
+            cardView.DataBind();
 
         }
 
@@ -428,6 +433,7 @@ namespace Statystyki_2018
                 string nazwa = (string)Session["elementMenu"];
                 Server.Transfer("redirector.aspx?id=" + nazwa);
             }
+            cardView.DataBind();
         }
 
         protected void Administracja_Click(object sender, EventArgs e)

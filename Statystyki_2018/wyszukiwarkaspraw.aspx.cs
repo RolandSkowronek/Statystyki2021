@@ -54,7 +54,7 @@ namespace Statystyki_2018
                 }
                 catch
                 {
-                    //Server.Transfer("default.aspx");
+                    Server.Transfer("default.aspx");
                 }
 
             }
@@ -89,10 +89,20 @@ namespace Statystyki_2018
                 }
 
                 string pozwolenie = cl.czy_dostepny(user, id.ToString(), domain);
-                if (pozwolenie != "0")
+                try
                 {
-                    ASPxComboBox1.Items.Add(dR[0].ToString());
+                    int pozwolenieNum = int.Parse(pozwolenie);
+                    if ((pozwolenie != "0") || (pozwolenie.Trim() != "") || (pozwolenie == null))
+                    {
+                        ASPxComboBox1.Items.Add(dR[0].ToString());
+                    }
                 }
+                catch (Exception)
+                {
+
+                    
+                }
+                
             }
             
             if (ASPxComboBox1.SelectedIndex == -1)

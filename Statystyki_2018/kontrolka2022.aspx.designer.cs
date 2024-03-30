@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Statystyki_2018 {
-    
-    
-    public partial class kontrolka2022 {
-        
+namespace Statystyki_2018
+{
+
+
+    public partial class kontrolka2022
+    {
+
         /// <summary>
         /// data1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxDateEdit data1;
-        
+
         /// <summary>
         /// data2 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxDateEdit data2;
-        
+
         /// <summary>
         /// LinkButton1 control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
-        
+
         /// <summary>
         /// LinkButton2 control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
-        
+
         /// <summary>
         /// LinkButton3 control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
-        
+
         /// <summary>
         /// grid control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxGridView grid;
-        
+
         /// <summary>
         /// ASPxGridViewExporter1 control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace Statystyki_2018 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxGridViewExporter ASPxGridViewExporter1;
-        
+
         /// <summary>
         /// Label1 control.
         /// </summary>

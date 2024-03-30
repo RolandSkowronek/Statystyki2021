@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>stat2018</RootNamespace>
     <AssemblyName>stat2018</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -153,6 +153,7 @@
     <Content Include="adm.aspx" />
     <Content Include="akti.aspx" />
     <Content Include="kontrolka2022.aspx" />
+    <Content Include="kontrolka2022X.aspx" />
     <Content Include="nowaN.aspx" />
     <Content Include="aglg.aspx" />
     <Content Include="oglk.aspx" />
@@ -385,7 +386,6 @@
     <Content Include="img\whitePoint.png" />
     <Content Include="img\zamknij.jpg" />
     <Content Include="kof.aspx" />
-    <Content Include="kontrolka.aspx" />
     <Content Include="mss10r.aspx" />
     <Content Include="mss11r.aspx" />
     <Content Include="mss1r.aspx" />
@@ -588,6 +588,13 @@
     </Compile>
     <Compile Include="kontrolka2022.aspx.designer.cs">
       <DependentUpon>kontrolka2022.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="kontrolka2022X.aspx.cs">
+      <DependentUpon>kontrolka2022X.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="kontrolka2022X.aspx.designer.cs">
+      <DependentUpon>kontrolka2022X.aspx</DependentUpon>
     </Compile>
     <Compile Include="nowaN.aspx.cs">
       <DependentUpon>nowaN.aspx</DependentUpon>
@@ -1294,13 +1301,6 @@
     </Compile>
     <Compile Include="kof.aspx.designer.cs">
       <DependentUpon>kof.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="kontrolka.aspx.cs">
-      <DependentUpon>kontrolka.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="kontrolka.aspx.designer.cs">
-      <DependentUpon>kontrolka.aspx</DependentUpon>
     </Compile>
     <Compile Include="mss10r.aspx.cs">
       <DependentUpon>mss10r.aspx</DependentUpon>

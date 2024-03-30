@@ -109,7 +109,7 @@
                                 <asp:Label ID="Label201" runat="server" Text='<%# Eval("d_01")%>' CssClass="normal"></asp:Label>
                             </a>
                         </ItemTemplate>
-                        <ItemStyle CssClass="col_121" />
+                        <ItemStyle CssClass="col_40" />
                     </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="d_02" SortExpression="d_02">
