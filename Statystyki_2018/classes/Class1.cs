@@ -144,9 +144,56 @@ namespace Statystyki_2018
             DataTable parameters = Common.makeParameterTable();
             parameters.Rows.Add("@id_wydzialu", id_wydzialu.Trim());
             parameters.Rows.Add("@user_id", result);
-            return Common.getQuerryValue("SELECT COUNT(*) FROM     uprawnienia WHERE  (id_uzytkownika = @user_id) AND (id_wydzialu =@id_wydzialu)", con_str_wcyw, parameters);
-        }// czy_dostepny
+            var answer = Common.getQuerryValue("SELECT COUNT(*) FROM     uprawnienia WHERE  (id_uzytkownika = @user_id) AND (id_wydzialu =@id_wydzialu)", con_str, parameters);
 
+            return answer;
+        }// czy_dostepny
+        public string czy_dostepnaWyszukiwarka(string user, string id_wydzialu, string domain)
+        {
+            var conn = new SqlConnection(con_str);
+
+            SqlCommand sqlCmd = new SqlCommand();
+            // user nr
+            string result = "";
+            using (sqlCmd = new SqlCommand())
+            {
+                switch (domain)
+                {
+                    case "1":
+                        {
+                            sqlCmd = new SqlCommand("SELECT distinct  [ident]       FROM uzytkownik  where   [login_domenowy] =@name", conn);
+                        }
+                        break;
+
+                    default:
+                        {
+                            sqlCmd = new SqlCommand("SELECT distinct  [ident]       FROM uzytkownik  where   [login] =@name", conn);
+                        }
+                        break;
+                }
+                try
+                {
+                    conn.Open();
+                    sqlCmd.Parameters.AddWithValue("@name", user.Trim());
+                    result = sqlCmd.ExecuteScalar().ToString();
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    conn.Close();
+                    return "0";
+                }
+            }
+
+            //pozwolenie
+
+            DataTable parameters = Common.makeParameterTable();
+            parameters.Rows.Add("@id_wydzialu", id_wydzialu.Trim());
+            parameters.Rows.Add("@user_id", result);
+            var answer = Common.getQuerryValue("select count (*)  FROM   uprawnienia WHERE rodzaj = 5 AND id_uzytkownika = @user_id and id_wydzialu = @id_wydzialu", con_str, parameters);
+
+            return answer;
+        }// czy_dostepny
         public DataSet pod_tabela(string cs, string kwerenda, string poczatek, string koniec, string id_sedziego)
         {
             var conn = new SqlConnection(cs);
@@ -739,9 +786,9 @@ namespace Statystyki_2018
                         }
                     }
                 }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
-                catch (Exception ex)
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+
+                catch 
+
                 { }//end of try
             }// end of if
 
@@ -750,7 +797,7 @@ namespace Statystyki_2018
 
         public string uzupelnij_statusy()
         {
-            Common.runQuerry("update tbl_statystyki_tbl_02 set funkcja = (SELECT   rtrim([nazwa]) FROM[funkcje]  where[rodzaj] = 1 and ident = tbl_statystyki_tbl_02.funkcja)", con_str, null);
+            Common.runQuerry("update tbl_statystyki_tbl_02 set funkcja = (SELECT   rtrim([nazwa]) FROM[funkcje]  where [rodzaj] = 1 and ident = tbl_statystyki_tbl_02.funkcja)", con_str, null);
             Common.runQuerry("update tbl_statystyki_tbl_02 set stanowisko=(SELECT   rtrim([nazwa]) FROM [funkcje]  where [rodzaj]=2 and ident=tbl_statystyki_tbl_02.stanowisko)", con_str, null);
 
             return "1";
@@ -893,80 +940,6 @@ namespace Statystyki_2018
 
         
         //================================================================================================
-        /*
-        public DataTable generuj_dane_do_tabeli_mss2(int id_dzialu, DateTime poczatek, DateTime koniec, int il_kolumn, string tenPlik)
-        {
-            string status = string.Empty;
-            status = status + "pompowanie danch do tabeli<br>";
-            var conn = new SqlConnection(con_str);
 
-            DataTable dTable = new DataTable();
-            string cs = podajConnectionString(id_dzialu);
-
-            string kwerenda = string.Empty;
-            DataSet dsKwerendy = new DataSet();
-            string opis = string.Empty;
-            // kwerenda + cs do datasetu
-
-            dsKwerendy = new DataSet();
-
-            DataTable parameters = new DataTable();
-            parameters.Columns.Add("name", typeof(String));
-            parameters.Columns.Add("value", typeof(String));
-
-            parameters.Rows.Add("@id_dzialu", id_dzialu);
-            DataTable dT1 = Common.getDataTable("SELECT [id_wydzial] ,[id_tabeli] ,[id_kolumny],[id_wiersza] ,[kwerenda]  FROM [kwerenda_mss] where  id_wydzial=@id_dzialu order by id_kolumny", con_str, parameters, tenPlik);
-
-            // zaladowanie do tabeli
-            int il_wierszy = 0;
-            try
-            {
-                il_wierszy = dT1.Rows.Count;
-            }
-            catch { }
-
-            DataTable dTResult = new DataTable();
-            dTResult.Columns.Add("idWydzial", typeof(string));
-            dTResult.Columns.Add("idTabeli", typeof(string));
-            dTResult.Columns.Add("idWiersza", typeof(string));
-            dTResult.Columns.Add("idKolumny", typeof(string));
-            dTResult.Columns.Add("wartosc", typeof(string));
-
-            foreach (DataRow dRow in dT1.Rows)
-            {
-                DataRow resultRow = dTResult.NewRow();
-                //wyciagnij zmienne daną
-                string idWydzial = dRow[0].ToString().Trim();
-                string idTabeli = dRow[1].ToString().Trim();
-                string idKolumny = dRow[2].ToString().Trim();
-                string idWiersza = dRow[3].ToString().Trim();
-                string kwerendaN = dRow[4].ToString().Trim();
-                parameters = new DataTable();
-                parameters.Columns.Add("name", typeof(String));
-                parameters.Columns.Add("value", typeof(String));
-
-                parameters.Rows.Add("@id_dzialu", id_dzialu);
-                parameters.Rows.Add("@data_1", KonwertujDate(poczatek));
-                parameters.Rows.Add("@data_2", KonwertujDate(koniec));
-                string wartosc = Common.getQuerryValue(kwerendaN, cs, parameters);
-                try
-                {
-                    int w = int.Parse(wartosc);
-                }
-                catch
-                {
-                    wartosc = "0";
-                }
-                resultRow[0] = idWydzial.Trim();
-                resultRow[1] = idTabeli.Trim();
-                resultRow[2] = idWiersza.Trim();
-                resultRow[3] = idKolumny.Trim();
-                resultRow[4] = wartosc;
-                dTResult.Rows.Add(resultRow);
-            }
-
-            return dTResult;
-        }// end of generuj_dane_do_tabeli_mss2
-        */
     } // end of class
 }

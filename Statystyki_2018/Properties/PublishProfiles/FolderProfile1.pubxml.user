@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>D:\temp\publish</_PublishTargetUrl>
-    <History>True|2024-03-30T12:22:29.2258617Z;True|2024-03-30T09:25:13.6866692+01:00;True|2024-03-28T20:22:44.0589082+01:00;True|2023-12-19T14:17:31.3901604+01:00;</History>
+    <History>True|2024-04-02T18:28:40.8146152Z;True|2024-04-02T17:54:49.2687098+02:00;True|2024-04-02T08:30:22.1798392+02:00;True|2024-04-01T16:04:02.9315041+02:00;True|2024-03-31T18:49:09.0566513+02:00;True|2024-03-30T13:22:29.2258617+01:00;True|2024-03-30T09:25:13.6866692+01:00;True|2024-03-28T20:22:44.0589082+01:00;True|2023-12-19T14:17:31.3901604+01:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -757,10 +757,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/22/2023 12:19:58</publishTime>
     </File>
     <File Include="bin/stat2018.dll">
-      <publishTime>03/30/2024 15:56:26</publishTime>
+      <publishTime>04/02/2024 20:35:55</publishTime>
     </File>
     <File Include="bin/stat2018.pdb">
-      <publishTime>03/30/2024 15:56:26</publishTime>
+      <publishTime>04/02/2024 20:35:55</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>02/01/2018 12:17:18</publishTime>
@@ -952,7 +952,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/11/2022 13:42:33</publishTime>
     </File>
     <File Include="kontrolka2022.aspx">
-      <publishTime>03/10/2024 20:36:56</publishTime>
+      <publishTime>04/02/2024 20:27:08</publishTime>
     </File>
     <File Include="kontrolka2022.aspx.cs">
       <publishTime>12/11/2022 13:42:33</publishTime>
@@ -1681,7 +1681,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/11/2022 13:42:34</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>03/30/2024 15:56:28</publishTime>
+      <publishTime>04/02/2024 20:35:56</publishTime>
     </File>
     <File Include="Properties/AssemblyInfo.cs">
       <publishTime>12/19/2022 11:16:53</publishTime>
@@ -1786,10 +1786,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/11/2022 13:42:32</publishTime>
     </File>
     <File Include="Statystyki_2018.csproj">
-      <publishTime>03/30/2024 14:43:39</publishTime>
+      <publishTime>03/30/2024 17:40:00</publishTime>
     </File>
     <File Include="Statystyki_2018.csproj.user">
-      <publishTime>03/30/2024 15:56:23</publishTime>
+      <publishTime>04/02/2024 20:35:52</publishTime>
     </File>
     <File Include="style/card.css">
       <publishTime>12/11/2022 13:42:34</publishTime>
@@ -2119,7 +2119,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/11/2022 13:42:32</publishTime>
     </File>
     <File Include="version.txt">
-      <publishTime>03/30/2024 15:48:47</publishTime>
+      <publishTime>04/02/2024 20:35:52</publishTime>
     </File>
     <File Include="wab.aspx">
       <publishTime>12/11/2022 13:42:34</publishTime>

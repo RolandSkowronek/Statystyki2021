@@ -16,7 +16,40 @@
             }
            
     </style>
-   
+
+      <style type="text/css">
+        body, html {
+            padding: 0;
+            margin: 0;
+        }
+
+        .first  
+{  background-color:indianred;
+    text-align:center;  
+    padding-left:0px !important;  
+    padding-right:0px!important;  
+    width: 14px!important; /*1px if for the border*/  
+ 
+}
+    </style>
+    <script type="text/javascript">
+        function OnInit(s, e) {
+            AdjustSize();
+            document.getElementById("gridContainer").style.visibility = "";
+        }
+        function OnEndCallback(s, e) {
+            AdjustSize();
+        }
+        function OnControlsInitialized(s, e) {
+            ASPxClientUtils.AttachEventToElement(window, "resize", function (evt) {
+                AdjustSize();
+            });
+        }
+        function AdjustSize() {
+            var height = Math.max(0, document.documentElement.clientHeight);
+            grid.SetHeight(height);
+        }
+    </script>
     <script src="Scripts/rls.js"></script>
 
     <div class="noprint" style="margin-left: auto; margin-right: auto;">
@@ -54,55 +87,117 @@
         </div>
     </div>
 
-    
-    <div  id="gridContainer" >
-           <dx:ASPxGridView ID="grid" ClientInstanceName="grid" runat="server" KeyFieldName="ID"
-            Width="100%" AutoGenerateColumns="true" OnCustomColumnDisplayText="grid_CustomColumnDisplayText"
-            OnSummaryDisplayText="grid_SummaryDisplayText" Theme="Moderno">
-            <Columns>
-        
-             
-            </Columns>
-            <Settings 
-              VerticalScrollBarMode="Visible"
-VerticalScrollableHeight="640"
-ShowFilterRow="True" 
-EnableFilterControlPopupMenuScrolling="True" 
-ShowFilterBar="Auto" 
-ShowFilterRowMenu="True" 
-ShowGroupFooter="VisibleAlways" 
-ShowFooter="True" 
-ShowHeaderFilterButton="True"
+
+    <div data-bind="dxDataGrid: gridOptions" id="gridContainer">
+
+
+        <dx:ASPxGridView ID="grid"
+            runat="server"
+            EnableTheming="True"
+            OnDataBinding="dataBinding"
+            Theme="Moderno"
+            EnableCallbackAnimation="True"
+            ViewStateMode="Enabled"
+            OnCustomColumnDisplayText="grid_CustomColumnDisplayText"
+            Settings-UseFixedTableLayout="True" Width="100%"
+            >  
+
+
+            <Settings
+                HorizontalScrollBarMode="Visible"
+                UseFixedTableLayout="True"
+                ShowGroupedColumns="True"
+                VerticalScrollBarMode="Visible"
+                VerticalScrollableHeight="640"
+                ShowFilterRow="True"
+                EnableFilterControlPopupMenuScrolling="True"
+                ShowFilterBar="Auto"
+                ShowFilterRowMenu="True"
+                ShowGroupFooter="VisibleAlways"
+                ShowFooter="True"
+                ShowHeaderFilterButton="True" 
+                 
                 />
-            <SettingsPager>
-                <PageSizeItemSettings Visible="true" Items="10, 20, 50" />
+
+
+
+
+            <SettingsBehavior
+                AllowSort="False"
+                AllowEllipsisInText="False"
+                ColumnResizeMode="Control"
+                
+                />
+
+
+
+            <SettingsDetail ExportMode="All" />
+
+            <SettingsAdaptivity AdaptivityMode="HideDataCellsWindowLimit">
+                <AdaptiveDetailLayoutProperties>
+                    <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" />
+                    <SettingsItems Width="100%" VerticalAlign="Middle" />
+                    <Styles>
+                        <LayoutItem CssClass="first">
+                        </LayoutItem>
+                    </Styles>
+                    <Paddings PaddingLeft="3px" PaddingRight="2px" />
+                </AdaptiveDetailLayoutProperties>
+            </SettingsAdaptivity>
+
+
+
+            <SettingsPager AlwaysShowPager="True" EnableAdaptivity="True">
             </SettingsPager>
-            <SettingsDataSecurity AllowInsert="false" AllowEdit="false" AllowDelete="false" />
-            <ClientSideEvents Init="grid_Init" BeginCallback="grid_BeginCallback" EndCallback="grid_EndCallback" />
-          
-            <GroupSummary>
-                <dx:ASPxSummaryItem SummaryType="Count" />
-            </GroupSummary>
+
+
+
+
+            <SettingsBehavior AllowFixedGroups="true" AllowFocusedRow="True" />
+            <SettingsResizing ColumnResizeMode="Control" />
+            <SettingsDataSecurity
+                AllowDelete="False"
+                AllowEdit="False"
+                AllowInsert="False" />
+            <SettingsSearchPanel ShowClearButton="True" Visible="False" />
+            <Styles>
+                <Header Wrap="True">
+                </Header>
+                <DetailRow Wrap="False">
+                </DetailRow>
+                <DetailCell Wrap="False">
+                </DetailCell>
+                <Cell Wrap="False">
+                </Cell>
+                <FocusedCell BackColor="#FFCC00">
+                </FocusedCell>
+            </Styles>
+
+
         </dx:ASPxGridView>
+
+
+
         <br />
-      
-        <dx:ASPxGridViewExporter ID="ASPxGridViewExporter1" 
-            runat="server" 
-            GridViewID="grid" 
-            PaperKind="A4" 
-            ExportedRowType="All" 
-            PrintSelectCheckBox="True" 
+
+        <dx:ASPxGridViewExporter ID="ASPxGridViewExporter1"
+            runat="server"
+            GridViewID="grid"
+            PaperKind="A4"
+            ExportedRowType="All"
+            PrintSelectCheckBox="True"
             OnRenderBrick="ASPxGridViewExporter1_RenderBrick">
             <Styles>
                 <Header Wrap="True">
                 </Header>
-                 
             </Styles>
         </dx:ASPxGridViewExporter>
         <br />
-        <br />
-        <br />
-       
+
     </div>
+             
+         
+         
+       
     <asp:Label ID="Label1" runat="server" meta:resourcekey="Label1Resource1"></asp:Label>
 </asp:Content>

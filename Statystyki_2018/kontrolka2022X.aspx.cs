@@ -160,20 +160,15 @@ namespace Statystyki_2018
             {
                 grid.SettingsPager.PageSize = 500;
             }
+            grid.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+
             DataTable parameters = cm.makeParameterTable();
             parameters.Rows.Add("@ident", ident);
             int szerokoscKolumny = 0;
             int rozmiarCzcionki = 0;
             int szerokosctabeli = 0;
+            string matrixszerokosci = string.Empty;
 
-            try
-            {
-           //     szerokoscKolumny = int.Parse(cm.getQuerryValue("SELECT szerokoscKolumny FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters));
-            }
-            catch
-            {
-                szerokoscKolumny = 50;
-            }
             try
             {
                 rozmiarCzcionki = int.Parse(cm.getQuerryValue("SELECT rozmiarczcionki FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters));
@@ -190,51 +185,77 @@ namespace Statystyki_2018
             {
                 szerokosctabeli = 1150;
             }
-            cm.log.Info("Kontrolka -rozmiar czcionki: " + rozmiarCzcionki.ToString());
-            cm.log.Info("Kontrolka -szerokosc Kolumny: " + szerokoscKolumny.ToString());
-            cm.log.Info("Kontrolka -szerokosc tabeli: " + szerokosctabeli.ToString());
-            Session["rozmiarCzcionki"] = rozmiarCzcionki;
-            Session["szerokoscKolumny"] = szerokoscKolumny;
-            Session["szerokosctabeli"] = szerokosctabeli;
-
             try
             {
                 if (szerokosctabeli > 0)
                 {
-                    grid.Width = szerokosctabeli;
+                  //  grid.Width = szerokosctabeli;
                 }
-                
-               // { // grid.Width = 0;     }
+
+                // { // grid.Width = 0;     }
             }
             catch
             { }
 
-           // grid.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
-            foreach (GridViewDataColumn dCol in grid.Columns)
+            try
             {
-                string name = dCol.Name;
-                Type typ = dCol.GetType();
-                Type typRef = typeof(DateTime);
-                GridViewDataColumn id = new GridViewDataColumn();
-                id.FieldName = name;
-               
-                cm.log.Info("kontrolka reftype: " + typRef.FullName);
-                cm.log.Info("kontrolka type: " + typ.FullName);
-                if (typ == typRef)
-                {
-                    grid.DataColumns[name].SettingsHeaderFilter.Mode = GridHeaderFilterMode.DateRangePicker;
-                    grid.DataColumns[name].Settings.AllowHeaderFilter = DevExpress.Utils.DefaultBoolean.True;
-                   
-                }
-                if (dCol is GridViewDataColumn)
-                {
-                    ((GridViewDataColumn)dCol).Settings.AutoFilterCondition = AutoFilterCondition.Contains;
-                }
-                dCol.Settings.AllowEllipsisInText = DefaultBoolean.True;
-               
-               
-                dCol.CellStyle.Font.Size = rozmiarCzcionki;
+                     matrixszerokosci = cm.getQuerryValue("SELECT macierzszerokosci FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters);
             }
+            catch
+            {
+               
+            }
+
+            Session["rozmiarCzcionki"] = rozmiarCzcionki;
+            Session["szerokoscKolumny"] = szerokoscKolumny;
+            Session["szerokosctabeli"] = szerokosctabeli;
+            int ColumnCounter = 0;
+
+            if (string.IsNullOrEmpty(matrixszerokosci))
+            {
+                // nie ma matrycy szerokości
+                foreach (GridViewDataColumn dCol in grid.Columns)
+                {
+                    string name = dCol.Name;
+                    Type typ = dCol.GetType();
+                    Type typRef = typeof(DateTime);
+                    GridViewDataColumn id = new GridViewDataColumn();
+                    id.FieldName = name;
+
+                    cm.log.Info("kontrolka reftype: " + typRef.FullName);
+                    cm.log.Info("kontrolka type: " + typ.FullName);
+                    if (typ == typRef)
+                    {
+                        grid.DataColumns[name].SettingsHeaderFilter.Mode = GridHeaderFilterMode.DateRangePicker;
+                        grid.DataColumns[name].Settings.AllowHeaderFilter = DevExpress.Utils.DefaultBoolean.True;
+                    }
+                    if (dCol is GridViewDataColumn)
+                    {
+                        ((GridViewDataColumn)dCol).Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+                    }
+                    dCol.Settings.AllowEllipsisInText = DefaultBoolean.True;
+
+                    if (rozmiarCzcionki>0)
+                    {
+                        dCol.CellStyle.Font.Size = rozmiarCzcionki;
+                    }
+                    if (ColumnCounter == 0)
+                    {
+                        dCol.MinWidth = 25;
+                    }
+                    ColumnCounter = ColumnCounter++;
+                }
+
+            }
+
+
+           
+          
+
+           
+
+           // grid.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
+          
 
             ASPxGridViewExporter1.DataBind();
         }
