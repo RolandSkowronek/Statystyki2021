@@ -159,13 +159,14 @@ namespace Statystyki_2018
                 tb.komorkaExcela(MyWorksheet1, rowik + 2, 1, "Wpływ spraw do rozpoznania przez referendarzy sądowych", true, 0, 5);
                 tb.komorkaExcela(MyWorksheet1, rowik + 3, 1, "Załatwienia", true, 0, 5);
                 tb.komorkaExcela(MyWorksheet1, rowik + 4, 1, "Pozostało na następny miesiąc", true, 0, 5);
-                tb.komorkaExcela(MyWorksheet1, rowik + 5, 1, "Zaległość", true, 5, 0);
-                tb.komorkaExcela(MyWorksheet1, rowik + 5, 2, "3-6 miesięcy", true, 0, 4);
-                tb.komorkaExcela(MyWorksheet1, rowik + 6, 2, "6-12 miesięcy", true, 0, 4);
-                tb.komorkaExcela(MyWorksheet1, rowik + 7, 2, "12-24 miesięcy (do 2 lat)", true, 0, 4);
-                tb.komorkaExcela(MyWorksheet1, rowik + 8, 2, "24-36 miesięcy (2-3 lat)", true, 0, 4);
-                tb.komorkaExcela(MyWorksheet1, rowik + 9, 2, "36-60 miesięcy (3-5 lat)", true, 0, 4);
-                tb.komorkaExcela(MyWorksheet1, rowik + 10, 2, "powyżej 60 miesięcy (powyżej 5 lat)", true, 0, 4);
+                tb.komorkaExcela(MyWorksheet1, rowik + 5, 1, "Zaległość", true, 6, 0);
+                tb.komorkaExcela(MyWorksheet1, rowik + 5, 2, "do 3 miesięcy", true, 0, 4);
+                tb.komorkaExcela(MyWorksheet1, rowik + 6, 2, "3-6 miesięcy", true, 0, 4);
+                tb.komorkaExcela(MyWorksheet1, rowik + 7, 2, "6-12 miesięcy", true, 0, 4);
+                tb.komorkaExcela(MyWorksheet1, rowik + 8, 2, "12-24 miesięcy (do 2 lat)", true, 0, 4);
+                tb.komorkaExcela(MyWorksheet1, rowik + 9, 2, "24-36 miesięcy (2-3 lat)", true, 0, 4);
+                tb.komorkaExcela(MyWorksheet1, rowik + 10, 2, "36-60 miesięcy (3-5 lat)", true, 0, 4);
+                tb.komorkaExcela(MyWorksheet1, rowik + 11, 2, "powyżej 60 miesięcy (powyżej 5 lat)", true, 0, 4);
                 DataTable tabelka001 = (DataTable)Session["tabelka002"];
                 int licznik = 0;
                 foreach (DataRow dR in tabelka001.Rows)
@@ -179,7 +180,7 @@ namespace Statystyki_2018
                     }
                      rowik++;
                     licznik++;
-                    if (licznik > 10)
+                    if (licznik > 11)
                     {
                         break;
                     }
@@ -374,17 +375,21 @@ namespace Statystyki_2018
             GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "Pozostałość na następny miesiąc", 7, 0, "", "borderAll center"));
          
             idWiersza = 6;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "3 - 6 miesięcy", 6, 1, "", "borderAll center", "Zaległość", 7, 1, "borderAll center"));
-
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "do 3 miesięcy", 6, 1, "", "borderAll center", "Zaległość", 7, 1, "borderAll center"));
+       
             idWiersza = 7;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "6-12 miesięcy", 6, 0, "", "borderAll center"));
+            
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "3 - 6 miesięcy", 6, 0, "", "borderAll center"));
+
             idWiersza = 8;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "12-24 miesięcy (do 2 lat)", 6, 0, "", "borderAll center"));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "6-12 miesięcy", 6, 0, "", "borderAll center"));
             idWiersza = 9;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "24-36 miesięcy (2-3 lat)", 6, 0, "", "borderAll center"));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "12-24 miesięcy (do 2 lat)", 6, 0, "", "borderAll center"));
             idWiersza = 10;
-            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "36-60 miesięcy (3-5 lat)", 6, 0, "", "borderAll center"));
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "24-36 miesięcy (2-3 lat)", 6, 0, "", "borderAll center"));
             idWiersza = 11;
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "36-60 miesięcy (3-5 lat)", 6, 0, "", "borderAll center"));
+            idWiersza = 12;
             GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, tb.wierszTabeliOGLK(tabelka01, 16, idWiersza, idtabeli, "powyżej 60 miesięcy (powyżej 5 lat)", 6, 0, "", "borderAll center"));
         }
 

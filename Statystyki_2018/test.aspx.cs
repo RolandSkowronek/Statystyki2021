@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Web;
 using System.Windows.Forms;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace Statystyki_2018
 {
@@ -28,60 +29,52 @@ namespace Statystyki_2018
             {
 
 
-             
-              
-     
+
+
+                string download = Environment.GetEnvironmentVariable("USERPROFILE") + @"\" + "Downloads";
                 Guid g = Guid.NewGuid();
                 string myFileName = g.ToString() + ".ps1";
-                string Usertemp = System.IO.Path.GetTempPath();
-                  string myTempFile = Path.Combine(Usertemp, myFileName);
+                //   string Usertemp = System.IO.Path.GetTempPath();
+                string myTempFile =  Path.Combine(download, myFileName);
+            //    var test001 = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
                 string s = string.Empty;
-               /*   using (StreamWriter sw = new StreamWriter(myFileName))
+
+
+                  using (StreamWriter sw = new StreamWriter(myTempFile))
                   {
-
-                      sw.WriteLine(" $wshell = New-Object -ComObject Wscript.Shell");
-                      sw.WriteLine(" $wshell.Run(\"notepad\")");
-                      sw.WriteLine(" Start-Sleep -m 1000");
-                      sw.WriteLine(" $wshell.SendKeys(\"^n\")");
-                      sw.WriteLine(" Start-Sleep -m 1000");
-                      sw.WriteLine(" $wshell.SendKeys(\"^v\")");
-                      s=sw.ToString();
-                  }
+                    s = TextBox1.Text;
+                    sw.WriteLine(s);
+                }
                 
-                */
-             
-                s = " $wshell = New-Object -ComObject Wscript.Shell";
-                s = s + " $wshell.Run(\"notepad\")" +Environment.NewLine;
-                s = s + " Start-Sleep -m 1000" +Environment.NewLine;
-                s = s + " $wshell.SendKeys(\"^n\")" + Environment.NewLine; ;
-                s = s + " Start-Sleep -m 1000" + Environment.NewLine; ;
-                s = s + " $wshell.SendKeys(\"^v\")" + Environment.NewLine;
-                
+               
+           
+ 
 
-            //    string download = Environment.GetEnvironmentVariable("USERPROFILE") + @"\" + "Downloads";
+                //   string download = Environment.GetEnvironmentVariable("USERPROFILE") + @"\" + "Downloads";
 
                 Response.Clear();
                 Response.AddHeader("content-disposition", "attachment; filename=" + myTempFile);
                 Response.AddHeader("content-type", "text/plain");
 
-                using (StreamWriter writer = new StreamWriter(Response.OutputStream))
+             /*   using (StreamWriter writer = new StreamWriter(Response.OutputStream))
                 {
                     writer.WriteLine(s);
                 }
                
 
+*/
 
-
-                string FireFile = Usertemp + "\\"+ myFileName;
+              
 
                 var startInfo = new ProcessStartInfo()
                 {
                     FileName = "powershell.exe",
-                    Arguments = $"-NoProfile -ExecutionPolicy ByPass -File \"{FireFile}\""
+                    Arguments = $"-NoProfile -ExecutionPolicy ByPass -File \"{myTempFile}\""
 
                 };
                 Process.Start(startInfo);
-                cm.log.Error(" Test PowerShell File Started " + FireFile);
+                cm.log.Info(" Test PowerShell File Started " + myTempFile);
                 Response.End();
               
             }

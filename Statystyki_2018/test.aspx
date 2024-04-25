@@ -39,6 +39,7 @@
 
     <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1">
     </asp:GridView>
+    <asp:TextBox ID="TextBox1" runat="server" Height="226px" TextMode="MultiLine" Width="588px"></asp:TextBox>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
     <br />
     <br />

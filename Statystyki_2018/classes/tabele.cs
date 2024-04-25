@@ -508,14 +508,14 @@ namespace Statystyki_2018
             try
             {
 
-                NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!8!3')\">" + jedenWiersz["d_08"].ToString().Trim() + "</a>", 1, 1, cssStyleDlaTabeli));
+                NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!16!3')\">" + jedenWiersz["d_16"].ToString().Trim() + "</a>", 1, 1, cssStyleDlaTabeli));
             }
             catch (Exception exz)
             {
                 cm.log.Error("Podtabela  : " + exz.Message);
                 try
                 {
-                    NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!8!3')\">0</a>", 1, 1, cssStyleDlaTabeli));
+                    NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!16!3')\">0</a>", 1, 1, cssStyleDlaTabeli));
                 }
                 catch (Exception ex)
                 {
@@ -549,7 +549,7 @@ namespace Statystyki_2018
             try
             {
 
-                NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!8!3')\">" + jedenWiersz["d_08"].ToString().Trim() + "</a>", 1, 1, cssStyleDlaTabeli));
+                NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!16!3')\">" + jedenWiersz["d_16"].ToString().Trim() + "</a>", 1, 1, cssStyleDlaTabeli));
             }
             catch (Exception ex)
             {
@@ -594,14 +594,14 @@ namespace Statystyki_2018
             try
             {
 
-                NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!8!3')\">" + jedenWiersz["d_08"].ToString().Trim() + "</a>", 1, 1, cssStyleDlaTabeli));
+                NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!16!3')\">" + jedenWiersz["d_16"].ToString().Trim() + "</a>", 1, 1, cssStyleDlaTabeli));
             }
             catch (Exception exz)
             {
                 cm.log.Error("Podtabela  : " + exz.Message);
                 try
                 {
-                    NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!8!3')\">0</a>", 1, 1, cssStyleDlaTabeli));
+                    NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!16!3')\">0</a>", 1, 1, cssStyleDlaTabeli));
                 }
                 catch (Exception ex)
                 {
@@ -635,7 +635,7 @@ namespace Statystyki_2018
             try
             {
 
-                NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!8!3')\">" + jedenWiersz["d_08"].ToString().Trim() + "</a>", 1, 1, cssStyleDlaTabeli));
+                NewTotalRow.Cells.Add(cela("<a class='" + CssStyleDlaTekstu + "' href=\"javascript: openPopup('popup.aspx?sesja=" + idWiersza.ToString().Trim() + "!" + idtabeli.ToString().Trim() + "!16!3')\">" + jedenWiersz["d_16"].ToString().Trim() + "</a>", 1, 1, cssStyleDlaTabeli));
             }
             catch (Exception ex)
             {

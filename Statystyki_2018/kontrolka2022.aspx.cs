@@ -35,7 +35,7 @@ namespace Statystyki_2018
 
                 DataTable parameters = cm.makeParameterTable();
                 parameters.Rows.Add("@ident", ident);
-
+                string nazwaKontrolki = string.Empty;
                 DateTime dataOd = DateTime.Parse(dTime.Year.ToString() + "-" + dTime.Month.ToString("D2") + "-01");
                 try
                 {
@@ -43,7 +43,14 @@ namespace Statystyki_2018
                 }
                 catch
                 { }
+                try
+                {
+                    nazwaKontrolki = cm.getQuerryValue("SELECT Opis FROM konfig  WHERE (ident = @ident)", cm.con_str, parameters);
+                }
+                catch
+                { }
 
+                Session["czesc"] = nazwaKontrolki;  
                 if (data1.Text.Length == 0)
                 {
                     data1.Date = dataOd;

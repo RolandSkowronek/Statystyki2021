@@ -123,7 +123,6 @@
 
 
             <SettingsBehavior
-                AllowSort="False"
                 AllowEllipsisInText="False"
                 ColumnResizeMode="Control"
                 

@@ -340,54 +340,76 @@ namespace Statystyki_2018
                 // pierwsza
                 int rowik = 0;
                 ExcelWorksheet MyWorksheet1 = MyExcel.Workbook.Worksheets[1];
+                try
+                {
+                    MyWorksheet1 = tabela.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], (DataTable)Session["tabelka001"], 28, 1, 4, true, false, false, false, false);
+                    rowik = table.Rows.Count - 3;
 
-                MyWorksheet1 = tabela.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], (DataTable)Session["tabelka001"], 28, 1, 4, true, false, false, false, false);
-                rowik = table.Rows.Count - 3;
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 7, 2, "pozostało z okresu poprzedniego", true, 0, 5);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 8, 2, "Wpływ spraw", true, 0, 5);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 9, 2, "Załatwienia", true, 0, 5);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 10, 2, "pozostało na okres następny", true, 0, 5);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 11, 2, "w tym", true, 4, 2);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 11, 5, "pow 3-6 miesiący", true, 0, 2);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 12, 5, "pow 6-12 miesięcy", true, 0, 2);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 13, 5, "1-2 lat", true, 0, 2);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 14, 5, "2 do 3 lat", true, 0, 2);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 15, 5, "pow. 3 lat", true, 0, 2);
+                }
+                catch (Exception ex)
+                {
+                    cm.log.Error(tenPlik + " " + ex.Message);
+                }
 
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 7, 2, "pozostało z okresu poprzedniego", true, 0, 5);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 8, 2, "Wpływ spraw", true, 0, 5);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 9, 2, "Załatwienia", true, 0, 5);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 10, 2, "pozostało na okres następny", true, 0, 5);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 11, 2, "w tym", true, 4, 2);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 11, 5, "pow 3-6 miesiący", true, 0, 2);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 12, 5, "pow 6-12 miesięcy", true, 0, 2);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 13, 5, "1-2 lat", true, 0, 2);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 14, 5, "2 do 3 lat", true, 0, 2);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[1], rowik + 15, 5, "pow. 3 lat", true, 0, 2);
+                try
+                {
+                    MyWorksheet1 = tabela.tworzArkuszwExcleBezSedziow(MyExcel.Workbook.Worksheets[1], (DataTable)Session["tabelka002"], 9, 18, 7, rowik + 7, false);
 
-                MyWorksheet1 = tabela.tworzArkuszwExcleBezSedziow(MyExcel.Workbook.Worksheets[1], (DataTable)Session["tabelka002"], 9, 18, 7, rowik + 7, false);
+                    table = (DataTable)Session["tabelka003"];
+                    rowik = table.Rows.Count - 3;
+                    MyWorksheet1 = tabela.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[2], (DataTable)Session["tabelka003"], 20, 1, 5, true, false, false, false, false);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 7, 2, "pozostało z okresu poprzedniego", true, 0, 3);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 8, 2, "Wpływ spraw", true, 0, 3);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 9, 2, "Załatwienia", true, 0, 3);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 10, 2, "pozostało na okres następny", true, 0, 3);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 11, 2, "w tym", true, 4, 1);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 11, 4, "pow 3-6 miesiący", true, 0, 1);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 12, 4, "pow 6-12 miesięcy", true, 0, 1);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 13, 4, "1-2 lat", true, 0, 1);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 14, 4, "2 do 3 lat", true, 0, 1);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 15, 4, "pow. 3 lat", true, 0, 1);
+                    MyWorksheet1 = tabela.tworzArkuszwExcleBezSedziow(MyExcel.Workbook.Worksheets[2], (DataTable)Session["tabelka004"], 9, 17, 5, rowik + 7, false);
 
-                table = (DataTable)Session["tabelka003"];
-                rowik = table.Rows.Count - 3;
-                MyWorksheet1 = tabela.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[2], (DataTable)Session["tabelka003"], 20, 1, 5, true, false, false, false, false);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 7, 2, "pozostało z okresu poprzedniego", true, 0, 3);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 8, 2, "Wpływ spraw", true, 0, 3);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 9, 2, "Załatwienia", true, 0, 3);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 10, 2, "pozostało na okres następny", true, 0, 3);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 11, 2, "w tym", true, 4, 1);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 11, 4, "pow 3-6 miesiący", true, 0, 1);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 12, 4, "pow 6-12 miesięcy", true, 0, 1);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 13, 4, "1-2 lat", true, 0, 1);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 14, 4, "2 do 3 lat", true, 0, 1);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[2], rowik + 15, 4, "pow. 3 lat", true, 0, 1);
-                MyWorksheet1 = tabela.tworzArkuszwExcleBezSedziow(MyExcel.Workbook.Worksheets[2], (DataTable)Session["tabelka004"], 9, 17, 5, rowik + 7, false);
+                }
+                catch (Exception ex)
+                {
+                    cm.log.Error(tenPlik + " " + ex.Message);
+                }
 
-                MyWorksheet1 = tabela.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[3], (DataTable)Session["tabelka005"], 20, 1, 4, true, false, false, false, false);
-                table = (DataTable)Session["tabelka005"];
-                rowik = table.Rows.Count - 3;
+                try
+                {
+                    MyWorksheet1 = tabela.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[3], (DataTable)Session["tabelka005"], 20, 1, 4, true, false, false, false, false);
+                    table = (DataTable)Session["tabelka005"];
+                    rowik = table.Rows.Count - 3;
 
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 7, 2, "pozostało z okresu poprzedniego", true, 0, 3);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 8, 2, "Wpływ spraw", true, 0, 3);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 9, 2, "Załatwienia", true, 0, 3);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 10, 2, "pozostało na okres następny", true, 0, 3);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 11, 2, "w tym", true, 4, 1);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 11, 4, "pow 3-6 miesiący", true, 0, 1);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 12, 4, "pow 6-12 miesięcy", true, 0, 1);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 13, 4, "1-2 lat", true, 0, 1);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 14, 4, "2 do 3 lat", true, 0, 1);
-                tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 15, 4, "pow. 3 lat", true, 0, 1);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 7, 2, "pozostało z okresu poprzedniego", true, 0, 3);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 8, 2, "Wpływ spraw", true, 0, 3);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 9, 2, "Załatwienia", true, 0, 3);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 10, 2, "pozostało na okres następny", true, 0, 3);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 11, 2, "w tym", true, 4, 1);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 11, 4, "pow 3-6 miesiący", true, 0, 1);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 12, 4, "pow 6-12 miesięcy", true, 0, 1);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 13, 4, "1-2 lat", true, 0, 1);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 14, 4, "2 do 3 lat", true, 0, 1);
+                    tabela.komorkaExcela(MyExcel.Workbook.Worksheets[3], rowik + 15, 4, "pow. 3 lat", true, 0, 1);
 
-                MyWorksheet1 = tabela.tworzArkuszwExcleBezSedziow(MyExcel.Workbook.Worksheets[3], (DataTable)Session["tabelka006"], 9, 17, 5, rowik + 7, false);
+                    MyWorksheet1 = tabela.tworzArkuszwExcleBezSedziow(MyExcel.Workbook.Worksheets[3], (DataTable)Session["tabelka006"], 9, 17, 5, rowik + 7, false);
+
+                }
+                catch (Exception ex)
+                {
+                    cm.log.Error(tenPlik + " " + ex.Message);
+                }
 
                 try
                 {
