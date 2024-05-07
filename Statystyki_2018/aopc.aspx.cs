@@ -135,7 +135,7 @@ namespace Statystyki_2018
             using (ExcelPackage MyExcel = new ExcelPackage(existingFile))
             {
                 
-                ExcelWorksheet MyWorksheet1 = tb.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], (DataTable)Session["tabelka001"], 112, 0, 10, true, false, false, false, false);
+                ExcelWorksheet MyWorksheet1 = tb.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], (DataTable)Session["tabelka001"], 125, 0, 10, true, false, false, false, false);
 
                 try
                 {
@@ -275,8 +275,8 @@ namespace Statystyki_2018
                         kolumnaPozostalosc.Columns.Add(DevExpressXXL.kolumnaDoTabeli("Ogółem", "d_65", idDzialu, "", false, szerokoscKolumny));
                         GridViewBandColumn kolumnaPozostaloscC = DevExpressXXL.GetBoundColumn("C");
                         kolumnaPozostaloscC.Columns.Add(DevExpressXXL.kolumnaDoTabeli("ogółem", "d_66", idDzialu, "", false, szerokoscKolumny));
-                        kolumnaPozostaloscC.Columns.Add(DevExpressXXL.kolumnaDoTabeli("ogółem", "d_67", idDzialu, "", false, szerokoscKolumny));
-                        kolumnaPozostaloscC.Columns.Add(DevExpressXXL.kolumnaDoTabeli("ogółem", "d_68", idDzialu, "", false, szerokoscKolumny));
+                        kolumnaPozostaloscC.Columns.Add(DevExpressXXL.kolumnaDoTabeli("o rozwód", "d_67", idDzialu, "", false, szerokoscKolumny));
+                        kolumnaPozostaloscC.Columns.Add(DevExpressXXL.kolumnaDoTabeli("o separacj", "d_68", idDzialu, "", false, szerokoscKolumny));
 
                         kolumnaPozostaloscC.Columns.Add(DevExpressXXL.podKolumna(new string[] { "ogółem", "o rozwód", "o separację" }, 69, idDzialu, false, szerokoscKolumny, "RC (do 31.01.2018)"));
                         kolumnaPozostaloscC.Columns.Add(DevExpressXXL.podKolumna(new string[] { "o rozwód", "o separację" }, 72, idDzialu, false, szerokoscKolumny, "od 1.02.2018"));

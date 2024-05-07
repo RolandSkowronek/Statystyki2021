@@ -4,8 +4,7 @@ using DevExpress.XtraPrinting;
 using System;
 using System.Data;
 using System.Drawing;
-using System.Web.DynamicData;
-using System.Web.UI.WebControls;
+using System.Globalization;
 
 namespace Statystyki_2018
 {
@@ -17,6 +16,23 @@ namespace Statystyki_2018
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+
+            CultureInfo newCulture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+
+            // Use the dot symbol as a thousand separator
+            newCulture.NumberFormat.NumberGroupSeparator = ".";
+            // Use the comma symbol as a decimal separator
+            newCulture.NumberFormat.NumberDecimalSeparator = ",";
+            // Show currency in euros
+            newCulture.NumberFormat.CurrencySymbol = "PLN";
+            // Copy date-time format from the en-us culture
+            newCulture.DateTimeFormat = new CultureInfo("pl-PL").DateTimeFormat;
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = newCulture;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = newCulture;
+
             //Bind the grid only once
             if (!IsPostBack)
             {
@@ -50,7 +66,7 @@ namespace Statystyki_2018
                 catch
                 { }
 
-                Session["czesc"] = nazwaKontrolki;  
+                Session["czesc"] = nazwaKontrolki;
                 if (data1.Text.Length == 0)
                 {
                     data1.Date = dataOd;
@@ -67,6 +83,9 @@ namespace Statystyki_2018
 
             }
         }
+
+
+
 
         protected void szukaj(object sender, EventArgs e)
         {
@@ -142,7 +161,7 @@ namespace Statystyki_2018
 
         private void DataBindX()
         {
-            grid.SettingsBehavior.AllowEllipsisInText = true; 
+            grid.SettingsBehavior.AllowEllipsisInText = true;
             var fontWeight = grid.Font.Size;
             string ident = (string)Session["valueX"];
             if (string.IsNullOrEmpty(ident))
@@ -175,46 +194,46 @@ namespace Statystyki_2018
             string matrixszerokosci = string.Empty;
 
             int szerokoscKolumny = 0;
-             int rozmiarCzcionki = 0;
-             int szerokosctabeli = 0;
+            int rozmiarCzcionki = 0;
+            int szerokosctabeli = 0;
             try
             {
                 matrixszerokosci = cm.getQuerryValue("SELECT macierzszerokosci FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters);
             }
             catch
-            {}
+            { }
 
 
             try
-             {
-                      szerokoscKolumny = int.Parse(cm.getQuerryValue("SELECT szerokoscKolumny FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters));
-             }
-             catch
-             {
-                 szerokoscKolumny = 50;
-             }
-             try
-             {
-                 rozmiarCzcionki = int.Parse(cm.getQuerryValue("SELECT rozmiarczcionki FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters));
-             }
-             catch
-             {
-                 rozmiarCzcionki = 10;
-             }
-           /*  try
-             {
-                 szerokosctabeli = int.Parse(cm.getQuerryValue("SELECT szerokosctabeli FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters));
-             }
-             catch
-             {
-                 szerokosctabeli = 1150;
-             }*/
-             cm.log.Info("Kontrolka -rozmiar czcionki: " + rozmiarCzcionki.ToString());
-             cm.log.Info("Kontrolka -szerokosc Kolumny: " + szerokoscKolumny.ToString());
-             cm.log.Info("Kontrolka -szerokosc tabeli: " + szerokosctabeli.ToString());
-             Session["rozmiarCzcionki"] = rozmiarCzcionki;
-             Session["szerokoscKolumny"] = szerokoscKolumny;
-             Session["szerokosctabeli"] = szerokosctabeli;
+            {
+                szerokoscKolumny = int.Parse(cm.getQuerryValue("SELECT szerokoscKolumny FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters));
+            }
+            catch
+            {
+                szerokoscKolumny = 50;
+            }
+            try
+            {
+                rozmiarCzcionki = int.Parse(cm.getQuerryValue("SELECT rozmiarczcionki FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters));
+            }
+            catch
+            {
+                rozmiarCzcionki = 10;
+            }
+            /*  try
+              {
+                  szerokosctabeli = int.Parse(cm.getQuerryValue("SELECT szerokosctabeli FROM            konfig  WHERE        (ident = @ident)", cm.con_str, parameters));
+              }
+              catch
+              {
+                  szerokosctabeli = 1150;
+              }*/
+            cm.log.Info("Kontrolka -rozmiar czcionki: " + rozmiarCzcionki.ToString());
+            cm.log.Info("Kontrolka -szerokosc Kolumny: " + szerokoscKolumny.ToString());
+            cm.log.Info("Kontrolka -szerokosc tabeli: " + szerokosctabeli.ToString());
+            Session["rozmiarCzcionki"] = rozmiarCzcionki;
+            Session["szerokoscKolumny"] = szerokoscKolumny;
+            Session["szerokosctabeli"] = szerokosctabeli;
 
             if (string.IsNullOrEmpty(matrixszerokosci))
             {
@@ -260,16 +279,16 @@ namespace Statystyki_2018
                     dCol.CellStyle.Wrap = DefaultBoolean.False;
                     dCol.HeaderStyle.Wrap = DefaultBoolean.True;
 
-                    columnCounter ++;
+                    columnCounter++;
 
                 }
-               
+
             }
-            else 
+            else
             {
                 // jest macierz
 
-                
+
                 string[] matrixszerokosciMatrix = matrixszerokosci.Split(',');
 
                 int columnCounter = 0;
@@ -284,21 +303,21 @@ namespace Statystyki_2018
                     cm.log.Info("kontrolka reftype: " + typRef.FullName);
                     cm.log.Info("kontrolka type: " + typ.FullName);
 
-                    if (columnCounter>0)
+                    if (columnCounter > 0)
                     {
                         try
                         {
-                            int tempWidth = int.Parse( matrixszerokosciMatrix[columnCounter - 1]);
+                            int tempWidth = int.Parse(matrixszerokosciMatrix[columnCounter - 1]);
                             dCol.MinWidth = tempWidth;
                             dCol.Width = tempWidth;
                         }
-                        catch 
+                        catch
                         {
 
-                            dCol.MinWidth = 50 ;
+                            dCol.MinWidth = 50;
                         }
                     }
-                  
+
                     if (columnCounter == 0)
                     {
                         dCol.MinWidth = 35;
@@ -309,7 +328,7 @@ namespace Statystyki_2018
                     {
                         grid.DataColumns[name].SettingsHeaderFilter.Mode = GridHeaderFilterMode.DateRangePicker;
                         grid.DataColumns[name].Settings.AllowHeaderFilter = DevExpress.Utils.DefaultBoolean.True;
-                     
+
                     }
 
                     if (dCol is GridViewDataColumn)
@@ -323,31 +342,31 @@ namespace Statystyki_2018
                     columnCounter++;
 
                 }
-              
+
 
             }
 
 
-            
+
             ASPxGridViewExporter1.DataBind();
         }
         private int ColumnLenght(DataTable dataTable, int ColumnNumber)
         {
             int maxLenght = 0;
 
-            foreach (DataRow row in dataTable.Rows) 
+            foreach (DataRow row in dataTable.Rows)
             {
                 int tmpMaxLenght = 0;
                 string cellValue = row[ColumnNumber].ToString();
                 if (cellValue != null)
                 {
-                    tmpMaxLenght= cellValue.Length;
-                    if (tmpMaxLenght>maxLenght)
+                    tmpMaxLenght = cellValue.Length;
+                    if (tmpMaxLenght > maxLenght)
                     {
                         maxLenght = tmpMaxLenght;
                     }
                 }
-            
+
             }
 
             return maxLenght;
@@ -360,11 +379,18 @@ namespace Statystyki_2018
             }
 
         }
-
-        protected void gridView_HtmlRowCreated(object sender, ASPxGridViewTableRowEventArgs e)
+        protected override void InitializeCulture()
         {
-
+            var trueLand = Request.QueryString["lang"];
+            var lang = "pl-PL";// 
+            if (!string.IsNullOrEmpty(lang))
+            {
+                Culture = lang;
+                UICulture = lang;
+            }
         }
 
+
     }
+
 }

@@ -582,6 +582,26 @@
     <Compile Include="akti.aspx.designer.cs">
       <DependentUpon>akti.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\DevExpress_Web_ASPxDiagram_v23_2.pl.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DevExpress_Web_ASPxDiagram_v23_2.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\DevExpress_Web_ASPxEditors_v23_2.pl.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DevExpress_Web_ASPxEditors_v23_2.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\DevExpress_Web_ASPxGantt_v23_2.pl.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DevExpress_Web_ASPxGantt_v23_2.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\DevExpress_Web_ASPxGridView_V17.1.designer.cs">
+      <DependentUpon>DevExpress_Web_ASPxGridView_V17.1.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="kontrolka2022.aspx.cs">
       <DependentUpon>kontrolka2022.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1546,7 +1566,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="App_GlobalResources\" />
     <Folder Include="classes\App_LocalResources\" />
     <Folder Include="Wymiana2\Odpowiedzi\" />
     <Folder Include="Wymiana2\Zapytania\" />
@@ -1554,6 +1573,22 @@
     <Folder Include="Wymiana\Tmp\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_GlobalResources\DevExpress_Web_ASPxDiagram_v23_2.pl.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>DevExpress_Web_ASPxDiagram_v23_2.pl.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\DevExpress_Web_ASPxEditors_v23_2.pl.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>DevExpress_Web_ASPxEditors_v23_2.pl.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\DevExpress_Web_ASPxGantt_v23_2.pl.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>DevExpress_Web_ASPxGantt_v23_2.pl.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\DevExpress_Web_ASPxGridView_V17.1.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>DevExpress_Web_ASPxGridView_V17.1.designer.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
