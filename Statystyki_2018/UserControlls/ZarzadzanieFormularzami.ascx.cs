@@ -86,6 +86,13 @@ namespace Statystyki_2018.UserControlls
                 };
                 CBRodzaje.Items.Add(listEditItem);
 
+                listEditItem = new DevExpress.Web.ListEditItem
+                {
+                    Text = "Kontrolki6X",
+                    Value = (int)Rodzaje.kontrolki6X
+                };
+                CBRodzaje.Items.Add(listEditItem);
+
                 CBRodzaje.SelectedIndex = 0;
                 CBRodzaje.DataBind();
             }
@@ -137,7 +144,7 @@ namespace Statystyki_2018.UserControlls
                     case 5: Uprawnienia.wyszukiwarka.usun(wydzial, uzytkownik); break;
                     case 6: Uprawnienia.pracownik.usun(wydzial, uzytkownik); break;
                     case 7: Uprawnienia.wymiana.usun(wydzial, uzytkownik); break;
-
+                  //  case 8: Uprawnienia.kontrolki6x.usun(wydzial, uzytkownik); break;
                     default:
                         break;
                 }
@@ -153,7 +160,7 @@ namespace Statystyki_2018.UserControlls
                     case 5: Uprawnienia.wyszukiwarka.dodaj(wydzial, uzytkownik); break;
                     case 6: Uprawnienia.pracownik.dodaj(wydzial, uzytkownik); break;
                     case 7: Uprawnienia.wymiana.dodaj(wydzial, uzytkownik); break;
-
+                 //   case 8: Uprawnienia.kontrolki6x.dodaj(wydzial, uzytkownik); break;
                     default:
                         break;
                 }
@@ -180,6 +187,7 @@ namespace Statystyki_2018.UserControlls
             public Wyszukiwarka wyszukiwarka = new Wyszukiwarka();
             public Pracownik pracownik = new Pracownik();
             public Wymiana wymiana = new Wymiana();
+            public Kontrolki6X kontrolki6x = new Kontrolki6X();
         }
 
         public class miesieczne : common
@@ -283,7 +291,7 @@ namespace Statystyki_2018.UserControlls
                 runQuerry(" delete from uprawnienia where  id_wydzialu=@idWydzialu and rodzaj=3 and id_uzytkownika=@id_uzytkownika", con_str, parametry);
             }
         }
-
+     
         public class Wyszukiwarka  : common
         {
             public void dodaj(int wydzial, int uzytkownik)
@@ -326,6 +334,26 @@ namespace Statystyki_2018.UserControlls
             }
         }
 
+        public class Kontrolki6X : common
+        {
+            public void dodaj(int wydzial, int uzytkownik)
+            {
+                log.Info("Kontrolki6X dodawanie");
+                DataTable parametry = makeParameterTable();
+                parametry.Rows.Add("@idWydzialu", wydzial);
+                parametry.Rows.Add("@id_uzytkownika", uzytkownik);
+                runQuerry(" IF NOT EXISTS(SELECT * FROM uprawnienia WHERE id_wydzialu = @idWydzialu AND rodzaj = 7 AND id_uzytkownika = @id_uzytkownika)    BEGIN       insert INTO uprawnienia (id_wydzialu,rodzaj,id_uzytkownika) VALUES  (@idWydzialu,3,@id_uzytkownika)    END", con_str, parametry, "Dodawanie uprawnień dla KOF");
+            }
+
+            public void usun(int wydzial, int uzytkownik)
+            {
+                log.Info("usuwanie Kontrolki");
+                DataTable parametry = makeParameterTable();
+                parametry.Rows.Add("@idWydzialu", wydzial);
+                parametry.Rows.Add("@id_uzytkownika", uzytkownik);
+                runQuerry(" delete from uprawnienia where  id_wydzialu=@idWydzialu and rodzaj=7 and id_uzytkownika=@id_uzytkownika", con_str, parametry);
+            }
+        }
         protected void EdycjaPracownika(object sender, DevExpress.Web.Data.ASPxDataUpdatingEventArgs e)
         {
             string klucz = e.Keys[0].ToString();

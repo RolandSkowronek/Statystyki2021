@@ -17,7 +17,8 @@ namespace Statystyki_2018
         wyszukiwarka = 5,
         pracownik = 6,
         wymiana=7,
-        potwierdzenie = 1
+        potwierdzenie = 1,
+        kontrolki6X = 8
     }
 
     public class Class1

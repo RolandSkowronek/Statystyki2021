@@ -191,6 +191,7 @@ namespace Statystyki_2018
             runQuerry(kwerenda, connStr, null);
         }
 
+    
         public string getQuerryValue(string kwerenda, string connStr, DataTable parameters)
         {
             //log.Info("Start getQuerryValue");
