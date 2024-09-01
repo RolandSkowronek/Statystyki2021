@@ -1,10 +1,14 @@
 ﻿using DevExpress.Utils;
+using DevExpress.Utils.Extensions;
 using DevExpress.Web;
 using DevExpress.XtraPrinting;
+using DevExpress.XtraRichEdit.Import.OpenXml;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 
 namespace Statystyki_2018
 {
@@ -390,7 +394,81 @@ namespace Statystyki_2018
             }
         }
 
+        protected void grid_SelectionChanged(object sender, EventArgs e)
+        {
+            var cos = e.ToArray();
+        }
 
+        protected void Automat(object sender, EventArgs e)
+        {
+            double numer = 0;
+            double rok = 0; 
+            string repertorium = string.Empty;
+            try
+            {
+                object valueNumer = grid.GetRowValues(grid.FocusedRowIndex, new string[] { "numer" });
+                numer = (double)valueNumer;
+            }
+            catch 
+            { }
+            try
+            {
+                object valueRok = grid.GetRowValues(grid.FocusedRowIndex, new string[] { "rok" });
+                rok = (double)valueRok;
+            }
+            catch
+            { }
+            try
+            {
+                object valueRepertorium = grid.GetRowValues(grid.FocusedRowIndex, new string[] { "rok" });
+                repertorium = (string)valueRepertorium;
+            }
+            catch
+            { }
+
+            string fileNewInfo = string.Empty;
+            try
+            {
+
+                Guid g = Guid.NewGuid();
+                string myFileName = g.ToString() + ".dat";
+                string s = string.Empty;
+                string download = Server.MapPath("Template") + @"\" + myFileName;
+
+                using (StreamWriter sw = new StreamWriter(download))
+                {
+                    s = numer.ToString() +"|"+rok.ToString ()+"|" + repertorium;
+                    sw.WriteLine(s);
+                }
+
+                FileInfo fNewFile = new FileInfo(download);
+
+                try
+                {
+
+                    this.Response.Clear();
+                    this.Response.ContentType = "application/vnd.ms-excel";
+                    this.Response.AddHeader("Content-Disposition", "attachment;filename=" + fNewFile.Name);
+                    this.Response.WriteFile(fNewFile.FullName);
+                    this.Response.End();
+                }
+                catch (Exception ex)
+                {
+                    //cm.log.Error(tenPlik + " " + ex.Message);
+                }
+                fileNewInfo = fNewFile.FullName;
+
+               
+            }
+            catch (Exception ex)
+            {
+
+                cm.log.Error(" Test PowerShell " + ex.Message);
+            }
+
+
+
+        }
     }
 
 }

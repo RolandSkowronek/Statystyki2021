@@ -1837,6 +1837,12 @@ height: 42px;*/
     color: Black;
     text-decoration: none;
     list-style-type: none;
+    p
+
+.ax_box {
+    color: Black;
+    text-decoration: none;
+    list-style-type: none;
     position: relative;
     overflow: hidden;
     display: block;
@@ -1856,16 +1862,10 @@ height: 42px;*/
     top: -3px;
     height: 24px;
     cursor: pointer;
-    left: 0px;
+    left: 1px;
 }
 
-.ax_X:hover {
-    color: Black;
-    background-color: White;
-}
-
-.ax_X:active {
-    color: #777777;
+ #777777;
 }
 
 .navi_border {

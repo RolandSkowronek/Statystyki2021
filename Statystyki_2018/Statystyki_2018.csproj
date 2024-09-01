@@ -103,8 +103,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\statystyki-popup\Bin\Microsoft.Data.Edm.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -152,9 +152,9 @@
   <ItemGroup>
     <Content Include="adm.aspx" />
     <Content Include="akti.aspx" />
-    <Content Include="mp2.aspx" />
     <Content Include="kontrolka2022.aspx" />
     <Content Include="kontrolka2022X.aspx" />
+    <Content Include="mp2.aspx" />
     <Content Include="nowaN.aspx" />
     <Content Include="aglg.aspx" />
     <Content Include="oglk.aspx" />
@@ -604,13 +604,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="mp2.aspx.cs">
-      <DependentUpon>mp2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="mp2.aspx.designer.cs">
-      <DependentUpon>mp2.aspx</DependentUpon>
-    </Compile>
     <Compile Include="kontrolka2022.aspx.cs">
       <DependentUpon>kontrolka2022.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -624,6 +617,13 @@
     </Compile>
     <Compile Include="kontrolka2022X.aspx.designer.cs">
       <DependentUpon>kontrolka2022X.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mp2.aspx.cs">
+      <DependentUpon>mp2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mp2.aspx.designer.cs">
+      <DependentUpon>mp2.aspx</DependentUpon>
     </Compile>
     <Compile Include="nowaN.aspx.cs">
       <DependentUpon>nowaN.aspx</DependentUpon>

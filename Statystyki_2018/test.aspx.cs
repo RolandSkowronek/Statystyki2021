@@ -12,6 +12,8 @@ using System.Web;
 using System.Windows.Forms;
 using static NPOI.HSSF.Util.HSSFColor;
 using System.Threading;
+using System.Data;
+using System.Web.UI;
 
 
 namespace Statystyki_2018
@@ -112,7 +114,7 @@ namespace Statystyki_2018
                 cm.log.Error(" Test PowerShell " + ex.Message);
             }
 
-            try
+        /*    try
             {
 
                 var startInfo = new ProcessStartInfo()
@@ -130,11 +132,14 @@ namespace Statystyki_2018
             {
 
                 throw;
-            }
+            }*/
 
         }
 
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Your Comment", "Ojejku();", true);
+        }
     
-
     }
 }

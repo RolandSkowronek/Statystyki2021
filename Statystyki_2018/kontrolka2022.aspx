@@ -49,6 +49,40 @@
             var height = Math.max(0, document.documentElement.clientHeight);
             grid.SetHeight(height);
         }
+
+        var doProcessClick;
+        var index;
+        function ProcessClick() {
+            if (doProcessClick) {
+                //  alert(`Here is the RowClick action in the ${index.toString()} row.`);
+            }
+        }
+        function OnRowClick(s, e) {
+            doProcessClick = true;
+            index = e.visibleIndex + 1;
+            window.setTimeout(ProcessClick, 500);
+        }
+
+        function OnRowDblClick(s, e) {
+            alert(`Here is the RowClick action in the ${index.toString()} row.`);
+            var indexX = index;
+          
+            doProcessClick = false;
+
+            //  openPopup('popup.aspx?sesja=1!1!11!3');
+
+            //var grid = gridLookUp.GetGridView();
+            alert(indexX);
+            var keys = grid.GetSelectedKeysOnPage();
+            alert(keys);
+            var row = grid.GetRowValues(indexX, 'Lp;numer', OnGetRowValues);
+        }
+        function OnGetRowValues(values) {
+            alert('aaa00');
+            if (values[0] == null) return;
+            alert('Product: ' + values[0]);
+        }
+
     </script>
     <script src="Scripts/rls.js"></script>
 
@@ -79,8 +113,11 @@
                             <asp:LinkButton ID="LinkButton2" runat="server" CssClass="ax_box" OnClick="Druk" meta:resourcekey="LinkButton2Resource1">Drukuj</asp:LinkButton>
                         </td>
                         <td>
-                            <asp:LinkButton ID="LinkButton3" runat="server" CssClass="ax_box" OnClick="Excell" meta:resourcekey="LinkButton2Resource1">Zapisz do Excell</asp:LinkButton>
+                            <asp:LinkButton ID="LinkButton3" runat="server" CssClass="ax_box" OnClick="Excell" meta:resourcekey="LinkButton2Resource1" Width="100%">Zapisz do Excell</asp:LinkButton>
                         </td>
+                          <td>
+      <asp:LinkButton ID="LinkButton4" runat="server" CssClass="ax_box" OnClick="Automat" meta:resourcekey="LinkButton2Resource1" Width="100%">Zapisz do automatyzacji</asp:LinkButton>
+  </td>
                     </tr>
                 </table>
             </div>
@@ -99,10 +136,10 @@
             EnableCallbackAnimation="True"
             ViewStateMode="Enabled"
             OnCustomColumnDisplayText="grid_CustomColumnDisplayText"
-            Settings-UseFixedTableLayout="True" Width="100%"
+            Settings-UseFixedTableLayout="True" Width="100%" OnSelectionChanged="grid_SelectionChanged"
             >  
 
-
+  <ClientSideEvents RowClick="OnRowClick" RowDblClick="OnRowDblClick"/>
             <Settings
                 HorizontalScrollBarMode="Visible"
                 UseFixedTableLayout="True"
@@ -119,13 +156,12 @@
                  
                 />
 
-
-
-
             <SettingsBehavior
                 AllowEllipsisInText="False"
                 ColumnResizeMode="Control"
-                
+                AllowFixedGroups="true" 
+                AllowFocusedRow="True"
+            
                 />
 
 
@@ -146,13 +182,12 @@
 
 
 
-            <SettingsPager AlwaysShowPager="True" EnableAdaptivity="True">
+            <SettingsPager 
+                AlwaysShowPager="True" 
+                EnableAdaptivity="True">
             </SettingsPager>
 
-
-
-
-            <SettingsBehavior AllowFixedGroups="true" AllowFocusedRow="True" />
+          
             <SettingsResizing ColumnResizeMode="Control" />
             <SettingsDataSecurity
                 AllowDelete="False"
