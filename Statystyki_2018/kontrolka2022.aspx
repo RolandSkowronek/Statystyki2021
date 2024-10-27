@@ -82,7 +82,27 @@
             if (values[0] == null) return;
             alert('Product: ' + values[0]);
         }
+        
+        function RunME() {
 
+            alert('aaa00');
+            const { exec } = require('child_process');
+          
+            exec('c:\\RunScript\\run.bat', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`error: ${error.message}`);
+                    return;
+                }
+                if (stdout) {
+                    console.log(`stdout: ${stdout}`);
+                }
+                if (stderr) {
+                    console.error(`stderr: ${stderr}`);
+                }
+            });
+            alert('aaa00');
+        }
+  
     </script>
     <script src="Scripts/rls.js"></script>
 
@@ -118,9 +138,15 @@
                           <td>
       <asp:LinkButton ID="LinkButton4" runat="server" CssClass="ax_box" OnClick="Automat" meta:resourcekey="LinkButton2Resource1" Width="100%">Zapisz do automatyzacji</asp:LinkButton>
   </td>
+                                                <td>
+                                                    &nbsp;</td>
+                 <td> 
+                     &nbsp;</td>
                     </tr>
+
                 </table>
             </div>
+            <asp:HiddenField ID="HiddenField1" runat="server" />
         </div>
     </div>
 

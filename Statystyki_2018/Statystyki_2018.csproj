@@ -162,6 +162,7 @@
     <Content Include="oczp.aspx" />
     <Content Include="aopc.aspx" />
     <Content Include="aktg2.aspx" />
+    <Content Include="oktp2.aspx" />
     <Content Include="osog.aspx" />
     <Content Include="oktc.aspx" />
     <Content Include="oktr.aspx" />
@@ -554,6 +555,7 @@
     <Content Include="Template\wizg_aspx.xlsx" />
     <Content Include="Template\oczu.xlsx" />
     <Content Include="Template\osok.xlsx" />
+    <Content Include="Template\oktp2.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -673,6 +675,13 @@
     </Compile>
     <Compile Include="aktg2.aspx.designer.cs">
       <DependentUpon>aktg2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="oktp2.aspx.cs">
+      <DependentUpon>oktp2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="oktp2.aspx.designer.cs">
+      <DependentUpon>oktp2.aspx</DependentUpon>
     </Compile>
     <Compile Include="osog.aspx.cs">
       <DependentUpon>osog.aspx</DependentUpon>

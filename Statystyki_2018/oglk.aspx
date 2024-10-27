@@ -428,10 +428,10 @@
                     </tr>
                     <tr>
                         <td class="borderTopLeft wciecie">Odpowiedzialność podmiotów zbiorowych </td>
-                        <td class="borderTopLeft col_36">&nbsp;</td>
-                        <td class="borderTopLeft" align="center"><a href="javascript:openPopup('popup.aspx?sesja=10!4!1!3')">
+                        <td class="borderTopLeft col_36">11</td>
+                        <td class="borderTopLeft" align="center"><a href="javascript:openPopup('popup.aspx?sesja=11!4!1!3')">
                             <asp:Label CssClass="normal" ID="tab_4_w11_c01" runat="server" Text="0"></asp:Label></a></td>
-                        <td class="borderTopLeft" align="center"><a href="javascript:openPopup('popup.aspx?sesja=10!4!2!3')">
+                        <td class="borderTopLeft" align="center"><a href="javascript:openPopup('popup.aspx?sesja=11!4!2!3')">
                             <asp:Label CssClass="normal" ID="tab_4_w11_c02" runat="server" Text="0"></asp:Label></a></td>
                     </tr>
                 </table>

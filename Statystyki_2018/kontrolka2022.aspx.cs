@@ -3,17 +3,22 @@ using DevExpress.Utils.Extensions;
 using DevExpress.Web;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraRichEdit.Import.OpenXml;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Net;
 
 namespace Statystyki_2018
 {
+
     public partial class kontrolka2022 : System.Web.UI.Page
     {
+        public string nazwaPlikuDanych = string.Empty;
         public wyszukiwarka w1 = new wyszukiwarka();
         public common cm = new common();
         public Class1 cl = new Class1();
@@ -401,15 +406,24 @@ namespace Statystyki_2018
 
         protected void Automat(object sender, EventArgs e)
         {
+             string nazwa = GenrateDataFile();
+
+            //StartScript(nazwaPlikuDanych); 
+
+        }
+
+        private string GenrateDataFile()
+        {
             double numer = 0;
-            double rok = 0; 
+            double rok = 0;
             string repertorium = string.Empty;
+            string odpowiedz = string.Empty;
             try
             {
                 object valueNumer = grid.GetRowValues(grid.FocusedRowIndex, new string[] { "numer" });
                 numer = (double)valueNumer;
             }
-            catch 
+            catch
             { }
             try
             {
@@ -417,7 +431,11 @@ namespace Statystyki_2018
                 rok = (double)valueRok;
             }
             catch
-            { }
+            {
+                rok = DateTime.Now.Year;
+
+
+            }
             try
             {
                 object valueRepertorium = grid.GetRowValues(grid.FocusedRowIndex, new string[] { "rok" });
@@ -426,45 +444,69 @@ namespace Statystyki_2018
             catch
             { }
 
-            string fileNewInfo = string.Empty;
+             string fileNewInfo = string.Empty;
             try
             {
 
                 Guid g = Guid.NewGuid();
-                string myFileName = g.ToString() + ".dat";
+                string myFileName = g.ToString() + ".precur";
                 string s = string.Empty;
                 string download = Server.MapPath("Template") + @"\" + myFileName;
+                FileInfo fNewFile = new FileInfo(download);
 
+                HiddenField1.Value = myFileName;
                 using (StreamWriter sw = new StreamWriter(download))
                 {
-                    s = numer.ToString() +"|"+rok.ToString ()+"|" + repertorium;
+                    s = numer.ToString() + "|" + rok.ToString() + "|" + repertorium;
                     sw.WriteLine(s);
                 }
 
-                FileInfo fNewFile = new FileInfo(download);
-
-                try
-                {
-
-                    this.Response.Clear();
-                    this.Response.ContentType = "application/vnd.ms-excel";
-                    this.Response.AddHeader("Content-Disposition", "attachment;filename=" + fNewFile.Name);
-                    this.Response.WriteFile(fNewFile.FullName);
-                    this.Response.End();
-                }
-                catch (Exception ex)
-                {
-                    //cm.log.Error(tenPlik + " " + ex.Message);
-                }
-                fileNewInfo = fNewFile.FullName;
-
+                
+                this.Response.Clear();
                
+                this.Response.AddHeader("Content-Disposition", "attachment;filename=" + fNewFile.Name);
+                this.Response.WriteFile(fNewFile.FullName);
+                this.Response.End();
+               
+              
+
+
             }
             catch (Exception ex)
             {
-
                 cm.log.Error(" Test PowerShell " + ex.Message);
+                return (nazwaPlikuDanych);
             }
+
+            return (nazwaPlikuDanych);
+
+        }
+
+        private void StartScript(string nazwa)
+        {
+            WebClient client = new WebClient();
+            Byte[] buffer = client.DownloadData(nazwa);
+            if (buffer != null)
+            {
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("content-lenght", buffer.Length.ToString());
+                Response.BinaryWrite(buffer);
+            }
+
+            ProcessStartInfo startInfo = new ProcessStartInfo(nazwa);
+            Process.Start(startInfo);
+
+            /*
+
+            string fileName = "c:\\RunScript\\run.bat";
+            ProcessStartInfo startInfo = new ProcessStartInfo(fileName);
+            Process.Start(startInfo);*/
+        }
+
+        protected void Skrypt(object sender, EventArgs e)
+        {
+              StartScript(HiddenField1.Value);
+
 
 
 

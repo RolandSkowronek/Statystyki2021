@@ -14,6 +14,7 @@ using static NPOI.HSSF.Util.HSSFColor;
 using System.Threading;
 using System.Data;
 using System.Web.UI;
+using System.Net;
 
 
 namespace Statystyki_2018
@@ -61,7 +62,7 @@ namespace Statystyki_2018
                   }
                  string myFileName = g.ToString() + ".ps1";
 
-  */
+ 
 
                 string myFileName = g.ToString() + ".ps1";
                 string s = string.Empty;
@@ -93,20 +94,34 @@ namespace Statystyki_2018
                     catch (Exception ex)
                     {
                         //cm.log.Error(tenPlik + " " + ex.Message);
-                    }
-                 fileNewInfo = fNewFile.FullName; 
-               
-/*
-                var startInfo = new ProcessStartInfo()
-                {
-                    FileName = "powershell.exe",
-                    Arguments = $"-NoProfile -ExecutionPolicy ByPass -File \"{fNewFile}\""
+                    } */
+             //    fileNewInfo = fNewFile.FullName;
 
-                };
+                string fileName = "c:\\RunScript\\run.bat";
+
+                WebClient client = new WebClient();
+                Byte[] buffer = client.DownloadData(fileName);
+                if (buffer != null)
+                {
+                    Response.ContentType = "application/pdf";
+                    Response.AddHeader("content-lenght", buffer.Length.ToString());
+                    Response.BinaryWrite(buffer);
+                }
+
+                ProcessStartInfo startInfo = new ProcessStartInfo(fileName);
                 Process.Start(startInfo);
-                cm.log.Info(" Test PowerShell File Started " + fNewFile);
-                Response.End();
-              */
+
+                /*
+                                var startInfo = new ProcessStartInfo()
+                                {
+                                    FileName = "powershell.exe",
+                                    Arguments = $"-NoProfile -ExecutionPolicy ByPass -File \"{fNewFile}\""
+
+                                };
+                                Process.Start(startInfo);
+                                cm.log.Info(" Test PowerShell File Started " + fNewFile);
+                                Response.End();
+                              */
             }
             catch (Exception ex)
             {

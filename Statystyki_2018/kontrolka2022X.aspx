@@ -71,6 +71,13 @@
                         <td>
                             <asp:LinkButton ID="LinkButton3" runat="server" CssClass="ax_box" OnClick="Excell" meta:resourcekey="LinkButton2Resource1">Zapisz do Excell</asp:LinkButton>
                         </td>
+
+                        <td>
+                            
+
+                        </td>
+
+                       
                     </tr>
                 </table>
             </div>

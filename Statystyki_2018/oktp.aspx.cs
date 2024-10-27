@@ -320,7 +320,7 @@ namespace Statystyki_2018
                 int rowik = 0;
                 ExcelWorksheet MyWorksheet1 = MyExcel.Workbook.Worksheets[1];
                 DataTable table = (DataTable)Session["tabelka001"];
-                MyWorksheet1 = tb.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], table, 15, 0, 5, true, true, false, false, false);
+                MyWorksheet1 = tb.tworzArkuszwExcle(MyExcel.Workbook.Worksheets[1], table, 21, 0, 5, true, true, false, false, false);
 
                 int iloscWierszy = GridView1.Rows.Count;
                 if (iloscWierszy > 0)
@@ -352,7 +352,7 @@ namespace Statystyki_2018
                 tb.komorkaExcela(MyWorksheet1, rowik + 8, 5, "powyżej 3 lat", true, 0, 1);
 
                 DataTable tabelka001 = (DataTable)Session["tabelka002"];
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < 6; i++)
                 {
                     for (int j = 0; j < 5; j++)
                     {
